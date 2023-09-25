@@ -13,15 +13,8 @@ class LongView extends StatefulWidget {
 }
 
 class _LongViewState extends State<LongView> {
+  TextEditingController inputController = TextEditingController();
   TextEditingController resultController = TextEditingController();
-  TextEditingController inputController = TextEditingController(text: '0');
-
-  @override
-  void dispose() {
-    super.dispose();
-    resultController.dispose();
-    inputController.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,245 +43,163 @@ class _LongViewState extends State<LongView> {
                 color: Colors.black.withOpacity(0.8)),
           ),
         ),
-        body: BlocConsumer<LongBloc, Map<String, dynamic>>(
-          listener: (context, state) {},
+        body: BlocBuilder<LongBloc, Map<String, dynamic>>(
           builder: (context, state) {
+            final valueInput = state['dropDownMenuInput'];
+            final valueResult = state['dropDownMenuResult'];
+            resultController.text = state['resultValue'];
             return Column(
               children: [
-                inputTextFiled(context, state, inputController),
-                resaultTextFiled(
-                    context: context,
-                    state: state,
-                    resultController: resultController,
-                    inputController: inputController),
+                //input
+                inputWidget(context, valueInput, valueResult),
+                //output
+                resultWidget(context, valueInput)
               ],
             );
           },
         ));
   }
-}
 
-Widget inputTextFiled(BuildContext context, Map<String, dynamic> state,
-    TextEditingController controller) {
-  return Container(
-      margin: EdgeInsets.only(top: 30.h, right: 15.w, left: 15.w),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Colors.grey.withOpacity(0.5))),
-      child: Row(
-        children: [
-          Expanded(
-            child: TextField(
-                enabled: true,
-                autofocus: true,
-                controller: controller,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  border: InputBorder.none,
-                ),
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 40.sp),
-                onChanged: (value) {
-                  // logicMath(
-                  //     context: context,
-                  //     state: state,
-                  //     inputController: controller);
-                }),
-          ),
-          DropdownMenu(
-              controller:
-                  TextEditingController(text: state['dropDownMenuInput']),
-              inputDecorationTheme:
-                  const InputDecorationTheme(border: InputBorder.none),
-              textStyle: TextStyle(fontSize: 40.sp, color: Colors.black),
-              trailingIcon: const Icon(
-                Icons.keyboard_arrow_down_outlined,
-                size: 30,
-              ),
-              onSelected: (value) {
-                context
-                    .read<LongBloc>()
-                    .add(DropDownMenuInput(dropDownMenuInput: value!));
-              },
-              dropdownMenuEntries: DataLong.listDataLong
-                  .map(
-                    (e) => DropdownMenuEntry(
-                        value: e,
-                        label: e,
-                        style: ButtonStyle(
-                            textStyle: MaterialStatePropertyAll(
-                                TextStyle(fontSize: 30.sp)))),
-                  )
-                  .toList()),
-          const SizedBox(
-            width: 10,
-          )
-        ],
-      ));
-}
+  Widget resultWidget(BuildContext context, valueInput) {
+    return Container(
+                  margin: EdgeInsets.only(top: 30.h, right: 15.w, left: 15.w),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border:
+                          Border.all(color: Colors.grey.withOpacity(0.5))),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          enabled: false,
+                          controller: resultController,
+                          keyboardType: TextInputType.number,
+                          decoration: const InputDecoration(
+                            border: InputBorder.none,
+                          ),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 40.sp),
+                        ),
+                      ),
+                      DropdownMenu(
+                          inputDecorationTheme: const InputDecorationTheme(
+                              border: InputBorder.none),
+                          textStyle: TextStyle(
+                              fontSize: 40.sp,
+                              color: Colors.black.withOpacity(0.5)),
+                          trailingIcon: const Icon(
+                            Icons.keyboard_arrow_down_outlined,
+                            size: 30,
+                          ),
+                          onSelected: (value) {
+                            context.read<LongBloc>().add(DropDownMenuResult(
+                                dropDownMenuResult: value ?? ''));
+                            onLogic(context,
+                                inputValue: valueInput,
+                                inputResult: value!,
+                                inputController: inputController);
+                          },
+                          dropdownMenuEntries: DataLong.listDataLong
+                              .map(
+                                (e) => DropdownMenuEntry(
+                                    value: e,
+                                    label: e,
+                                    style: ButtonStyle(
+                                        textStyle: MaterialStatePropertyAll(
+                                            TextStyle(fontSize: 30.sp)))),
+                              )
+                              .toList()),
+                      const SizedBox(
+                        width: 10,
+                      )
+                    ],
+                  ));
+  }
 
-Widget resaultTextFiled(
-    {required BuildContext context,
-    required Map<String, dynamic> state,
-    required TextEditingController resultController,
-    required TextEditingController inputController}) {
-  resultController.text = state['resultValue'].toString();
-  return Container(
-      margin: EdgeInsets.only(top: 30.h, right: 15.w, left: 15.w),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Colors.grey.withOpacity(0.5))),
-      child: Row(
-        children: [
-          Expanded(
-            child: TextField(
-              controller: resultController,
-              enabled: false,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                border: InputBorder.none,
-              ),
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 40.sp),
+  Widget inputWidget(BuildContext context, valueInput, valueResult) {
+    return Container(
+        margin: EdgeInsets.only(top: 30.h, right: 15.w, left: 15.w),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: Colors.grey.withOpacity(0.5))),
+        child: Row(
+          children: [
+            Expanded(
+              child: TextField(
+                  enabled: true,
+                  controller: inputController,
+                  autofocus: true,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    border: InputBorder.none,
+                  ),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 40.sp),
+                  onChanged: (value) {
+                    onLogic(context,
+                        inputValue: valueInput,
+                        inputResult: valueResult,
+                        inputController: inputController);
+                  }),
             ),
-          ),
-          DropdownMenu(
-              controller:
-                  TextEditingController(text: state['dropDownMenuResult']),
-              inputDecorationTheme:
-                  const InputDecorationTheme(border: InputBorder.none),
-              textStyle: TextStyle(
-                  fontSize: 40.sp, color: Colors.black.withOpacity(0.5)),
-              trailingIcon: const Icon(
-                Icons.keyboard_arrow_down_outlined,
-                size: 30,
-              ),
-              onSelected: (value) {
-                context
-                    .read<LongBloc>()
-                    .add(DropDownMenuResult(dropDownMenuResult: value!));
-              },
-              dropdownMenuEntries: DataLong.listDataLong
-                  .map(
-                    (e) => DropdownMenuEntry(
-                        value: e,
-                        label: e,
-                        style: ButtonStyle(
-                            textStyle: MaterialStatePropertyAll(
-                                TextStyle(fontSize: 30.sp)))),
-                  )
-                  .toList()),
-          const SizedBox(
-            width: 10,
-          )
-        ],
-      ));
-}
-
-void logicMath({
-  required BuildContext context,
-  required Map<String, dynamic> state,
-  required TextEditingController inputController,
-}) {
-  //cm => m
-  if (state['dropDownMenuInput'] == 'cm' &&
-      state['dropDownMenuResult'] == 'm') {
-    context.read<LongBloc>().add(ConvertSentiMeterToMeter(
-        m: double.tryParse(inputController.text) ?? 0));
-  }
-  //cm => cm
-  if (state['dropDownMenuInput'] == 'cm' &&
-      state['dropDownMenuResult'] == 'cm') {
-    context.read<LongBloc>().add(ConvertSentiMeterToSentiMeter(
-        cm: double.tryParse(inputController.text) ?? 0));
+            DropdownMenu(
+                inputDecorationTheme:
+                    const InputDecorationTheme(border: InputBorder.none),
+                textStyle: TextStyle(fontSize: 40.sp, color: Colors.black),
+                trailingIcon: const Icon(
+                  Icons.keyboard_arrow_down_outlined,
+                  size: 30,
+                ),
+                onSelected: (value) {
+                  context
+                      .read<LongBloc>()
+                      .add(DropDownMenuInput(dropDownMenuInput: value ?? ''));
+                  onLogic(context,
+                      inputValue: value!,
+                      inputResult: valueResult,
+                      inputController: inputController);
+                },
+                dropdownMenuEntries: DataLong.listDataLong
+                    .map(
+                      (e) => DropdownMenuEntry(
+                          value: e,
+                          label: e,
+                          style: ButtonStyle(
+                              textStyle: MaterialStatePropertyAll(
+                                  TextStyle(fontSize: 30.sp)))),
+                    )
+                    .toList()),
+            const SizedBox(
+              width: 10,
+            )
+          ],
+        ));
   }
 
-  //cm => mm
-  if (state['dropDownMenuInput'] == 'cm' &&
-      state['dropDownMenuResult'] == 'mm') {
-    context.read<LongBloc>().add(ConvertSentiMeterToMiliMeter(
-        mm: double.tryParse(inputController.text) ?? 0));
-  }
-
-  //cm => km
-  if (state['dropDownMenuInput'] == 'cm' &&
-      state['dropDownMenuResult'] == 'km') {
-    context.read<LongBloc>().add(ConvertSentiMeterToKiloMeter(
-        km: double.tryParse(inputController.text) ?? 0));
-  }
-  //cm => inch
-  if (state['dropDownMenuInput'] == 'cm' &&
-      state['dropDownMenuResult'] == 'inch') {
-    context.read<LongBloc>().add(ConvertSentiMeterToInch(
-        inch: double.tryParse(inputController.text) ?? 0));
-  }
-
-  //m => m
-  if (state['dropDownMenuInput'] == 'm' && state['dropDownMenuResult'] == 'm') {
-    context.read<LongBloc>().add(
-        ConvertMeterToMeter(m: double.tryParse(inputController.text) ?? 0));
-
-    //m => cm
-    if (state['dropDownMenuInput'] == 'm' &&
-        state['dropDownMenuResult'] == 'cm') {
-      context.read<LongBloc>().add(ConvertMeterToSentiMeter(
-          cm: double.tryParse(inputController.text) ?? 0));
-    }
-
-    //m => km
-    if (state['dropDownMenuInput'] == 'm' &&
-        state['dropDownMenuResult'] == 'km') {
-      context.read<LongBloc>().add(ConvertMeterToKiloMeter(
-          km: double.tryParse(inputController.text) ?? 0));
-    }
-
-    //m => mm
-    if (state['dropDownMenuInput'] == 'm' &&
-        state['dropDownMenuResult'] == 'mm') {
-      context.read<LongBloc>().add(ConvertMeterToMiliMeter(
-          mm: double.tryParse(inputController.text) ?? 0));
-    }
-
-    //m => inch
-    if (state['dropDownMenuInput'] == 'm' &&
-        state['dropDownMenuResult'] == 'inch') {
-      context.read<LongBloc>().add(
-          ConvertMeterToInch(inch: double.tryParse(inputController.text) ?? 0));
-    }
-
-    //km => km
-    if (state['dropDownMenuInput'] == 'km' &&
-        state['dropDownMenuResult'] == 'km') {
-      context.read<LongBloc>().add(ConvertKiloMeterToKiloMeter(
-          km: double.tryParse(inputController.text) ?? 0));
-    }
-
-    //km => mm
-    if (state['dropDownMenuInput'] == 'km' &&
-        state['dropDownMenuResult'] == 'mm') {
-      context.read<LongBloc>().add(ConvertKiloMeterToMiliMeter(
-          mm: double.tryParse(inputController.text) ?? 0));
-    }
-
-    //km => cm
-    if (state['dropDownMenuInput'] == 'km' &&
-        state['dropDownMenuResult'] == 'cm') {
-      context.read<LongBloc>().add(ConvertKiloMeterToSentiMeter(
-          cm: double.tryParse(inputController.text) ?? 0));
-    }
-
-    //km => inch
-    if (state['dropDownMenuInput'] == 'km' &&
-        state['dropDownMenuResult'] == 'inch') {
-      context.read<LongBloc>().add(ConvertKiloMeterToInch(
-          inch: double.tryParse(inputController.text) ?? 0));
-    }
-
-    //km => m
-    if (state['dropDownMenuInput'] == 'km' &&
-        state['dropDownMenuResult'] == 'm') {
-      context.read<LongBloc>().add(ConvertKiloMeterToMeter(
-          m: double.tryParse(inputController.text) ?? 0));
+  void onLogic(BuildContext context,
+      {required String inputValue,
+      required String inputResult,
+      required TextEditingController inputController}) {
+    if (inputValue == 'cm' && inputResult == 'm') {
+      context
+          .read<LongBloc>()
+          .add(CmToMeter(cm: double.tryParse(inputController.text) ?? 0));
+      print('cm - m');
+    } else if (inputValue == 'cm' && inputResult == 'cm') {
+      context
+          .read<LongBloc>()
+          .add(CmToCm(cm: double.tryParse(inputController.text) ?? 0));
+      print('cm - cm');
+    } else if (inputValue == 'm' && inputResult == 'm') {
+      context
+          .read<LongBloc>()
+          .add(MeterToMeter(m: double.tryParse(inputController.text) ?? 0));
+      print('m - m');
+    } else if (inputValue == 'm' && inputResult == 'cm') {
+      context
+          .read<LongBloc>()
+          .add(MeterToCm(m: double.tryParse(inputController.text) ?? 0));
+      print('m - cm');
     }
   }
 }

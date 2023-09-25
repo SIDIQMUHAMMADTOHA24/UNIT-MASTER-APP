@@ -4,8 +4,6 @@ import 'package:conversion_app/global.dart';
 import 'package:conversion_app/view/home/detail/long/bloc/long_bloc.dart';
 
 import 'package:conversion_app/view/home/detail/long/long_view.dart';
-import 'package:conversion_app/view/home/testing/bloc/testing_bloc.dart';
-import 'package:conversion_app/view/home/testing/testing.dart';
 import 'package:flutter/material.dart';
 import 'package:conversion_app/view/home/home_view.dart';
 import 'package:conversion_app/view/login/login_view.dart';
@@ -46,12 +44,6 @@ class AppPages {
           bloc: BlocProvider(
             create: (context) => LongBloc(),
           )),
-      PageEntity(
-          routes: AppName.TESTING,
-          pages: const TestingView(),
-          bloc: BlocProvider(
-            create: (context) => TestingBloc(),
-          ))
     ];
   }
 
