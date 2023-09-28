@@ -202,3 +202,10 @@ class KmToInch extends LongEvent {
     required this.km,
   });
 }
+
+class ShowFormula extends LongEvent {
+  final String formula;
+  ShowFormula({
+    required this.formula,
+  });
+}

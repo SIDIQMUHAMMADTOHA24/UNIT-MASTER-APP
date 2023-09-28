@@ -8,8 +8,12 @@ class LongBloc extends Bloc<LongEvent, Map<String, dynamic>> {
           'resultValue': '0',
           'dropDownMenuInput': 'm',
           'dropDownMenuResult': 'm',
-          'fontSize': 0.0
+          'fontSize': 0.0,
+          'formula': ''
         }) {
+    //bloc for show formula
+    on<ShowFormula>(_isShowFormula);
+
     //bloc for fontSize
     on<FontSize>(_fontSize);
 
@@ -43,6 +47,11 @@ class LongBloc extends Bloc<LongEvent, Map<String, dynamic>> {
     on<KmToCm>(_kmToCm);
     on<KmToMm>(_kmToMm);
     on<KmToInch>(_kmToInch);
+  }
+
+  //bloc for show formula
+  _isShowFormula(ShowFormula event, Emitter<Map<String, dynamic>> emit) {
+    emit({...state, 'formula': event.formula});
   }
 
   //bloc for fontSize

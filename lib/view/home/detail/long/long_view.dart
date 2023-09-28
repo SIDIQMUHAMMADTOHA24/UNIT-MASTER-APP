@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -70,12 +69,14 @@ class _LongViewState extends State<LongView> {
                     valueInput: valueInput,
                     valueResult: valueResult,
                     fontSize: fontSize),
+
                 //output
                 resultWidget(
                     context: context,
                     valueInput: valueInput,
                     valueResult: valueResult,
-                    fontSize: fontSize)
+                    fontSize: fontSize),
+                Text(state['formula'] ?? '')
               ],
             );
           },
@@ -133,6 +134,8 @@ class _LongViewState extends State<LongView> {
                       inputValue: value!,
                       inputResult: valueResult,
                       inputController: inputController);
+                  showFormula(context,
+                      inputValue: value, inputResult: valueResult);
                 },
                 dropdownMenuEntries: DataLong.listDataLong
                     .map(
@@ -194,6 +197,8 @@ class _LongViewState extends State<LongView> {
                       inputValue: valueInput,
                       inputResult: value!,
                       inputController: inputController);
+                  showFormula(context,
+                      inputValue: valueInput, inputResult: value);
                 },
                 dropdownMenuEntries: DataLong.listDataLong
                     .map(
@@ -383,6 +388,26 @@ class _LongViewState extends State<LongView> {
           .read<LongBloc>()
           .add(KmToCm(km: double.tryParse(inputController.text) ?? 0));
       print('km - cm');
+    }
+  }
+
+  void showFormula(
+    BuildContext context, {
+    required String inputValue,
+    required String inputResult,
+  }) {
+    String initial = 'Formula :';
+    if (inputValue == 'cm' && inputResult == 'm') {
+      print('cm - m');
+      context
+          .read<LongBloc>()
+          .add(ShowFormula(formula: '$initial bagi dengan 100'));
+    }
+    if (inputValue == 'cm' && inputResult == 'cm') {
+      print('cm - cm');
+      context
+          .read<LongBloc>()
+          .add(ShowFormula(formula: '$initial bilangan sama'));
     }
   }
 }
