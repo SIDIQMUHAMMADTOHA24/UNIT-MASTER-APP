@@ -76,7 +76,13 @@ class _LongViewState extends State<LongView> {
                     valueInput: valueInput,
                     valueResult: valueResult,
                     fontSize: fontSize),
-                Text(state['formula'] ?? '')
+                const SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  state['formula'] ?? '',
+                  style: const TextStyle(fontSize: 18),
+                )
               ],
             );
           },
@@ -397,17 +403,120 @@ class _LongViewState extends State<LongView> {
     required String inputResult,
   }) {
     String initial = 'Formula :';
+    if (inputValue == 'cm' && inputResult == 'cm') {
+      context.read<LongBloc>().add(ShowFormula(formula: ''));
+    }
     if (inputValue == 'cm' && inputResult == 'm') {
-      print('cm - m');
       context
           .read<LongBloc>()
           .add(ShowFormula(formula: '$initial bagi dengan 100'));
     }
-    if (inputValue == 'cm' && inputResult == 'cm') {
-      print('cm - cm');
+    if (inputValue == 'cm' && inputResult == 'mm') {
       context
           .read<LongBloc>()
-          .add(ShowFormula(formula: '$initial bilangan sama'));
+          .add(ShowFormula(formula: '$initial kali dengan 10'));
+    }
+    if (inputValue == 'cm' && inputResult == 'km') {
+      context
+          .read<LongBloc>()
+          .add(ShowFormula(formula: '$initial bagi dengan 100.000'));
+    }
+    if (inputValue == 'cm' && inputResult == 'inch') {
+      context
+          .read<LongBloc>()
+          .add(ShowFormula(formula: '$initial bagi dengan 2.54'));
+    }
+    if (inputValue == 'm' && inputResult == 'm') {
+      context.read<LongBloc>().add(ShowFormula(formula: ''));
+    }
+    if (inputValue == 'm' && inputResult == 'cm') {
+      context
+          .read<LongBloc>()
+          .add(ShowFormula(formula: '$initial kali dengan 100'));
+    }
+    if (inputValue == 'm' && inputResult == 'mm') {
+      context
+          .read<LongBloc>()
+          .add(ShowFormula(formula: '$initial kali dengan 1000'));
+    }
+    if (inputValue == 'm' && inputResult == 'km') {
+      context
+          .read<LongBloc>()
+          .add(ShowFormula(formula: '$initial kali dengan 1000'));
+    }
+    if (inputValue == 'm' && inputResult == 'inch') {
+      context
+          .read<LongBloc>()
+          .add(ShowFormula(formula: '$initial kali dengan 39.37'));
+    }
+    if (inputValue == 'mm' && inputResult == 'mm') {
+      context.read<LongBloc>().add(ShowFormula(formula: ''));
+    }
+    if (inputValue == 'mm' && inputResult == 'cm') {
+      context
+          .read<LongBloc>()
+          .add(ShowFormula(formula: '$initial bagi dengan 10'));
+    }
+    if (inputValue == 'mm' && inputResult == 'm') {
+      context
+          .read<LongBloc>()
+          .add(ShowFormula(formula: '$initial bagi dengan 1000'));
+    }
+    if (inputValue == 'mm' && inputResult == 'inch') {
+      context
+          .read<LongBloc>()
+          .add(ShowFormula(formula: '$initial bagi dengan 25.4'));
+    }
+    if (inputValue == 'mm' && inputResult == 'km') {
+      context
+          .read<LongBloc>()
+          .add(ShowFormula(formula: '$initial bagi dengan 1000000'));
+    }
+    if (inputValue == 'km' && inputResult == 'km') {
+      context.read<LongBloc>().add(ShowFormula(formula: ''));
+    }
+    if (inputValue == 'km' && inputResult == 'cm') {
+      context
+          .read<LongBloc>()
+          .add(ShowFormula(formula: '$initial kali dengan 100000'));
+    }
+    if (inputValue == 'km' && inputResult == 'm') {
+      context
+          .read<LongBloc>()
+          .add(ShowFormula(formula: '$initial kali dengan 1000'));
+    }
+    if (inputValue == 'km' && inputResult == 'mm') {
+      context
+          .read<LongBloc>()
+          .add(ShowFormula(formula: '$initial kali dengan 1000000'));
+    }
+    if (inputValue == 'km' && inputResult == 'inch') {
+      context
+          .read<LongBloc>()
+          .add(ShowFormula(formula: '$initial kali dengan 39370'));
+    }
+    if (inputValue == 'inch' && inputResult == 'inch') {
+      context.read<LongBloc>().add(ShowFormula(formula: ''));
+    }
+    if (inputValue == 'inch' && inputResult == 'cm') {
+      context
+          .read<LongBloc>()
+          .add(ShowFormula(formula: '$initial kali dengan 2.54'));
+    }
+    if (inputValue == 'inch' && inputResult == 'm') {
+      context
+          .read<LongBloc>()
+          .add(ShowFormula(formula: '$initial kali dengan 39.37'));
+    }
+    if (inputValue == 'inch' && inputResult == 'mm') {
+      context
+          .read<LongBloc>()
+          .add(ShowFormula(formula: '$initial kali dengan 25.4'));
+    }
+    if (inputValue == 'inch' && inputResult == 'km') {
+      context
+          .read<LongBloc>()
+          .add(ShowFormula(formula: '$initial bagi dengan 0.0000254'));
     }
   }
 }
