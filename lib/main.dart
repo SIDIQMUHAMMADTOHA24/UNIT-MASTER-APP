@@ -24,8 +24,8 @@ class MyApp extends StatelessWidget {
           builder: (context, child) => MaterialApp(
             theme: ThemeData(scaffoldBackgroundColor: Colors.white),
             debugShowCheckedModeBanner: false,
-            // onGenerateRoute: AppPages.GenerateRouteSettings,
-            home: const LongView(),
+            onGenerateRoute: AppPages.GenerateRouteSettings,
+            // home: const LongView(),
           ),
         ));
   }

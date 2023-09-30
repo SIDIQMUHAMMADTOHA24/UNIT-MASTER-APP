@@ -39,6 +39,9 @@ class HomeView extends StatelessWidget {
         if (image == 'panjang') {
           Navigator.pushNamed(context, '/long');
         }
+        if (image == 'massa') {
+          Navigator.pushNamed(context, '/massa');
+        }
       },
       child: Container(
         margin: const EdgeInsets.all(5),

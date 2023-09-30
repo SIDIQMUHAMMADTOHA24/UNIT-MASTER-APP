@@ -4,6 +4,8 @@ import 'package:conversion_app/global.dart';
 import 'package:conversion_app/view/home/detail/long/bloc/long_bloc.dart';
 
 import 'package:conversion_app/view/home/detail/long/long_view.dart';
+import 'package:conversion_app/view/home/detail/massa/bloc/massa_bloc.dart';
+import 'package:conversion_app/view/home/detail/massa/massa_view.dart';
 import 'package:flutter/material.dart';
 import 'package:conversion_app/view/home/home_view.dart';
 import 'package:conversion_app/view/login/login_view.dart';
@@ -44,6 +46,12 @@ class AppPages {
           bloc: BlocProvider(
             create: (context) => LongBloc(),
           )),
+      PageEntity(
+          routes: AppName.MASSA,
+          pages: const MassaView(),
+          bloc: BlocProvider(
+            create: (context) => MassaBloc(),
+          ))
     ];
   }
 
@@ -64,13 +72,9 @@ class AppPages {
       var resault =
           routes().where((element) => element.routes == settings.name);
       if (resault.isNotEmpty) {
-        print('frist log');
-        print(resault.first.routes);
         bool deviceFristOpen = Global.storageService.autoLogin();
         if (resault.first.routes == AppName.INITIAL) {
-          print('lewat sini tuan');
           if (deviceFristOpen) {
-            print('revisi ke 17');
             return MaterialPageRoute(
                 builder: (context) => const HomeView(), settings: settings);
           }
@@ -81,7 +85,6 @@ class AppPages {
             builder: (context) => resault.first.pages, settings: settings);
       }
     }
-    print('invalid routes ${settings.name}');
     return MaterialPageRoute(
         builder: (context) => const SelectModeView(), settings: settings);
   }

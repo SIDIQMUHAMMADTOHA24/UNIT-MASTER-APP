@@ -28,6 +28,14 @@ class _LongViewState extends State<LongView> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    inputController.dispose();
+    resultController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
@@ -102,26 +110,23 @@ class _LongViewState extends State<LongView> {
         child: Row(
           children: [
             Expanded(
-              child: AnimatedBuilder(
-                animation: inputController,
-                builder: (context, child) => TextField(
-                    enabled: true,
-                    controller: inputController,
-                    maxLength: 11,
-                    autofocus: true,
-                    style: TextStyle(fontSize: fontSize.sp),
-                    textInputAction: TextInputAction.done,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                        border: InputBorder.none, counterText: ''),
-                    textAlign: TextAlign.center,
-                    onChanged: (value) {
-                      onLogic(context,
-                          inputValue: valueInput,
-                          inputResult: valueResult,
-                          inputController: inputController);
-                    }),
-              ),
+              child: TextField(
+                  enabled: true,
+                  controller: inputController,
+                  maxLength: 11,
+                  autofocus: true,
+                  style: TextStyle(fontSize: fontSize.sp),
+                  textInputAction: TextInputAction.done,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                      border: InputBorder.none, counterText: ''),
+                  textAlign: TextAlign.center,
+                  onChanged: (value) {
+                    onLogic(context,
+                        inputValue: valueInput,
+                        inputResult: valueResult,
+                        inputController: inputController);
+                  }),
             ),
             DropdownMenu(
                 controller: TextEditingController(text: valueInput),
