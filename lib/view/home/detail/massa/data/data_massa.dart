@@ -3,7 +3,6 @@ class DataMassa {
     'kg',
     'g',
     'ton',
-    'kw',
     'mg',
     'ounce',
     'pound'

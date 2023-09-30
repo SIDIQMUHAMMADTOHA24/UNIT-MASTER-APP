@@ -65,12 +65,6 @@ class KgToMg extends MassaEvent {
   });
 }
 
-class KgToKw extends MassaEvent {
-  final double kg;
-  KgToKw({
-    required this.kg,
-  });
-}
 
 class KgToTon extends MassaEvent {
   final double kg;
@@ -115,12 +109,7 @@ class GramToPound extends MassaEvent {
   });
 }
 
-class GramToKw extends MassaEvent {
-  final double gram;
-  GramToKw({
-    required this.gram,
-  });
-}
+
 
 class GramToTon extends MassaEvent {
   final double gram;
@@ -151,12 +140,6 @@ class MgToGram extends MassaEvent {
   });
 }
 
-class MgToKw extends MassaEvent {
-  final double mg;
-  MgToKw({
-    required this.mg,
-  });
-}
 
 class MgToPound extends MassaEvent {
   final double mg;
@@ -194,12 +177,6 @@ class OunceToGram extends MassaEvent {
   });
 }
 
-class OunceToKw extends MassaEvent {
-  final double ounce;
-  OunceToKw({
-    required this.ounce,
-  });
-}
 
 class OunceToPound extends MassaEvent {
   final double ounce;
@@ -252,13 +229,6 @@ class PoundToGram extends MassaEvent {
   });
 }
 
-class PoundToKw extends MassaEvent {
-  final double pound;
-  PoundToKw({
-    required this.pound,
-  });
-}
-
 class PoundToTon extends MassaEvent {
   final double pound;
   PoundToTon({
@@ -280,56 +250,6 @@ class PoundToOunce extends MassaEvent {
   });
 }
 
-////////////////////////////Kw//////////////////////////////
-class KwToKw extends MassaEvent {
-  final double kw;
-  KwToKw({
-    required this.kw,
-  });
-}
-
-class KwToKg extends MassaEvent {
-  final double kw;
-  KwToKg({
-    required this.kw,
-  });
-}
-
-class KwToGram extends MassaEvent {
-  final double kw;
-  KwToGram({
-    required this.kw,
-  });
-}
-
-class KwToTon extends MassaEvent {
-  final double kw;
-  KwToTon({
-    required this.kw,
-  });
-}
-
-class KwToPound extends MassaEvent {
-  final double kw;
-  KwToPound({
-    required this.kw,
-  });
-}
-
-class KwToMg extends MassaEvent {
-  final double kw;
-  KwToMg({
-    required this.kw,
-  });
-}
-
-class KwToOunce extends MassaEvent {
-  final double kw;
-  KwToOunce({
-    required this.kw,
-  });
-}
-
 ////////////////////////////Ton//////////////////////////////
 
 
@@ -343,13 +263,6 @@ class TonToKg extends MassaEvent {
 class TonToGram extends MassaEvent {
   final double ton;
   TonToGram({
-    required this.ton,
-  });
-}
-
-class TonToKw extends MassaEvent {
-  final double ton;
-  TonToKw({
     required this.ton,
   });
 }
@@ -373,6 +286,13 @@ class TonToPound extends MassaEvent {
 class TonToTon extends MassaEvent {
   final double ton;
   TonToTon({
+    required this.ton,
+  });
+}
+
+class TonToMg extends MassaEvent {
+  final double ton;
+  TonToMg({
     required this.ton,
   });
 }
