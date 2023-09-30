@@ -69,6 +69,7 @@ class _LongViewState extends State<LongView> {
             final valueResult = state['dropDownMenuResult'];
             resultController.text = state['resultValue'];
             final fontSize = state['fontSize'];
+            print(fontSize);
             return Column(
               children: [
                 //input
@@ -132,7 +133,7 @@ class _LongViewState extends State<LongView> {
                 controller: TextEditingController(text: valueInput),
                 inputDecorationTheme:
                     const InputDecorationTheme(border: InputBorder.none),
-                textStyle: TextStyle(fontSize: 40.sp, color: Colors.black),
+                textStyle: TextStyle(fontSize: 35.sp, color: Colors.black),
                 trailingIcon: const Icon(
                   Icons.keyboard_arrow_down_outlined,
                   size: 30,
@@ -187,7 +188,7 @@ class _LongViewState extends State<LongView> {
                 decoration: const InputDecoration(
                     border: InputBorder.none, counterText: ''),
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: fontSize),
+                style: TextStyle(fontSize: fontSize.sp),
               ),
             ),
             DropdownMenu(
@@ -195,7 +196,7 @@ class _LongViewState extends State<LongView> {
                 inputDecorationTheme:
                     const InputDecorationTheme(border: InputBorder.none),
                 textStyle: TextStyle(
-                    fontSize: 40.sp, color: Colors.black.withOpacity(0.5)),
+                    fontSize: 35.sp, color: Colors.black.withOpacity(0.5)),
                 trailingIcon: const Icon(
                   Icons.keyboard_arrow_down_outlined,
                   size: 30,

@@ -5,7 +5,7 @@ part of 'massa_bloc.dart';
 sealed class MassaEvent {}
 
 //Event for resize
-class FontSize extends MassaBloc {
+class FontSize extends MassaEvent {
   final double size;
   FontSize({
     required this.size,
@@ -294,5 +294,13 @@ class TonToMg extends MassaEvent {
   final double ton;
   TonToMg({
     required this.ton,
+  });
+}
+
+
+class ShowFormula extends MassaEvent {
+  final String formula;
+  ShowFormula({
+    required this.formula,
   });
 }

@@ -26,8 +26,9 @@ class HomeView extends StatelessWidget {
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2),
               children: [
-                menuItem(context, image: 'panjang', title: 'Konversi Panjang'),
-                menuItem(context, image: 'massa', title: 'Konversi Berat'),
+                menuItem(context, image: 'length', title: 'Konversi Panjang'),
+                menuItem(context, image: 'massa', title: 'Konversi Massa'),
+                menuItem(context, image: 'suhu', title: 'Konversi Suhu')
               ],
             )));
   }
@@ -36,11 +37,16 @@ class HomeView extends StatelessWidget {
       {required String image, required String title}) {
     return GestureDetector(
       onTap: () {
-        if (image == 'panjang') {
+        if (image == 'length') {
           Navigator.pushNamed(context, '/long');
         }
         if (image == 'massa') {
           Navigator.pushNamed(context, '/massa');
+
+        }
+        if (image == 'suhu') {
+          Navigator.pushNamed(context, '/suhu');
+          
         }
       },
       child: Container(
@@ -49,9 +55,9 @@ class HomeView extends StatelessWidget {
         child: Column(
           children: [
             Image.asset('assets/$image.png',
-                color: Colors.black.withOpacity(0.8), fit: BoxFit.cover),
+                color: Colors.black.withOpacity(0.8), fit: BoxFit.cover,width: 50,),
             SizedBox(
-              height: 5.h,
+              height: 7.h,
             ),
             Text(
               title,

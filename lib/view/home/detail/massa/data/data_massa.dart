@@ -1,7 +1,7 @@
 class DataMassa {
   static List<String> listDataMassa = [
     'kg',
-    'g',
+    'gram',
     'ton',
     'mg',
     'ounce',

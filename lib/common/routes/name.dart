@@ -7,4 +7,5 @@ class AppName {
   static const LONG = '/long';
   static const TESTING = '/tes';
   static const MASSA = '/massa';
+  static const SUHU = '/suhu';
 }

@@ -6,6 +6,8 @@ import 'package:conversion_app/view/home/detail/long/bloc/long_bloc.dart';
 import 'package:conversion_app/view/home/detail/long/long_view.dart';
 import 'package:conversion_app/view/home/detail/massa/bloc/massa_bloc.dart';
 import 'package:conversion_app/view/home/detail/massa/massa_view.dart';
+import 'package:conversion_app/view/home/detail/suhu/bloc/suhu_bloc.dart';
+import 'package:conversion_app/view/home/detail/suhu/suhu_view.dart';
 import 'package:flutter/material.dart';
 import 'package:conversion_app/view/home/home_view.dart';
 import 'package:conversion_app/view/login/login_view.dart';
@@ -44,13 +46,19 @@ class AppPages {
           routes: AppName.LONG,
           pages: const LongView(),
           bloc: BlocProvider(
-            create: (context) => LongBloc(),
+            create: (_) => LongBloc(),
           )),
       PageEntity(
           routes: AppName.MASSA,
           pages: const MassaView(),
           bloc: BlocProvider(
-            create: (context) => MassaBloc(),
+            create: (_) => MassaBloc(),
+          )),
+      PageEntity(
+          routes: AppName.SUHU,
+          pages: const SuhuView(),
+          bloc: BlocProvider(
+            create: (_) => SuhuBloc(),
           ))
     ];
   }

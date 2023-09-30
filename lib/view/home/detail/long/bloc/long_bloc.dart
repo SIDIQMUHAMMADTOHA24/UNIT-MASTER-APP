@@ -57,11 +57,11 @@ class LongBloc extends Bloc<LongEvent, Map<String, dynamic>> {
   //bloc for fontSize
   _fontSize(FontSize event, Emitter<Map<String, dynamic>> emit) {
     final textLength = event.size;
-    if (textLength > 7) {
-      final newFontSize = 40 - ((textLength - 7) * 4);
+    if (textLength > 3) {
+      final newFontSize = 35 - ((textLength - 6) * 4);
       emit({...state, 'fontSize': newFontSize.toDouble()});
     } else {
-      emit({...state, 'fontSize': 40.toDouble()});
+      emit({...state, 'fontSize': 35.toDouble()});
     }
   }
 
