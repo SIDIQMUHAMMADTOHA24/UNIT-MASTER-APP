@@ -22,16 +22,40 @@ class SuhuBloc extends Bloc<SuhuEvent, Map<String, dynamic>> {
     on<DropDownMenuInput>(_dropDownMenuInput);
     on<DropDownMenuResult>(_dropDownMenuResult);
 
-    //bloc for math
-    on<CelsiusToCelsius>(_celsiusToCelsius);
-    on<CelsiusToFahrenheit>(_celsiusToFahrenheit);
-    on<CelsiusToKelvin>(_celsiusToKelvin);
-    on<FahrenheitToCelsius>(_fahrenheitToCelsius);
-    on<FahrenheitToFahrenheit>(_fahrenheitToFahrenheit);
-    on<FahrenheitToKelvin>(_fahrenheitToKelvin);
-    on<KelvinToCelsius>(_kelvinToCelsius);
-    on<KelvinToFahrenheit>(_kelvinToFahrenheit);
-    on<KelvinToKelvin>(_kelvinToKelvin);
+    on<TemperatureConversion>(
+      (event, emit) {
+        switch (event.conversionType) {
+          case TemperatureConversionType.celsiusToCelsius:
+            _celsiusToCelsius(event, emit);
+            break;
+          case TemperatureConversionType.celsiusToFahrenheit:
+            _celsiusToFahrenheit(event, emit);
+            break;
+          case TemperatureConversionType.celsiusToKelvin:
+            _celsiusToKelvin(event, emit);
+            break;
+          case TemperatureConversionType.fahrenheitToCelsius:
+            _fahrenheitToCelsius(event, emit);
+            break;
+          case TemperatureConversionType.fahrenheitToFahrenheit:
+            _fahrenheitToFahrenheit(event, emit);
+            break;
+          case TemperatureConversionType.fahrenheitToKelvin:
+            _fahrenheitToKelvin(event, emit);
+            break;
+          case TemperatureConversionType.kelvinToCelsius:
+            _kelvinToCelsius(event, emit);
+            break;
+          case TemperatureConversionType.kelvinToFahrenheit:
+            _kelvinToFahrenheit(event, emit);
+            break;
+          case TemperatureConversionType.kelvinToKelvin:
+            _kelvinToKelvin(event, emit);
+            break;
+          default:
+        }
+      },
+    );
   }
 
   //bloc for show formula
@@ -63,13 +87,13 @@ class SuhuBloc extends Bloc<SuhuEvent, Map<String, dynamic>> {
 
 //bloc for math
   _celsiusToCelsius(
-      CelsiusToCelsius event, Emitter<Map<String, dynamic>> emit) {
-    emit({...state, 'resultValue': event.c.toInt().toString()});
+      TemperatureConversion event, Emitter<Map<String, dynamic>> emit) {
+    emit({...state, 'resultValue': event.value.toInt().toString()});
   }
 
   _celsiusToFahrenheit(
-      CelsiusToFahrenheit event, Emitter<Map<String, dynamic>> emit) {
-    double c = (event.c * 1.8) + 32;
+      TemperatureConversion event, Emitter<Map<String, dynamic>> emit) {
+    double c = (event.value * 1.8) + 32;
     int result = c.toInt();
     double remainder = c - result.toDouble();
     if (remainder == 0) {
@@ -79,8 +103,9 @@ class SuhuBloc extends Bloc<SuhuEvent, Map<String, dynamic>> {
     }
   }
 
-  _celsiusToKelvin(CelsiusToKelvin event, Emitter<Map<String, dynamic>> emit) {
-    double c = event.c + 273.15;
+  _celsiusToKelvin(
+      TemperatureConversion event, Emitter<Map<String, dynamic>> emit) {
+    double c = event.value + 273.15;
     int result = c.toInt();
     double remainder = c - result.toDouble();
     if (remainder == 0) {
@@ -91,13 +116,13 @@ class SuhuBloc extends Bloc<SuhuEvent, Map<String, dynamic>> {
   }
 
   _fahrenheitToFahrenheit(
-      FahrenheitToFahrenheit event, Emitter<Map<String, dynamic>> emit) {
-    emit({...state, 'resultValue': event.f.toInt().toString()});
+      TemperatureConversion event, Emitter<Map<String, dynamic>> emit) {
+    emit({...state, 'resultValue': event.value.toInt().toString()});
   }
 
   _fahrenheitToCelsius(
-      FahrenheitToCelsius event, Emitter<Map<String, dynamic>> emit) {
-    double f = (event.f - 32) * 0.556;
+      TemperatureConversion event, Emitter<Map<String, dynamic>> emit) {
+    double f = (event.value - 32) * 0.556;
     int result = f.toInt();
     double remainder = f - result.toDouble();
     if (remainder == 0) {
@@ -108,8 +133,8 @@ class SuhuBloc extends Bloc<SuhuEvent, Map<String, dynamic>> {
   }
 
   _fahrenheitToKelvin(
-      FahrenheitToKelvin event, Emitter<Map<String, dynamic>> emit) {
-    double f = (event.f - 32) * 0.556 + 273.15;
+      TemperatureConversion event, Emitter<Map<String, dynamic>> emit) {
+    double f = (event.value - 32) * 0.556 + 273.15;
     int result = f.toInt();
     double remainder = f - result.toDouble();
     if (remainder == 0) {
@@ -119,8 +144,9 @@ class SuhuBloc extends Bloc<SuhuEvent, Map<String, dynamic>> {
     }
   }
 
-  _kelvinToCelsius(KelvinToCelsius event, Emitter<Map<String, dynamic>> emit) {
-    double k = event.k - 273.15;
+  _kelvinToCelsius(
+      TemperatureConversion event, Emitter<Map<String, dynamic>> emit) {
+    double k = event.value - 273.15;
     int result = k.toInt();
     double remainder = k - result.toDouble();
     if (remainder == 0) {
@@ -130,13 +156,14 @@ class SuhuBloc extends Bloc<SuhuEvent, Map<String, dynamic>> {
     }
   }
 
-  _kelvinToKelvin(KelvinToKelvin event, Emitter<Map<String, dynamic>> emit) {
-    emit({...state, 'resultValue': event.k.toInt().toString()});
+  _kelvinToKelvin(
+      TemperatureConversion event, Emitter<Map<String, dynamic>> emit) {
+    emit({...state, 'resultValue': event.value.toInt().toString()});
   }
 
   _kelvinToFahrenheit(
-      KelvinToFahrenheit event, Emitter<Map<String, dynamic>> emit) {
-    double k = (event.k - 273.15) * 1.8 + 32;
+      TemperatureConversion event, Emitter<Map<String, dynamic>> emit) {
+    double k = (event.value - 273.15) * 1.8 + 32;
     int result = k.toInt();
     double remainder = k - result.toDouble();
     if (remainder == 0) {

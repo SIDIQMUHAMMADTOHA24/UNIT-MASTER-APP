@@ -25,6 +25,7 @@ class _MassaViewState extends State<MassaView> {
     inputController.addListener(_updateSize);
     super.initState();
   }
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -32,6 +33,7 @@ class _MassaViewState extends State<MassaView> {
     resultController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,6 +68,7 @@ class _MassaViewState extends State<MassaView> {
             final valueResult = state['dropDownMenuResult'];
             resultController.text = state['resultValue'];
             final fontSize = state['fontSize'];
+            final formula = state['formula'];
             print(fontSize.toString());
             return Column(
               children: [
@@ -85,9 +88,29 @@ class _MassaViewState extends State<MassaView> {
                 const SizedBox(
                   height: 20,
                 ),
-                Text(
-                  state['formula'] ?? '',
-                  style: const TextStyle(fontSize: 18),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    (formula.isNotEmpty)
+                        ? Container(
+                            padding: const EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                color: Colors.amber),
+                            child: const Center(
+                                child: Text('Formula :',
+                                    style: TextStyle(fontSize: 18))),
+                          )
+                        : Container(),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      formula ?? '',
+                      style: const TextStyle(fontSize: 18),
+                    ),
+                  ],
                 )
               ],
             );
@@ -130,7 +153,7 @@ class _MassaViewState extends State<MassaView> {
                 controller: TextEditingController(text: valueInput),
                 inputDecorationTheme:
                     const InputDecorationTheme(border: InputBorder.none),
-                textStyle: TextStyle(fontSize:35.sp, color: Colors.black),
+                textStyle: TextStyle(fontSize: 35.sp, color: Colors.black),
                 trailingIcon: const Icon(
                   Icons.keyboard_arrow_down_outlined,
                   size: 30,
@@ -459,45 +482,44 @@ class _MassaViewState extends State<MassaView> {
     required String inputValue,
     required String inputResult,
   }) {
-    String initial = 'Formula :';
     if (inputValue == 'kg' && inputResult == 'kg') {
       context.read<MassaBloc>().add(ShowFormula(formula: ''));
     }
     if (inputValue == 'kg' && inputResult == 'ton') {
       context
           .read<MassaBloc>()
-          .add(ShowFormula(formula: '$initial bagi dengan 1000'));
+          .add(ShowFormula(formula: 'bagi dengan 1000'));
     }
     if (inputValue == 'kg' && inputResult == 'gram') {
       context
           .read<MassaBloc>()
-          .add(ShowFormula(formula: '$initial kali dengan 1000'));
+          .add(ShowFormula(formula: 'kali dengan 1000'));
     }
     if (inputValue == 'kg' && inputResult == 'ounce') {
       context
           .read<MassaBloc>()
-          .add(ShowFormula(formula: '$initial kali dengan 35.274'));
+          .add(ShowFormula(formula: 'kali dengan 35.274'));
     }
     if (inputValue == 'kg' && inputResult == 'pound') {
       context
           .read<MassaBloc>()
-          .add(ShowFormula(formula: '$initial kali dengan 2.20462'));
+          .add(ShowFormula(formula: 'kali dengan 2.20462'));
     }
     if (inputValue == 'kg' && inputResult == 'mg') {
       context
           .read<MassaBloc>()
-          .add(ShowFormula(formula: '$initial kali dengan 1000000 '));
+          .add(ShowFormula(formula: 'kali dengan 1000000 '));
     }
     //
     if (inputValue == 'gram' && inputResult == 'kg') {
       context
           .read<MassaBloc>()
-          .add(ShowFormula(formula: '$initial bagi dengan 1000'));
+          .add(ShowFormula(formula: 'bagi dengan 1000'));
     }
     if (inputValue == 'gram' && inputResult == 'ton') {
       context
           .read<MassaBloc>()
-          .add(ShowFormula(formula: '$initial bagi dengan 1000000'));
+          .add(ShowFormula(formula: 'bagi dengan 1000000'));
     }
     if (inputValue == 'gram' && inputResult == 'gram') {
       context.read<MassaBloc>().add(ShowFormula(formula: ''));
@@ -505,23 +527,23 @@ class _MassaViewState extends State<MassaView> {
     if (inputValue == 'gram' && inputResult == 'ounce') {
       context
           .read<MassaBloc>()
-          .add(ShowFormula(formula: '$initial bagi dengan 28.35'));
+          .add(ShowFormula(formula: 'bagi dengan 28.35'));
     }
     if (inputValue == 'gram' && inputResult == 'pound') {
       context
           .read<MassaBloc>()
-          .add(ShowFormula(formula: '$initial bagi dengan 453.6'));
+          .add(ShowFormula(formula: 'bagi dengan 453.6'));
     }
     if (inputValue == 'gram' && inputResult == 'mg') {
       context
           .read<MassaBloc>()
-          .add(ShowFormula(formula: '$initial kali dengan 1000'));
+          .add(ShowFormula(formula: 'kali dengan 1000'));
     }
     //
     if (inputValue == 'ton' && inputResult == 'kg') {
       context
           .read<MassaBloc>()
-          .add(ShowFormula(formula: '$initial bagi dengan 1000'));
+          .add(ShowFormula(formula: 'bagi dengan 1000'));
     }
     if (inputValue == 'ton' && inputResult == 'ton') {
       context.read<MassaBloc>().add(ShowFormula(formula: ''));
@@ -529,48 +551,48 @@ class _MassaViewState extends State<MassaView> {
     if (inputValue == 'ton' && inputResult == 'gram') {
       context
           .read<MassaBloc>()
-          .add(ShowFormula(formula: '$initial kali dengan 1000000'));
+          .add(ShowFormula(formula: 'kali dengan 1000000'));
     }
     if (inputValue == 'ton' && inputResult == 'ounce') {
       context
           .read<MassaBloc>()
-          .add(ShowFormula(formula: '$initial kali dengan 35273961'));
+          .add(ShowFormula(formula: 'kali dengan 35273961'));
     }
     if (inputValue == 'ton' && inputResult == 'pound') {
       context
           .read<MassaBloc>()
-          .add(ShowFormula(formula: '$initial kali dengan 2204.62'));
+          .add(ShowFormula(formula: 'kali dengan 2204.62'));
     }
     if (inputValue == 'ton' && inputResult == 'mg') {
       context
           .read<MassaBloc>()
-          .add(ShowFormula(formula: '$initial kali dengan 1000000000'));
+          .add(ShowFormula(formula: 'kali dengan 1000000000'));
     }
     //
     if (inputValue == 'mg' && inputResult == 'kg') {
       context
           .read<MassaBloc>()
-          .add(ShowFormula(formula: '$initial bagi dengan 1000000'));
+          .add(ShowFormula(formula: 'bagi dengan 1000000'));
     }
     if (inputValue == 'mg' && inputResult == 'ton') {
       context
           .read<MassaBloc>()
-          .add(ShowFormula(formula: '$initial kali dengan 1000000'));
+          .add(ShowFormula(formula: 'kali dengan 1000000'));
     }
     if (inputValue == 'mg' && inputResult == 'gram') {
       context
           .read<MassaBloc>()
-          .add(ShowFormula(formula: '$initial bagi dengan 1000'));
+          .add(ShowFormula(formula: 'bagi dengan 1000'));
     }
     if (inputValue == 'mg' && inputResult == 'ounce') {
       context
           .read<MassaBloc>()
-          .add(ShowFormula(formula: '$initial bagi dengan 28350'));
+          .add(ShowFormula(formula: 'bagi dengan 28350'));
     }
     if (inputValue == 'mg' && inputResult == 'pound') {
       context
           .read<MassaBloc>()
-          .add(ShowFormula(formula: '$initial bagi dengan 453600'));
+          .add(ShowFormula(formula: 'bagi dengan 453600'));
     }
     if (inputValue == 'mg' && inputResult == 'mg') {
       context.read<MassaBloc>().add(ShowFormula(formula: ''));
@@ -579,17 +601,17 @@ class _MassaViewState extends State<MassaView> {
     if (inputValue == 'ounce' && inputResult == 'kg') {
       context
           .read<MassaBloc>()
-          .add(ShowFormula(formula: '$initial kali dengan 0.0283495'));
+          .add(ShowFormula(formula: 'kali dengan 0.0283495'));
     }
     if (inputValue == 'ounce' && inputResult == 'ton') {
       context
           .read<MassaBloc>()
-          .add(ShowFormula(formula: '$initial kali dengan 0.0000283495'));
+          .add(ShowFormula(formula: 'kali dengan 0.0000283495'));
     }
     if (inputValue == 'ounce' && inputResult == 'gram') {
       context
           .read<MassaBloc>()
-          .add(ShowFormula(formula: '$initial kali dengan 28.3495'));
+          .add(ShowFormula(formula: 'kali dengan 28.3495'));
     }
     if (inputValue == 'ounce' && inputResult == 'ounce') {
       context.read<MassaBloc>().add(ShowFormula(formula: ''));
@@ -597,29 +619,29 @@ class _MassaViewState extends State<MassaView> {
     if (inputValue == 'ounce' && inputResult == 'pound') {
       context
           .read<MassaBloc>()
-          .add(ShowFormula(formula: '$initial kali dengan 0.0625'));
+          .add(ShowFormula(formula: 'kali dengan 0.0625'));
     }
     if (inputValue == 'ounce' && inputResult == 'mg') {
-      context.read<MassaBloc>().add(ShowFormula(formula: '$initial 28.3495'));
+      context.read<MassaBloc>().add(ShowFormula(formula: '28.3495'));
     }
     //
     if (inputValue == 'pound' && inputResult == 'kg') {
       context
           .read<MassaBloc>()
-          .add(ShowFormula(formula: '$initial bagi dengan 2.205'));
+          .add(ShowFormula(formula: 'bagi dengan 2.205'));
     }
     if (inputValue == 'pound' && inputResult == 'ton') {
       context
           .read<MassaBloc>()
-          .add(ShowFormula(formula: '$initial kali dengan 0.000453592'));
+          .add(ShowFormula(formula: 'kali dengan 0.000453592'));
     }
     if (inputValue == 'pound' && inputResult == 'gram') {
-      context.read<MassaBloc>().add(ShowFormula(formula: '$initial 453.6'));
+      context.read<MassaBloc>().add(ShowFormula(formula: '453.6'));
     }
     if (inputValue == 'pound' && inputResult == 'ounce') {
       context
           .read<MassaBloc>()
-          .add(ShowFormula(formula: '$initial kali dengan 16'));
+          .add(ShowFormula(formula: 'kali dengan 16'));
     }
     if (inputValue == 'pound' && inputResult == 'pound') {
       context.read<MassaBloc>().add(ShowFormula(formula: ''));
@@ -627,7 +649,7 @@ class _MassaViewState extends State<MassaView> {
     if (inputValue == 'pound' && inputResult == 'mg') {
       context
           .read<MassaBloc>()
-          .add(ShowFormula(formula: '$initial kali dengan 453600'));
+          .add(ShowFormula(formula: 'kali dengan 453600'));
     }
   }
 }

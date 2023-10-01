@@ -28,7 +28,8 @@ class HomeView extends StatelessWidget {
               children: [
                 menuItem(context, image: 'length', title: 'Konversi Panjang'),
                 menuItem(context, image: 'massa', title: 'Konversi Massa'),
-                menuItem(context, image: 'suhu', title: 'Konversi Suhu')
+                menuItem(context, image: 'suhu', title: 'Konversi Suhu'),
+                menuItem(context, image: 'time', title: 'Konversi Waktu'),
               ],
             )));
   }
@@ -42,20 +43,24 @@ class HomeView extends StatelessWidget {
         }
         if (image == 'massa') {
           Navigator.pushNamed(context, '/massa');
-
         }
         if (image == 'suhu') {
           Navigator.pushNamed(context, '/suhu');
-          
+        }
+        if (image == 'time') {
+          Navigator.pushNamed(context, '/time');
         }
       },
       child: Container(
         margin: const EdgeInsets.all(5),
-        // decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
         child: Column(
           children: [
-            Image.asset('assets/$image.png',
-                color: Colors.black.withOpacity(0.8), fit: BoxFit.cover,width: 50,),
+            Image.asset(
+              'assets/$image.png',
+              color: Colors.black.withOpacity(0.8),
+              fit: BoxFit.cover,
+              width: 50,
+            ),
             SizedBox(
               height: 7.h,
             ),

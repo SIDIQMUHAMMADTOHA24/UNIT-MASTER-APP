@@ -8,6 +8,8 @@ import 'package:conversion_app/view/home/detail/massa/bloc/massa_bloc.dart';
 import 'package:conversion_app/view/home/detail/massa/massa_view.dart';
 import 'package:conversion_app/view/home/detail/suhu/bloc/suhu_bloc.dart';
 import 'package:conversion_app/view/home/detail/suhu/suhu_view.dart';
+import 'package:conversion_app/view/home/detail/time/bloc/time_bloc.dart';
+import 'package:conversion_app/view/home/detail/time/time_view.dart';
 import 'package:flutter/material.dart';
 import 'package:conversion_app/view/home/home_view.dart';
 import 'package:conversion_app/view/login/login_view.dart';
@@ -59,6 +61,12 @@ class AppPages {
           pages: const SuhuView(),
           bloc: BlocProvider(
             create: (_) => SuhuBloc(),
+          )),
+      PageEntity(
+          routes: AppName.TIME,
+          pages: const TimeView(),
+          bloc: BlocProvider(
+            create: (_) => TimeBloc(),
           ))
     ];
   }

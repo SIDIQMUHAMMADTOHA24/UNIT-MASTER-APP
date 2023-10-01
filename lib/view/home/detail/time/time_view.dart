@@ -1,23 +1,23 @@
-import 'package:conversion_app/view/home/detail/suhu/bloc/suhu_bloc.dart';
-import 'package:conversion_app/view/home/detail/suhu/data/data_suhu.dart';
+import 'package:conversion_app/view/home/detail/time/bloc/time_bloc.dart';
+import 'package:conversion_app/view/home/detail/time/data/data_time.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SuhuView extends StatefulWidget {
-  const SuhuView({super.key});
+class TimeView extends StatefulWidget {
+  const TimeView({super.key});
 
   @override
-  State<SuhuView> createState() => _SuhuViewState();
+  State<TimeView> createState() => _TimeViewState();
 }
 
-class _SuhuViewState extends State<SuhuView> {
+class _TimeViewState extends State<TimeView> {
   TextEditingController inputController = TextEditingController();
   TextEditingController resultController = TextEditingController();
 
   void _updateSize() {
     final textLength = inputController.text.length;
-    context.read<SuhuBloc>().add(FontSize(size: textLength.toDouble()));
+    context.read<TimeBloc>().add(FontSize(size: textLength.toDouble()));
   }
 
   @override
@@ -55,14 +55,14 @@ class _SuhuViewState extends State<SuhuView> {
           elevation: 0,
           backgroundColor: Colors.white,
           title: Text(
-            'Konversi Suhu',
+            'Konversi Waktu',
             style: TextStyle(
                 fontSize: 20.sp,
                 fontWeight: FontWeight.w500,
                 color: Colors.black.withOpacity(0.8)),
           ),
         ),
-        body: BlocBuilder<SuhuBloc, Map<String, dynamic>>(
+        body: BlocBuilder<TimeBloc, Map<String, dynamic>>(
           builder: (context, state) {
             final valueInput = state['dropDownMenuInput'];
             final valueResult = state['dropDownMenuResult'];
@@ -77,14 +77,14 @@ class _SuhuViewState extends State<SuhuView> {
                     context: context,
                     valueInput: valueInput,
                     valueResult: valueResult,
-                    fontSize: fontSize),
+                    fontSize: 35),
 
                 //output
                 resultWidget(
                     context: context,
                     valueInput: valueInput,
                     valueResult: valueResult,
-                    fontSize: fontSize),
+                    fontSize: 35),
                 const SizedBox(
                   height: 20,
                 ),
@@ -160,16 +160,16 @@ class _SuhuViewState extends State<SuhuView> {
                 ),
                 onSelected: (value) {
                   context
-                      .read<SuhuBloc>()
+                      .read<TimeBloc>()
                       .add(DropDownMenuInput(dropDownMenuInput: value ?? ''));
                   onLogic(context,
                       inputValue: value!,
                       inputResult: valueResult,
                       inputController: inputController);
-                  showFormula(context,
-                      inputValue: value, inputResult: valueResult);
+                  // showFormula(context,
+                  //     inputValue: value, inputResult: valueResult);
                 },
-                dropdownMenuEntries: DataSuhu.listDataSuhu
+                dropdownMenuEntries: DataTime.listDataTime
                     .map(
                       (e) => DropdownMenuEntry(
                           value: e,
@@ -223,16 +223,16 @@ class _SuhuViewState extends State<SuhuView> {
                 ),
                 onSelected: (value) {
                   context
-                      .read<SuhuBloc>()
+                      .read<TimeBloc>()
                       .add(DropDownMenuResult(dropDownMenuResult: value ?? ''));
                   onLogic(context,
                       inputValue: valueInput,
                       inputResult: value!,
                       inputController: inputController);
-                  showFormula(context,
-                      inputValue: valueInput, inputResult: value);
+                  // showFormula(context,
+                  //     inputValue: valueInput, inputResult: value);
                 },
-                dropdownMenuEntries: DataSuhu.listDataSuhu
+                dropdownMenuEntries: DataTime.listDataTime
                     .map(
                       (e) => DropdownMenuEntry(
                           value: e,
@@ -255,92 +255,40 @@ class _SuhuViewState extends State<SuhuView> {
       required TextEditingController inputController}) {
     double inputValueAsDouble = double.tryParse(inputController.text) ?? 0;
 
-    if (inputValue == '°C' && inputResult == '°C') {
-      context.read<SuhuBloc>().add(TemperatureConversion(
-          value: inputValueAsDouble,
-          conversionType: TemperatureConversionType.celsiusToCelsius));
-    }
-    if (inputValue == '°C' && inputResult == '°F') {
-      context.read<SuhuBloc>().add(TemperatureConversion(
-          value: inputValueAsDouble,
-          conversionType: TemperatureConversionType.celsiusToFahrenheit));
-    }
-    if (inputValue == '°C' && inputResult == 'Kelvin') {
-      context.read<SuhuBloc>().add(TemperatureConversion(
-          value: inputValueAsDouble,
-          conversionType: TemperatureConversionType.celsiusToKelvin));
-    }
-
-    if (inputValue == '°F' && inputResult == '°C') {
-      context.read<SuhuBloc>().add(TemperatureConversion(
-          value: inputValueAsDouble,
-          conversionType: TemperatureConversionType.fahrenheitToCelsius));
-    }
-    if (inputValue == '°F' && inputResult == '°F') {
-      context.read<SuhuBloc>().add(TemperatureConversion(
-          value: inputValueAsDouble,
-          conversionType: TemperatureConversionType.fahrenheitToFahrenheit));
-    }
-    if (inputValue == '°F' && inputResult == 'Kelvin') {
-      context.read<SuhuBloc>().add(TemperatureConversion(
-          value: inputValueAsDouble,
-          conversionType: TemperatureConversionType.fahrenheitToKelvin));
-    }
-
-    if (inputValue == 'Kelvin' && inputResult == '°C') {
-      context.read<SuhuBloc>().add(TemperatureConversion(
-          value: inputValueAsDouble,
-          conversionType: TemperatureConversionType.kelvinToCelsius));
-    }
-    if (inputValue == 'Kelvin' && inputResult == '°F') {
-      context.read<SuhuBloc>().add(TemperatureConversion(
-          value: inputValueAsDouble,
-          conversionType: TemperatureConversionType.kelvinToFahrenheit));
-    }
-    if (inputValue == 'Kelvin' && inputResult == 'Kelvin') {
-      context.read<SuhuBloc>().add(TemperatureConversion(
-          value: inputValueAsDouble,
-          conversionType: TemperatureConversionType.kelvinToKelvin));
-    }
-  }
-
-  void showFormula(
-    BuildContext context, {
-    required String inputValue,
-    required String inputResult,
-  }) {
-    if (inputValue == '°C' && inputResult == '°C') {
-      context.read<SuhuBloc>().add(ShowFormula(formula: ''));
-    }
-    if (inputValue == '°C' && inputResult == '°F') {
-      context.read<SuhuBloc>().add(ShowFormula(formula: '(°C × 1.8) + 32'));
-    }
-    if (inputValue == '°C' && inputResult == 'Kelvin') {
-      context.read<SuhuBloc>().add(ShowFormula(formula: '°C + 273,15'));
-    }
-    //
-    if (inputValue == '°F' && inputResult == '°C') {
-      context.read<SuhuBloc>().add(ShowFormula(formula: '(°F − 32) × 0.556'));
-    }
-    if (inputValue == '°F' && inputResult == '°F') {
-      context.read<SuhuBloc>().add(ShowFormula(formula: ''));
-    }
-    if (inputValue == '°F' && inputResult == 'Kelvin') {
-      context
-          .read<SuhuBloc>()
-          .add(ShowFormula(formula: '(°F − 32) × 1.8 + 273,15 '));
-    }
-    //
-    if (inputValue == 'Kelvin' && inputResult == '°C') {
-      context.read<SuhuBloc>().add(ShowFormula(formula: 'K − 273,15'));
-    }
-    if (inputValue == 'Kelvin' && inputResult == '°F') {
-      context
-          .read<SuhuBloc>()
-          .add(ShowFormula(formula: '(K − 273,15) × 1.8 + 32'));
-    }
-    if (inputValue == 'Kelvin' && inputResult == 'Kelvin') {
-      context.read<SuhuBloc>().add(ShowFormula(formula: ''));
+    if (inputValue == 'Detik') {
+      if (inputResult == 'Menit') {
+        context.read<TimeBloc>().add(TimeConversion(
+            value: inputValueAsDouble,
+            conversionType: TimeConversionType.detikToMenit));
+      } else if (inputResult == 'Jam') {
+        context.read<TimeBloc>().add(TimeConversion(
+            value: inputValueAsDouble,
+            conversionType: TimeConversionType.detikToJam));
+      } else if (inputResult == 'Hari') {
+        context.read<TimeBloc>().add(TimeConversion(
+            value: inputValueAsDouble,
+            conversionType: TimeConversionType.detikToHari));
+      } else if (inputResult == 'Minggu') {
+        context.read<TimeBloc>().add(TimeConversion(
+            value: inputValueAsDouble,
+            conversionType: TimeConversionType.detikToMinggu));
+      } else if (inputResult == 'Bulan') {
+        context.read<TimeBloc>().add(TimeConversion(
+            value: inputValueAsDouble,
+            conversionType: TimeConversionType.detikToBulan));
+      } else if (inputResult == 'Tahun') {
+        context.read<TimeBloc>().add(TimeConversion(
+            value: inputValueAsDouble,
+            conversionType: TimeConversionType.detikToTahun));
+      } else if (inputResult == 'Dekade') {
+        context.read<TimeBloc>().add(TimeConversion(
+            value: inputValueAsDouble,
+            conversionType: TimeConversionType.detikToDekade));
+      } else if (inputResult == 'Abad') {
+        context.read<TimeBloc>().add(TimeConversion(
+            value: inputValueAsDouble,
+            conversionType: TimeConversionType.detikToAbad));
+      }
     }
   }
 }

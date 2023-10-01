@@ -27,74 +27,28 @@ class DropDownMenuResult extends SuhuEvent {
   });
 }
 
-class CelsiusToFahrenheit extends SuhuEvent {
-  final double c;
-  CelsiusToFahrenheit({
-    required this.c,
-  });
-}
-
-class CelsiusToKelvin extends SuhuEvent {
-  final double c;
-  CelsiusToKelvin({
-    required this.c,
-  });
-}
-
-class CelsiusToCelsius extends SuhuEvent {
-  final double c;
-  CelsiusToCelsius({
-    required this.c,
-  });
-}
-
-class FahrenheitToCelsius extends SuhuEvent {
-  final double f;
-  FahrenheitToCelsius({
-    required this.f,
-  });
-}
-
-class FahrenheitToKelvin extends SuhuEvent {
-  final double f;
-  FahrenheitToKelvin({
-    required this.f,
-  });
-}
-
-class FahrenheitToFahrenheit extends SuhuEvent {
-  final double f;
-  FahrenheitToFahrenheit({
-    required this.f,
-  });
-}
-
-
-class KelvinToKelvin extends SuhuEvent {
-  final double k;
-  KelvinToKelvin({
-    required this.k,
-  });
-}
-
-class KelvinToCelsius extends SuhuEvent {
-  final double k;
-  KelvinToCelsius({
-    required this.k,
-  });
-}
-
-class KelvinToFahrenheit extends SuhuEvent {
-  final double k;
-  KelvinToFahrenheit({
-    required this.k,
-  });
-}
-
-
 class ShowFormula extends SuhuEvent {
   final String formula;
   ShowFormula({
     required this.formula,
   });
+}
+
+enum TemperatureConversionType {
+  celsiusToFahrenheit,
+  celsiusToKelvin,
+  celsiusToCelsius,
+  fahrenheitToCelsius,
+  fahrenheitToKelvin,
+  fahrenheitToFahrenheit,
+  kelvinToKelvin,
+  kelvinToCelsius,
+  kelvinToFahrenheit,
+}
+
+class TemperatureConversion extends SuhuEvent {
+  final double value;
+  final TemperatureConversionType conversionType;
+
+  TemperatureConversion({required this.value, required this.conversionType});
 }
