@@ -34,14 +34,20 @@ class ShowFormula extends TimeEvent {
 }
 
 enum TimeConversionType {
-  detikToJam,
+  // Detik ke ...
+  detikToDetik,
   detikToMenit,
+  detikToJam,
   detikToHari,
   detikToMinggu,
   detikToBulan,
   detikToTahun,
   detikToDekade,
   detikToAbad,
+
+  // Menit ke ...
+  menitToDetik,
+  menitToMenit,
   menitToJam,
   menitToHari,
   menitToMinggu,
@@ -49,27 +55,83 @@ enum TimeConversionType {
   menitToTahun,
   menitToDekade,
   menitToAbad,
+
+  // Jam ke ...
+  jamToDetik,
+  jamToMenit,
+  jamToJam,
   jamToHari,
   jamToMinggu,
   jamToBulan,
   jamToTahun,
   jamToDekade,
   jamToAbad,
+
+  // Hari ke ...
+  hariToDetik,
+  hariToMenit,
+  hariToJam,
+  hariToHari,
   hariToMinggu,
   hariToBulan,
   hariToTahun,
   hariToDekade,
   hariToAbad,
+
+  // Minggu ke ...
+  mingguToDetik,
+  mingguToJam,
+  mingguToMenit,
+  mingguToHari,
+  mingguToMinggu,
   mingguToBulan,
   mingguToTahun,
   mingguToDekade,
   mingguToAbad,
+
+  // Bulan ke ...
+  bulanToDetik,
+  bulanToMenit,
+  bulanToJam,
+  bulanToHari,
+  bulanToMinggu,
+  bulanToBulan,
   bulanToTahun,
   bulanToDekade,
   bulanToAbad,
+
+  // Tahun ke ...
+  tahunToDetik,
+  tahunToMenit,
+  tahunToJam,
+  tahunToHari,
+  tahunToMinggu,
+  tahunToBulan,
+  tahunToTahun,
   tahunToDekade,
   tahunToAbad,
+
+  // Dekade ke ...
+  dekadeToDetik,
+  dekadeToMenit,
+  dekadeToJam,
+  dekadeToHari,
+  dekadeToMinggu,
+  dekadeToTahun,
+  dekadeToBulan,
+  dekadeToDekade,
   dekadeToAbad,
+
+  // Abad ke ...
+  abadToDetik,
+  abadToMenit,
+  abadToJam,
+  abadToHari,
+  abadToMinggu,
+  abadToBulan,
+  abadToTahun,
+  abadToDekade,
+  abadToAbad,
 }
 
 class TimeConversion extends TimeEvent {

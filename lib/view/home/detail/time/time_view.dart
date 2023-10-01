@@ -254,41 +254,5 @@ class _TimeViewState extends State<TimeView> {
       required String inputResult,
       required TextEditingController inputController}) {
     double inputValueAsDouble = double.tryParse(inputController.text) ?? 0;
-
-    if (inputValue == 'Detik') {
-      if (inputResult == 'Menit') {
-        context.read<TimeBloc>().add(TimeConversion(
-            value: inputValueAsDouble,
-            conversionType: TimeConversionType.detikToMenit));
-      } else if (inputResult == 'Jam') {
-        context.read<TimeBloc>().add(TimeConversion(
-            value: inputValueAsDouble,
-            conversionType: TimeConversionType.detikToJam));
-      } else if (inputResult == 'Hari') {
-        context.read<TimeBloc>().add(TimeConversion(
-            value: inputValueAsDouble,
-            conversionType: TimeConversionType.detikToHari));
-      } else if (inputResult == 'Minggu') {
-        context.read<TimeBloc>().add(TimeConversion(
-            value: inputValueAsDouble,
-            conversionType: TimeConversionType.detikToMinggu));
-      } else if (inputResult == 'Bulan') {
-        context.read<TimeBloc>().add(TimeConversion(
-            value: inputValueAsDouble,
-            conversionType: TimeConversionType.detikToBulan));
-      } else if (inputResult == 'Tahun') {
-        context.read<TimeBloc>().add(TimeConversion(
-            value: inputValueAsDouble,
-            conversionType: TimeConversionType.detikToTahun));
-      } else if (inputResult == 'Dekade') {
-        context.read<TimeBloc>().add(TimeConversion(
-            value: inputValueAsDouble,
-            conversionType: TimeConversionType.detikToDekade));
-      } else if (inputResult == 'Abad') {
-        context.read<TimeBloc>().add(TimeConversion(
-            value: inputValueAsDouble,
-            conversionType: TimeConversionType.detikToAbad));
-      }
-    }
   }
 }
