@@ -23,42 +23,110 @@ class MassaBloc extends Bloc<MassaEvent, Map<String, dynamic>> {
     on<DropDownMenuResult>(_dropDownMenuResult);
 
     //bloc for logic
-    on<KgToGram>(_kgToGram);
-    on<KgToKg>(_kgToKg);
-    on<KgToOunce>(_kgToOunce);
-    on<KgToTon>(_kgToTon);
-    on<KgToPound>(_kgToPound);
-    on<KgToMg>(_kgToMg);
-    on<GramToKg>(_gramToKg);
-    on<GramToGram>(_gramToGram);
-    on<GramToTon>(_gramToTon);
-    on<GramToOunce>(_gramToOunce);
-    on<GramToPound>(_gramToPound);
-    on<GramToMg>(_gramToMg);
-    on<TonToKg>(_tonToKg);
-    on<TonToGram>(_tonToGram);
-    on<TonToMg>(_tonToMg);
-    on<TonToOunce>(_tonToOunce);
-    on<TonToPound>(_tonToPound);
-    on<TonToTon>(_tonToTon);
-    on<OunceToOunce>(_ounceToOunce);
-    on<OunceToGram>(_ounceToGram);
-    on<OunceToKg>(_ounceToKg);
-    on<OunceToMg>(_ounceToMg);
-    on<OunceToPound>(_ounceToPound);
-    on<OunceToTon>(_ounceToTon);
-    on<MgToGram>(_mgToGram);
-    on<MgToKg>(_mgToKg);
-    on<MgToOunce>(_mgToOunce);
-    on<MgToPound>(_mgToPound);
-    on<MgToMg>(_mgToMg);
-    on<MgToTon>(_mgToTon);
-    on<PoundToGram>(_poundToGram);
-    on<PoundToKg>(_poundToKg);
-    on<PoundToMg>(_poundToMg);
-    on<PoundToOunce>(_poundToOunce);
-    on<PoundToTon>(_poundToTon);
-    on<PoundToPound>(_poundToPound);
+    on<MassaConversion>((event, emit) {
+      switch (event.conversionType) {
+        case MassaConversionType.gramToGram:
+          _gramToGram(event, emit);
+          break;
+        case MassaConversionType.gramToKg:
+          _gramToKg(event, emit);
+          break;
+        case MassaConversionType.gramToTon:
+          _gramToTon(event, emit);
+          break;
+        case MassaConversionType.gramToOunce:
+          _gramToOunce(event, emit);
+          break;
+        case MassaConversionType.gramToPound:
+          _gramToPound(event, emit);
+          break;
+        case MassaConversionType.gramToMg:
+          _gramToMg(event, emit);
+          break;
+        case MassaConversionType.kgToKg:
+          _kgToKg(event, emit);
+          break;
+        case MassaConversionType.kgToGram:
+          _kgToGram(event, emit);
+          break;
+        case MassaConversionType.kgToOunce:
+          _kgToOunce(event, emit);
+          break;
+        case MassaConversionType.kgToTon:
+          _kgToTon(event, emit);
+          break;
+        case MassaConversionType.kgToPound:
+          _kgToPound(event, emit);
+          break;
+        case MassaConversionType.kgToMg:
+          _kgToMg(event, emit);
+          break;
+        case MassaConversionType.tonToTon:
+          _tonToTon(event, emit);
+          break;
+        case MassaConversionType.tonToKg:
+          _tonToKg(event, emit);
+          break;
+        case MassaConversionType.tonToGram:
+          _tonToGram(event, emit);
+          break;
+        case MassaConversionType.tonToPound:
+          _tonToPound(event, emit);
+          break;
+        case MassaConversionType.tonToOunce:
+          _tonToOunce(event, emit);
+          break;
+        case MassaConversionType.tonToMg:
+          _tonToMg(event, emit);
+          break;
+        case MassaConversionType.ounceToKg:
+          _ounceToKg(event, emit);
+          break;
+        case MassaConversionType.ounceToGram:
+          _ounceToGram(event, emit);
+          break;
+        case MassaConversionType.ounceToOunce:
+          _ounceToOunce(event, emit);
+          break;
+        case MassaConversionType.ounceToPound:
+          _ounceToPound(event, emit);
+          break;
+        case MassaConversionType.mgToKg:
+          _mgToKg(event, emit);
+          break;
+        case MassaConversionType.mgToOunce:
+          _mgToOunce(event, emit);
+          break;
+        case MassaConversionType.mgToMg:
+          _mgToMg(event, emit);
+          break;
+        case MassaConversionType.mgToPound:
+          _mgToPound(event, emit);
+          break;
+        case MassaConversionType.mgToTon:
+          _mgToTon(event, emit);
+          break;
+        case MassaConversionType.poundToPound:
+          _poundToPound(event, emit);
+          break;
+        case MassaConversionType.poundToGram:
+          _poundToGram(event, emit);
+          break;
+        case MassaConversionType.poundToKg:
+          _poundToKg(event, emit);
+          break;
+        case MassaConversionType.poundToMg:
+          _poundToMg(event, emit);
+          break;
+        case MassaConversionType.poundToTon:
+          _poundToTon(event, emit);
+          break;
+        case MassaConversionType.poundToOunce:
+          _poundToOunce(event, emit);
+          break;
+        default:
+      }
+    });
   }
 
   //bloc for show formula
@@ -89,8 +157,8 @@ class MassaBloc extends Bloc<MassaEvent, Map<String, dynamic>> {
   }
 
 //bloc for logic
-  _kgToGram(KgToGram event, Emitter<Map<String, dynamic>> emit) {
-    double kg = event.kg * 1000;
+  _kgToGram(MassaConversion event, Emitter<Map<String, dynamic>> emit) {
+    double kg = event.value * 1000;
     int result = kg.toInt();
     double remainder = kg - result.toDouble();
     if (remainder == 0) {
@@ -100,12 +168,12 @@ class MassaBloc extends Bloc<MassaEvent, Map<String, dynamic>> {
     }
   }
 
-  _kgToKg(KgToKg event, Emitter<Map<String, dynamic>> emit) {
-    emit({...state, 'resultValue': event.kg.toInt().toString()});
+  _kgToKg(MassaConversion event, Emitter<Map<String, dynamic>> emit) {
+    emit({...state, 'resultValue': event.value.toInt().toString()});
   }
 
-  _kgToOunce(KgToOunce event, Emitter<Map<String, dynamic>> emit) {
-    double kg = event.kg * 35.274;
+  _kgToOunce(MassaConversion event, Emitter<Map<String, dynamic>> emit) {
+    double kg = event.value * 35.274;
     int result = kg.toInt();
     double remainder = kg - result.toDouble();
     if (remainder == 0) {
@@ -115,8 +183,8 @@ class MassaBloc extends Bloc<MassaEvent, Map<String, dynamic>> {
     }
   }
 
-  _kgToTon(KgToTon event, Emitter<Map<String, dynamic>> emit) {
-    double kg = event.kg / 1000;
+  _kgToTon(MassaConversion event, Emitter<Map<String, dynamic>> emit) {
+    double kg = event.value / 1000;
     int result = kg.toInt();
     double remainder = kg - result.toDouble();
     if (remainder == 0) {
@@ -126,8 +194,8 @@ class MassaBloc extends Bloc<MassaEvent, Map<String, dynamic>> {
     }
   }
 
-  _kgToPound(KgToPound event, Emitter<Map<String, dynamic>> emit) {
-    double kg = event.kg * 2.20462;
+  _kgToPound(MassaConversion event, Emitter<Map<String, dynamic>> emit) {
+    double kg = event.value * 2.20462;
     int result = kg.toInt();
     double remainder = kg - result.toDouble();
     if (remainder == 0) {
@@ -137,8 +205,8 @@ class MassaBloc extends Bloc<MassaEvent, Map<String, dynamic>> {
     }
   }
 
-  _kgToMg(KgToMg event, Emitter<Map<String, dynamic>> emit) {
-    double kg = event.kg * 1000000;
+  _kgToMg(MassaConversion event, Emitter<Map<String, dynamic>> emit) {
+    double kg = event.value * 1000000;
     int result = kg.toInt();
     double remainder = kg - result.toDouble();
     if (remainder == 0) {
@@ -148,8 +216,8 @@ class MassaBloc extends Bloc<MassaEvent, Map<String, dynamic>> {
     }
   }
 
-  _gramToKg(GramToKg event, Emitter<Map<String, dynamic>> emit) {
-    double gram = event.gram / 1000;
+  _gramToKg(MassaConversion event, Emitter<Map<String, dynamic>> emit) {
+    double gram = event.value / 1000;
     int result = gram.toInt();
     double remainder = gram - result.toDouble();
     if (remainder == 0) {
@@ -159,12 +227,12 @@ class MassaBloc extends Bloc<MassaEvent, Map<String, dynamic>> {
     }
   }
 
-  _gramToGram(GramToGram event, Emitter<Map<String, dynamic>> emit) {
-    emit({...state, 'resultValue': event.gram.toInt().toString()});
+  _gramToGram(MassaConversion event, Emitter<Map<String, dynamic>> emit) {
+    emit({...state, 'resultValue': event.value.toInt().toString()});
   }
 
-  _gramToTon(GramToTon event, Emitter<Map<String, dynamic>> emit) {
-    double gram = event.gram / 1000000;
+  _gramToTon(MassaConversion event, Emitter<Map<String, dynamic>> emit) {
+    double gram = event.value / 1000000;
     int result = gram.toInt();
     double remainder = gram - result.toDouble();
     if (remainder == 0) {
@@ -174,8 +242,8 @@ class MassaBloc extends Bloc<MassaEvent, Map<String, dynamic>> {
     }
   }
 
-  _gramToOunce(GramToOunce event, Emitter<Map<String, dynamic>> emit) {
-    double gram = event.gram / 28.35;
+  _gramToOunce(MassaConversion event, Emitter<Map<String, dynamic>> emit) {
+    double gram = event.value / 28.35;
     int result = gram.toInt();
     double remainder = gram - result.toDouble();
     if (remainder == 0) {
@@ -185,8 +253,8 @@ class MassaBloc extends Bloc<MassaEvent, Map<String, dynamic>> {
     }
   }
 
-  _gramToPound(GramToPound event, Emitter<Map<String, dynamic>> emit) {
-    double gram = event.gram / 453.6;
+  _gramToPound(MassaConversion event, Emitter<Map<String, dynamic>> emit) {
+    double gram = event.value / 453.6;
     int result = gram.toInt();
     double remainder = gram - result.toDouble();
     if (remainder == 0) {
@@ -196,8 +264,8 @@ class MassaBloc extends Bloc<MassaEvent, Map<String, dynamic>> {
     }
   }
 
-  _gramToMg(GramToMg event, Emitter<Map<String, dynamic>> emit) {
-    double gram = event.gram * 1000;
+  _gramToMg(MassaConversion event, Emitter<Map<String, dynamic>> emit) {
+    double gram = event.value * 1000;
     int result = gram.toInt();
     double remainder = gram - result.toDouble();
     if (remainder == 0) {
@@ -207,22 +275,22 @@ class MassaBloc extends Bloc<MassaEvent, Map<String, dynamic>> {
     }
   }
 
-  _tonToTon(TonToTon event, Emitter<Map<String, dynamic>> emit) {
-    emit({...state, 'resultValue': event.ton.toInt().toString()});
+  _tonToTon(MassaConversion event, Emitter<Map<String, dynamic>> emit) {
+    emit({...state, 'resultValue': event.value.toInt().toString()});
   }
 
-  _tonToKg(TonToKg event, Emitter<Map<String, dynamic>> emit) {
-    double ton = event.ton * 1000;
+  _tonToKg(MassaConversion event, Emitter<Map<String, dynamic>> emit) {
+    double ton = event.value * 1000;
     emit({...state, 'resultValue': ton.toInt().toString()});
   }
 
-  _tonToGram(TonToGram event, Emitter<Map<String, dynamic>> emit) {
-    double ton = event.ton * 1000000;
+  _tonToGram(MassaConversion event, Emitter<Map<String, dynamic>> emit) {
+    double ton = event.value * 1000000;
     emit({...state, 'resultValue': ton.toInt().toString()});
   }
 
-  _tonToPound(TonToPound event, Emitter<Map<String, dynamic>> emit) {
-    double ton = event.ton * 2204.62;
+  _tonToPound(MassaConversion event, Emitter<Map<String, dynamic>> emit) {
+    double ton = event.value * 2204.62;
     int result = ton.toInt();
     double remainder = ton - result.toDouble();
     if (remainder == 0) {
@@ -232,8 +300,8 @@ class MassaBloc extends Bloc<MassaEvent, Map<String, dynamic>> {
     }
   }
 
-  _tonToOunce(TonToOunce event, Emitter<Map<String, dynamic>> emit) {
-    double ton = event.ton * 35273961;
+  _tonToOunce(MassaConversion event, Emitter<Map<String, dynamic>> emit) {
+    double ton = event.value * 35273961;
     int result = ton.toInt();
     double remainder = ton - result.toDouble();
     if (remainder == 0) {
@@ -243,8 +311,8 @@ class MassaBloc extends Bloc<MassaEvent, Map<String, dynamic>> {
     }
   }
 
-  _tonToMg(TonToMg event, Emitter<Map<String, dynamic>> emit) {
-    double ton = event.ton * 1000000000;
+  _tonToMg(MassaConversion event, Emitter<Map<String, dynamic>> emit) {
+    double ton = event.value * 1000000000;
     int result = ton.toInt();
     double remainder = ton - result.toDouble();
     if (remainder == 0) {
@@ -254,8 +322,8 @@ class MassaBloc extends Bloc<MassaEvent, Map<String, dynamic>> {
     }
   }
 
-  _ounceToKg(OunceToKg event, Emitter<Map<String, dynamic>> emit) {
-    double ounce = event.ounce * 0.0283495;
+  _ounceToKg(MassaConversion event, Emitter<Map<String, dynamic>> emit) {
+    double ounce = event.value * 0.0283495;
     int result = ounce.toInt();
     double remainder = ounce - result.toDouble();
     if (remainder == 0) {
@@ -265,8 +333,8 @@ class MassaBloc extends Bloc<MassaEvent, Map<String, dynamic>> {
     }
   }
 
-  _ounceToGram(OunceToGram event, Emitter<Map<String, dynamic>> emit) {
-    double ounce = event.ounce * 28.3495;
+  _ounceToGram(MassaConversion event, Emitter<Map<String, dynamic>> emit) {
+    double ounce = event.value * 28.3495;
     int result = ounce.toInt();
     double remainder = ounce - result.toDouble();
     if (remainder == 0) {
@@ -276,12 +344,12 @@ class MassaBloc extends Bloc<MassaEvent, Map<String, dynamic>> {
     }
   }
 
-  _ounceToOunce(OunceToOunce event, Emitter<Map<String, dynamic>> emit) {
-    emit({...state, 'resultValue': event.ounce.toInt().toString()});
+  _ounceToOunce(MassaConversion event, Emitter<Map<String, dynamic>> emit) {
+    emit({...state, 'resultValue': event.value.toInt().toString()});
   }
 
-  _ounceToPound(OunceToPound event, Emitter<Map<String, dynamic>> emit) {
-    double ounce = event.ounce * 0.0625;
+  _ounceToPound(MassaConversion event, Emitter<Map<String, dynamic>> emit) {
+    double ounce = event.value * 0.0625;
     int result = ounce.toInt();
     double remainder = ounce - result.toDouble();
     if (remainder == 0) {
@@ -291,30 +359,8 @@ class MassaBloc extends Bloc<MassaEvent, Map<String, dynamic>> {
     }
   }
 
-  _ounceToMg(OunceToMg event, Emitter<Map<String, dynamic>> emit) {
-    double ounce = event.ounce * 28.3495;
-    int result = ounce.toInt();
-    double remainder = ounce - result.toDouble();
-    if (remainder == 0) {
-      emit({...state, 'resultValue': result.toString()});
-    } else {
-      emit({...state, 'resultValue': ounce.toString()});
-    }
-  }
-
-  _ounceToTon(OunceToTon event, Emitter<Map<String, dynamic>> emit) {
-    double ounce = event.ounce * 0.0000283495;
-    int result = ounce.toInt();
-    double remainder = ounce - result.toDouble();
-    if (remainder == 0) {
-      emit({...state, 'resultValue': result.toString()});
-    } else {
-      emit({...state, 'resultValue': ounce.toString()});
-    }
-  }
-
-  _mgToGram(MgToGram event, Emitter<Map<String, dynamic>> emit) {
-    double mg = event.mg / 1000;
+  _mgToKg(MassaConversion event, Emitter<Map<String, dynamic>> emit) {
+    double mg = event.value / 1000000;
     int result = mg.toInt();
     double remainder = mg - result.toDouble();
     if (remainder == 0) {
@@ -324,8 +370,8 @@ class MassaBloc extends Bloc<MassaEvent, Map<String, dynamic>> {
     }
   }
 
-  _mgToKg(MgToKg event, Emitter<Map<String, dynamic>> emit) {
-    double mg = event.mg / 1000000;
+  _mgToOunce(MassaConversion event, Emitter<Map<String, dynamic>> emit) {
+    double mg = event.value / 28350;
     int result = mg.toInt();
     double remainder = mg - result.toDouble();
     if (remainder == 0) {
@@ -335,8 +381,12 @@ class MassaBloc extends Bloc<MassaEvent, Map<String, dynamic>> {
     }
   }
 
-  _mgToOunce(MgToOunce event, Emitter<Map<String, dynamic>> emit) {
-    double mg = event.mg / 28350;
+  _mgToMg(MassaConversion event, Emitter<Map<String, dynamic>> emit) {
+    emit({...state, 'resultValue': event.value.toInt().toString()});
+  }
+
+  _mgToPound(MassaConversion event, Emitter<Map<String, dynamic>> emit) {
+    double mg = event.value / 453600;
     int result = mg.toInt();
     double remainder = mg - result.toDouble();
     if (remainder == 0) {
@@ -346,12 +396,8 @@ class MassaBloc extends Bloc<MassaEvent, Map<String, dynamic>> {
     }
   }
 
-  _mgToMg(MgToMg event, Emitter<Map<String, dynamic>> emit) {
-    emit({...state, 'resultValue': event.mg.toInt().toString()});
-  }
-
-  _mgToPound(MgToPound event, Emitter<Map<String, dynamic>> emit) {
-    double mg = event.mg / 453600;
+  _mgToTon(MassaConversion event, Emitter<Map<String, dynamic>> emit) {
+    double mg = event.value * 1000000;
     int result = mg.toInt();
     double remainder = mg - result.toDouble();
     if (remainder == 0) {
@@ -361,23 +407,12 @@ class MassaBloc extends Bloc<MassaEvent, Map<String, dynamic>> {
     }
   }
 
-  _mgToTon(MgToTon event, Emitter<Map<String, dynamic>> emit) {
-    double mg = event.mg * 1000000;
-    int result = mg.toInt();
-    double remainder = mg - result.toDouble();
-    if (remainder == 0) {
-      emit({...state, 'resultValue': result.toString()});
-    } else {
-      emit({...state, 'resultValue': mg.toString()});
-    }
+  _poundToPound(MassaConversion event, Emitter<Map<String, dynamic>> emit) {
+    emit({...state, 'resultValue': event.value.toInt().toString()});
   }
 
-  _poundToPound(PoundToPound event, Emitter<Map<String, dynamic>> emit) {
-    emit({...state, 'resultValue': event.pound.toInt().toString()});
-  }
-
-  _poundToGram(PoundToGram event, Emitter<Map<String, dynamic>> emit) {
-    double pound = event.pound * 453.6;
+  _poundToGram(MassaConversion event, Emitter<Map<String, dynamic>> emit) {
+    double pound = event.value * 453.6;
     int result = pound.toInt();
     double remainder = pound - result.toDouble();
     if (remainder == 0) {
@@ -387,8 +422,8 @@ class MassaBloc extends Bloc<MassaEvent, Map<String, dynamic>> {
     }
   }
 
-  _poundToKg(PoundToKg event, Emitter<Map<String, dynamic>> emit) {
-    double pound = event.pound / 2.205;
+  _poundToKg(MassaConversion event, Emitter<Map<String, dynamic>> emit) {
+    double pound = event.value / 2.205;
     int result = pound.toInt();
     double remainder = pound - result.toDouble();
     if (remainder == 0) {
@@ -398,8 +433,8 @@ class MassaBloc extends Bloc<MassaEvent, Map<String, dynamic>> {
     }
   }
 
-  _poundToMg(PoundToMg event, Emitter<Map<String, dynamic>> emit) {
-    double pound = event.pound * 453600;
+  _poundToMg(MassaConversion event, Emitter<Map<String, dynamic>> emit) {
+    double pound = event.value * 453600;
     int result = pound.toInt();
     double remainder = pound - result.toDouble();
     if (remainder == 0) {
@@ -409,8 +444,8 @@ class MassaBloc extends Bloc<MassaEvent, Map<String, dynamic>> {
     }
   }
 
-  _poundToTon(PoundToTon event, Emitter<Map<String, dynamic>> emit) {
-    double pound = event.pound * 0.000453592;
+  _poundToTon(MassaConversion event, Emitter<Map<String, dynamic>> emit) {
+    double pound = event.value * 0.000453592;
     int result = pound.toInt();
     double remainder = pound - result.toDouble();
     if (remainder == 0) {
@@ -420,8 +455,8 @@ class MassaBloc extends Bloc<MassaEvent, Map<String, dynamic>> {
     }
   }
 
-  _poundToOunce(PoundToOunce event, Emitter<Map<String, dynamic>> emit) {
-    double pound = event.pound * 16;
+  _poundToOunce(MassaConversion event, Emitter<Map<String, dynamic>> emit) {
+    double pound = event.value * 16;
     int result = pound.toInt();
     double remainder = pound - result.toDouble();
     if (remainder == 0) {

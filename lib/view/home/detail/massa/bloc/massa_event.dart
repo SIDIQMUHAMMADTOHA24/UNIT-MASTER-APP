@@ -12,7 +12,6 @@ class FontSize extends MassaEvent {
   });
 }
 
-
 //Event for DropDownMenu
 class DropDownMenuInput extends MassaEvent {
   final String dropDownMenuInput;
@@ -28,279 +27,68 @@ class DropDownMenuResult extends MassaEvent {
   });
 }
 
-//Event for Loic
-////////////////////////////Kg//////////////////////////////
-class KgToGram extends MassaEvent {
-  final double kg;
-  KgToGram({
-    required this.kg,
-  });
-}
-
-class KgToKg extends MassaEvent {
-  final double kg;
-  KgToKg({
-    required this.kg,
-  });
-}
-
-class KgToOunce extends MassaEvent {
-  final double kg;
-  KgToOunce({
-    required this.kg,
-  });
-}
-
-class KgToPound extends MassaEvent {
-  final double kg;
-  KgToPound({
-    required this.kg,
-  });
-}
-
-class KgToMg extends MassaEvent {
-  final double kg;
-  KgToMg({
-    required this.kg,
-  });
-}
-
-
-class KgToTon extends MassaEvent {
-  final double kg;
-  KgToTon({
-    required this.kg,
-  });
-}
-
-////////////////////////////Gram//////////////////////////////
-class GramToKg extends MassaEvent {
-  final double gram;
-  GramToKg({
-    required this.gram,
-  });
-}
-
-class GramToGram extends MassaEvent {
-  final double gram;
-  GramToGram({
-    required this.gram,
-  });
-}
-
-class GramToOunce extends MassaEvent {
-  final double gram;
-  GramToOunce({
-    required this.gram,
-  });
-}
-
-class GramToMg extends MassaEvent {
-  final double gram;
-  GramToMg({
-    required this.gram,
-  });
-}
-
-class GramToPound extends MassaEvent {
-  final double gram;
-  GramToPound({
-    required this.gram,
-  });
-}
-
-
-
-class GramToTon extends MassaEvent {
-  final double gram;
-  GramToTon({
-    required this.gram,
-  });
-}
-
-////////////////////////////Mg//////////////////////////////
-class MgToMg extends MassaEvent {
-  final double mg;
-  MgToMg({
-    required this.mg,
-  });
-}
-
-class MgToKg extends MassaEvent {
-  final double mg;
-  MgToKg({
-    required this.mg,
-  });
-}
-
-class MgToGram extends MassaEvent {
-  final double mg;
-  MgToGram({
-    required this.mg,
-  });
-}
-
-
-class MgToPound extends MassaEvent {
-  final double mg;
-  MgToPound({
-    required this.mg,
-  });
-}
-
-class MgToOunce extends MassaEvent {
-  final double mg;
-  MgToOunce({
-    required this.mg,
-  });
-}
-
-class MgToTon extends MassaEvent {
-  final double mg;
-  MgToTon({
-    required this.mg,
-  });
-}
-
-////////////////////////////Ounce//////////////////////////////
-class OunceToKg extends MassaEvent {
-  final double ounce;
-  OunceToKg({
-    required this.ounce,
-  });
-}
-
-class OunceToGram extends MassaEvent {
-  final double ounce;
-  OunceToGram({
-    required this.ounce,
-  });
-}
-
-
-class OunceToPound extends MassaEvent {
-  final double ounce;
-  OunceToPound({
-    required this.ounce,
-  });
-}
-
-class OunceToTon extends MassaEvent {
-  final double ounce;
-  OunceToTon({
-    required this.ounce,
-  });
-}
-
-class OunceToMg extends MassaEvent {
-  final double ounce;
-  OunceToMg({
-    required this.ounce,
-  });
-}
-
-class OunceToOunce extends MassaEvent {
-  final double ounce;
-  OunceToOunce({
-    required this.ounce,
-  });
-}
-
-////////////////////////////Pound//////////////////////////////
-
-class PoundToKg extends MassaEvent {
-  final double pound;
-  PoundToKg({
-    required this.pound,
-  });
-}
-
-class PoundToPound extends MassaEvent {
-  final double pound;
-  PoundToPound({
-    required this.pound,
-  });
-}
-
-class PoundToGram extends MassaEvent {
-  final double pound;
-  PoundToGram({
-    required this.pound,
-  });
-}
-
-class PoundToTon extends MassaEvent {
-  final double pound;
-  PoundToTon({
-    required this.pound,
-  });
-}
-
-class PoundToMg extends MassaEvent {
-  final double pound;
-  PoundToMg({
-    required this.pound,
-  });
-}
-
-class PoundToOunce extends MassaEvent {
-  final double pound;
-  PoundToOunce({
-    required this.pound,
-  });
-}
-
-////////////////////////////Ton//////////////////////////////
-
-
-class TonToKg extends MassaEvent {
-  final double ton;
-  TonToKg({
-    required this.ton,
-  });
-}
-
-class TonToGram extends MassaEvent {
-  final double ton;
-  TonToGram({
-    required this.ton,
-  });
-}
-
-class TonToOunce extends MassaEvent {
-  final double ton;
-  TonToOunce({
-    required this.ton,
-  });
-}
-
-
-
-class TonToPound extends MassaEvent {
-  final double ton;
-  TonToPound({
-    required this.ton,
-  });
-}
-
-class TonToTon extends MassaEvent {
-  final double ton;
-  TonToTon({
-    required this.ton,
-  });
-}
-
-class TonToMg extends MassaEvent {
-  final double ton;
-  TonToMg({
-    required this.ton,
-  });
-}
-
-
 class ShowFormula extends MassaEvent {
   final String formula;
   ShowFormula({
     required this.formula,
+  });
+}
+
+enum MassaConversionType {
+  // Kilogram
+  kgToKg,
+  kgToGram,
+  kgToOunce,
+  kgToPound,
+  kgToMg,
+  kgToTon,
+
+  // Gram
+  gramToKg,
+  gramToGram,
+  gramToOunce,
+  gramToPound,
+  gramToMg,
+  gramToTon,
+
+  // Milligram
+  mgToKg,
+  mgToGram,
+  mgToOunce,
+  mgToPound,
+  mgToMg,
+  mgToTon,
+
+  // Ounce
+  ounceToKg,
+  ounceToGram,
+  ounceToOunce,
+  ounceToPound,
+  ounceToMg,
+  ounceToTon,
+
+  // Pound
+  poundToKg,
+  poundToGram,
+  poundToOunce,
+  poundToPound,
+  poundToMg,
+  poundToTon,
+
+  // Ton
+  tonToKg,
+  tonToGram,
+  tonToOunce,
+  tonToPound,
+  tonToMg,
+  tonToTon,
+}
+
+class MassaConversion extends MassaEvent {
+  final double value;
+  final MassaConversionType conversionType;
+  MassaConversion({
+    required this.value,
+    required this.conversionType,
   });
 }

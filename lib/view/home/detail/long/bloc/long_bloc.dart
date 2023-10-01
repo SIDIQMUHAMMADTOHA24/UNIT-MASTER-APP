@@ -20,33 +20,86 @@ class LongBloc extends Bloc<LongEvent, Map<String, dynamic>> {
     //bloc for DropDownMenu
     on<DropDownMenuInput>(_dropDownMenuInput);
     on<DropDownMenuResult>(_dropDownMenuResult);
-
-    //bloc for logic math
-    on<CmToMeter>(_cmToMeter);
-    on<CmToCm>(_cmToCm);
-    on<CmToMm>(_cmToMm);
-    on<CmToInch>(_cmToInch);
-    on<CmToKm>(_cmToKm);
-    on<MeterToMeter>(_meterToMeter);
-    on<MeterToCm>(_meterToCm);
-    on<MeterToMm>(_meterToMm);
-    on<MeterToInch>(_meterToInch);
-    on<MeterToKm>(_meterToKm);
-    on<InchToInch>(_inchToInch);
-    on<InchToCm>(_inchToCm);
-    on<InchToMeter>(_inchToMeter);
-    on<InchToKm>(_inchToKm);
-    on<InchToMm>(_inchToMm);
-    on<MmToMm>(_mmToMm);
-    on<MmToMeter>(_mmToMeter);
-    on<MmToKm>(_mmToKm);
-    on<MmToCm>(_mmToCm);
-    on<MmToInch>(_mmToInch);
-    on<KmToKm>(_kmToKm);
-    on<KmToMeter>(_kmToMeter);
-    on<KmToCm>(_kmToCm);
-    on<KmToMm>(_kmToMm);
-    on<KmToInch>(_kmToInch);
+    on<LengthConversion>((event, emit) {
+      switch (event.conversionType) {
+        case LengthConversionType.cmToCm:
+          _cmToCm(event, emit);
+          break;
+        case LengthConversionType.cmToMm:
+          _cmToMm(event, emit);
+          break;
+        case LengthConversionType.cmToKm:
+          _cmToKm(event, emit);
+          break;
+        case LengthConversionType.cmToInch:
+          _cmToInch(event, emit);
+          break;
+        case LengthConversionType.cmToMeter:
+          _cmToMeter(event, emit);
+          break;
+        case LengthConversionType.meterToCm:
+          _meterToCm(event, emit);
+          break;
+        case LengthConversionType.meterToInch:
+          _meterToInch(event, emit);
+          break;
+        case LengthConversionType.meterToMeter:
+          _meterToMeter(event, emit);
+          break;
+        case LengthConversionType.meterToMm:
+          _meterToMm(event, emit);
+          break;
+        case LengthConversionType.meterToKm:
+          _meterToKm(event, emit);
+          break;
+        case LengthConversionType.inchToInch:
+          _inchToInch(event, emit);
+          break;
+        case LengthConversionType.inchToMeter:
+          _inchToMeter(event, emit);
+          break;
+        case LengthConversionType.inchToCm:
+          _inchToCm(event, emit);
+          break;
+        case LengthConversionType.inchToKm:
+          _inchToKm(event, emit);
+          break;
+        case LengthConversionType.inchToMm:
+          _inchToMm(event, emit);
+          break;
+        case LengthConversionType.mmToMm:
+          _mmToMm(event, emit);
+          break;
+        case LengthConversionType.mmToCm:
+          _mmToCm(event, emit);
+          break;
+        case LengthConversionType.mmToKm:
+          _mmToKm(event, emit);
+          break;
+        case LengthConversionType.mmToMeter:
+          _mmToMeter(event, emit);
+          break;
+        case LengthConversionType.mmToInch:
+          _mmToInch(event, emit);
+          break;
+        case LengthConversionType.kmToKm:
+          _kmToKm(event, emit);
+          break;
+        case LengthConversionType.kmToMm:
+          _kmToMm(event, emit);
+          break;
+        case LengthConversionType.kmToCm:
+          _kmToCm(event, emit);
+          break;
+        case LengthConversionType.kmToMeter:
+          _kmToMeter(event, emit);
+          break;
+        case LengthConversionType.kmToInch:
+          _kmToInch(event, emit);
+          break;
+        default:
+      }
+    });
   }
 
   //bloc for show formula
@@ -77,235 +130,207 @@ class LongBloc extends Bloc<LongEvent, Map<String, dynamic>> {
   }
 
   //bloc for logic math
-  _cmToMeter(CmToMeter event, Emitter<Map<String, dynamic>> emit) {
-    double sentiMeter = event.cm / 100;
+  _cmToMeter(LengthConversion event, Emitter<Map<String, dynamic>> emit) {
+    double sentiMeter = event.value / 100;
     int result = sentiMeter.toInt();
     double remainder = sentiMeter - result.toDouble();
     if (remainder == 0) {
       emit({...state, 'resultValue': result.toString()});
-      print('hasil = $result');
     } else {
       emit({...state, 'resultValue': sentiMeter.toString()});
-      print('hasil = $sentiMeter');
     }
   }
 
-  _cmToCm(CmToCm event, Emitter<Map<String, dynamic>> emit) {
-    emit({...state, 'resultValue': event.cm.toInt().toString()});
+  _cmToCm(LengthConversion event, Emitter<Map<String, dynamic>> emit) {
+    emit({...state, 'resultValue': event.value.toInt().toString()});
   }
 
-  _cmToMm(CmToMm event, Emitter<Map<String, dynamic>> emit) {
-    double miliMeter = event.cm * 10;
+  _cmToMm(LengthConversion event, Emitter<Map<String, dynamic>> emit) {
+    double miliMeter = event.value * 10;
     emit({...state, 'resultValue': miliMeter.toInt().toString()});
   }
 
-  _cmToInch(CmToInch event, Emitter<Map<String, dynamic>> emit) {
-    double sentiMeter = event.cm / 2.54;
+  _cmToInch(LengthConversion event, Emitter<Map<String, dynamic>> emit) {
+    double sentiMeter = event.value / 2.54;
     int result = sentiMeter.toInt();
     double remainder = sentiMeter - result.toDouble();
     if (remainder == 0) {
       emit({...state, 'resultValue': result.toString()});
-      print('$sentiMeter inch');
     } else {
       emit({...state, 'resultValue': sentiMeter.toString()});
-      print('$sentiMeter inch');
     }
   }
 
-  _cmToKm(CmToKm event, Emitter<Map<String, dynamic>> emit) {
-    double sentiMeter = event.cm / 100000;
+  _cmToKm(LengthConversion event, Emitter<Map<String, dynamic>> emit) {
+    double sentiMeter = event.value / 100000;
     int result = sentiMeter.toInt();
     double remainder = sentiMeter - result.toDouble();
     if (remainder == 0) {
       emit({...state, 'resultValue': result.toString()});
-      print('$sentiMeter km');
     } else {
       emit({...state, 'resultValue': sentiMeter.toString()});
-      print('$sentiMeter km');
     }
   }
 
-  _meterToMeter(MeterToMeter event, Emitter<Map<String, dynamic>> emit) {
-    emit({...state, 'resultValue': event.m.toInt().toString()});
+  _meterToMeter(LengthConversion event, Emitter<Map<String, dynamic>> emit) {
+    emit({...state, 'resultValue': event.value.toInt().toString()});
   }
 
-  _meterToCm(MeterToCm event, Emitter<Map<String, dynamic>> emit) {
-    double meter = event.m * 100;
+  _meterToCm(LengthConversion event, Emitter<Map<String, dynamic>> emit) {
+    double meter = event.value * 100;
     emit({...state, 'resultValue': meter.toInt().toString()});
   }
 
-  _meterToMm(MeterToMm event, Emitter<Map<String, dynamic>> emit) {
-    double meter = event.m * 1000;
+  _meterToMm(LengthConversion event, Emitter<Map<String, dynamic>> emit) {
+    double meter = event.value * 1000;
     emit({...state, 'resultValue': meter.toInt().toString()});
   }
 
-  _meterToInch(MeterToInch event, Emitter<Map<String, dynamic>> emit) {
-    double meter = event.m * 39.37;
+  _meterToInch(LengthConversion event, Emitter<Map<String, dynamic>> emit) {
+    double meter = event.value * 39.37;
     int result = meter.toInt();
     double remainder = meter - result.toDouble();
     if (remainder == 0) {
       emit({...state, 'resultValue': result.toString()});
-      print('$meter inch');
     } else {
       emit({...state, 'resultValue': meter.toString()});
-      print('$meter inch');
     }
   }
 
-  _meterToKm(MeterToKm event, Emitter<Map<String, dynamic>> emit) {
-    double meter = event.m / 1000;
+  _meterToKm(LengthConversion event, Emitter<Map<String, dynamic>> emit) {
+    double meter = event.value / 1000;
     int result = meter.toInt();
     double remainder = meter - result.toDouble();
     if (remainder == 0) {
       emit({...state, 'resultValue': result.toString()});
-      print('$meter km');
     } else {
       emit({...state, 'resultValue': meter.toString()});
-      print('$meter km');
     }
   }
 
-  _inchToInch(InchToInch event, Emitter<Map<String, dynamic>> emit) {
-    emit({...state, 'resultValue': event.inch.toInt().toString()});
+  _inchToInch(LengthConversion event, Emitter<Map<String, dynamic>> emit) {
+    emit({...state, 'resultValue': event.value.toInt().toString()});
   }
 
-  _inchToMeter(InchToMeter event, Emitter<Map<String, dynamic>> emit) {
-    double inch = event.inch / 39.37;
+  _inchToMeter(LengthConversion event, Emitter<Map<String, dynamic>> emit) {
+    double inch = event.value / 39.37;
     int result = inch.toInt();
     double remainder = inch - result.toDouble();
     if (remainder == 0) {
       emit({...state, 'resultValue': result.toString()});
-      print('hasil = $result');
     } else {
       emit({...state, 'resultValue': inch.toString()});
-      print('hasil = $inch');
     }
   }
 
-  _inchToCm(InchToCm event, Emitter<Map<String, dynamic>> emit) {
-    double inch = event.inch * 2.54;
+  _inchToCm(LengthConversion event, Emitter<Map<String, dynamic>> emit) {
+    double inch = event.value * 2.54;
     int result = inch.toInt();
     double remainder = inch - result.toDouble();
     if (remainder == 0) {
       emit({...state, 'resultValue': result.toString()});
-      print('hasil = $result');
     } else {
       emit({...state, 'resultValue': inch.toString()});
-      print('hasil = $inch');
     }
   }
 
-  _inchToMm(InchToMm event, Emitter<Map<String, dynamic>> emit) {
-    double inch = event.inch * 25.4;
+  _inchToMm(LengthConversion event, Emitter<Map<String, dynamic>> emit) {
+    double inch = event.value * 25.4;
     int result = inch.toInt();
     double remainder = inch - result.toDouble();
     if (remainder == 0) {
       emit({...state, 'resultValue': result.toString()});
-      print('hasil = $result');
     } else {
       emit({...state, 'resultValue': inch.toString()});
-      print('hasil = $inch');
     }
   }
 
-  _inchToKm(InchToKm event, Emitter<Map<String, dynamic>> emit) {
-    double sentiMeter = event.inch * 0.0000254;
+  _inchToKm(LengthConversion event, Emitter<Map<String, dynamic>> emit) {
+    double sentiMeter = event.value * 0.0000254;
     int result = sentiMeter.toInt();
     double remainder = sentiMeter - result.toDouble();
     if (remainder == 0) {
       emit({...state, 'resultValue': result.toString()});
-      print('hasil = $result');
     } else {
       emit({...state, 'resultValue': sentiMeter.toString()});
-      print('hasil = $sentiMeter');
     }
   }
 
-  _mmToMm(MmToMm event, Emitter<Map<String, dynamic>> emit) {
-    emit({...state, 'resultValue': event.mm.toInt().toString()});
+  _mmToMm(LengthConversion event, Emitter<Map<String, dynamic>> emit) {
+    emit({...state, 'resultValue': event.value.toInt().toString()});
   }
 
-  _mmToCm(MmToCm event, Emitter<Map<String, dynamic>> emit) {
-    double sentiMeter = event.mm / 10;
+  _mmToCm(LengthConversion event, Emitter<Map<String, dynamic>> emit) {
+    double sentiMeter = event.value / 10;
     int result = sentiMeter.toInt();
     double remainder = sentiMeter - result.toDouble();
     if (remainder == 0) {
       emit({...state, 'resultValue': result.toString()});
-      print('hasil = $result');
     } else {
       emit({...state, 'resultValue': sentiMeter.toString()});
-      print('hasil = $sentiMeter');
     }
   }
 
-  _mmToMeter(MmToMeter event, Emitter<Map<String, dynamic>> emit) {
-    double sentiMeter = event.mm / 1000;
+  _mmToMeter(LengthConversion event, Emitter<Map<String, dynamic>> emit) {
+    double sentiMeter = event.value / 1000;
     int result = sentiMeter.toInt();
     double remainder = sentiMeter - result.toDouble();
     if (remainder == 0) {
       emit({...state, 'resultValue': result.toString()});
-      print('hasil = $result');
     } else {
       emit({...state, 'resultValue': sentiMeter.toString()});
-      print('hasil = $sentiMeter');
     }
   }
 
-  _mmToKm(MmToKm event, Emitter<Map<String, dynamic>> emit) {
-    double sentiMeter = event.mm / 1000000;
+  _mmToKm(LengthConversion event, Emitter<Map<String, dynamic>> emit) {
+    double sentiMeter = event.value / 1000000;
     int result = sentiMeter.toInt();
     double remainder = sentiMeter - result.toDouble();
     if (remainder == 0) {
       emit({...state, 'resultValue': result.toString()});
-      print('hasil = $result');
     } else {
       emit({...state, 'resultValue': sentiMeter.toString()});
-      print('hasil = $sentiMeter');
     }
   }
 
-  _mmToInch(MmToInch event, Emitter<Map<String, dynamic>> emit) {
-    double sentiMeter = event.mm / 25.4;
+  _mmToInch(LengthConversion event, Emitter<Map<String, dynamic>> emit) {
+    double sentiMeter = event.value / 25.4;
     int result = sentiMeter.toInt();
     double remainder = sentiMeter - result.toDouble();
     if (remainder == 0) {
       emit({...state, 'resultValue': result.toString()});
-      print('hasil = $result');
     } else {
       emit({...state, 'resultValue': sentiMeter.toString()});
-      print('hasil = $sentiMeter');
     }
   }
 
-  _kmToKm(KmToKm event, Emitter<Map<String, dynamic>> emit) {
-    emit({...state, 'resultValue': event.km.toInt().toString()});
+  _kmToKm(LengthConversion event, Emitter<Map<String, dynamic>> emit) {
+    emit({...state, 'resultValue': event.value.toInt().toString()});
   }
 
-  _kmToMm(KmToMm event, Emitter<Map<String, dynamic>> emit) {
-    double kiloMeter = event.km * 1000000;
+  _kmToMm(LengthConversion event, Emitter<Map<String, dynamic>> emit) {
+    double kiloMeter = event.value * 1000000;
     emit({...state, 'resultValue': kiloMeter.toInt().toString()});
   }
 
-  _kmToMeter(KmToMeter event, Emitter<Map<String, dynamic>> emit) {
-    double kiloMeter = event.km * 1000;
+  _kmToMeter(LengthConversion event, Emitter<Map<String, dynamic>> emit) {
+    double kiloMeter = event.value * 1000;
     emit({...state, 'resultValue': kiloMeter.toInt().toString()});
   }
 
-  _kmToCm(KmToCm event, Emitter<Map<String, dynamic>> emit) {
-    double kiloMeter = event.km * 100000;
+  _kmToCm(LengthConversion event, Emitter<Map<String, dynamic>> emit) {
+    double kiloMeter = event.value * 100000;
     emit({...state, 'resultValue': kiloMeter.toInt().toString()});
   }
 
-  _kmToInch(KmToInch event, Emitter<Map<String, dynamic>> emit) {
-    double kiloMeter = event.km * 39370;
+  _kmToInch(LengthConversion event, Emitter<Map<String, dynamic>> emit) {
+    double kiloMeter = event.value * 39370;
     int result = kiloMeter.toInt();
     double remainder = kiloMeter - result.toDouble();
     if (remainder == 0) {
       emit({...state, 'resultValue': result.toString()});
-      print('$kiloMeter inch');
     } else {
       emit({...state, 'resultValue': kiloMeter.toString()});
-      print('$kiloMeter inch');
     }
   }
 }

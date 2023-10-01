@@ -254,226 +254,194 @@ class _MassaViewState extends State<MassaView> {
       required String inputResult,
       required TextEditingController inputController}) {
 ///////////////////////////////KG///////////////////////////////
+    double inputValueAsDouble = double.tryParse(inputController.text) ?? 0;
     if (inputValue == 'kg' && inputResult == 'gram') {
-      context
-          .read<MassaBloc>()
-          .add(KgToGram(kg: double.tryParse(inputController.text) ?? 0));
-      print('kg - g');
+      context.read<MassaBloc>().add(MassaConversion(
+          value: inputValueAsDouble,
+          conversionType: MassaConversionType.kgToGram));
     }
     if (inputValue == 'kg' && inputResult == 'kg') {
-      context
-          .read<MassaBloc>()
-          .add(KgToKg(kg: double.tryParse(inputController.text) ?? 0));
-      print('kg - kg');
+      context.read<MassaBloc>().add(MassaConversion(
+          value: inputValueAsDouble,
+          conversionType: MassaConversionType.kgToKg));
     }
     if (inputValue == 'kg' && inputResult == 'ton') {
-      context
-          .read<MassaBloc>()
-          .add(KgToTon(kg: double.tryParse(inputController.text) ?? 0));
-      print('kg - ton');
+      context.read<MassaBloc>().add(MassaConversion(
+          value: inputValueAsDouble,
+          conversionType: MassaConversionType.kgToTon));
     }
     if (inputValue == 'kg' && inputResult == 'ounce') {
-      context
-          .read<MassaBloc>()
-          .add(KgToOunce(kg: double.tryParse(inputController.text) ?? 0));
-      print('kg - ounce');
+      context.read<MassaBloc>().add(MassaConversion(
+          value: inputValueAsDouble,
+          conversionType: MassaConversionType.kgToOunce));
     }
     if (inputValue == 'kg' && inputResult == 'pound') {
-      context
-          .read<MassaBloc>()
-          .add(KgToPound(kg: double.tryParse(inputController.text) ?? 0));
-      print('kg - pound');
+      context.read<MassaBloc>().add(MassaConversion(
+          value: inputValueAsDouble,
+          conversionType: MassaConversionType.kgToPound));
     }
     if (inputValue == 'kg' && inputResult == 'mg') {
-      context
-          .read<MassaBloc>()
-          .add(KgToMg(kg: double.tryParse(inputController.text) ?? 0));
-      print('kg - mg');
+      context.read<MassaBloc>().add(MassaConversion(
+          value: inputValueAsDouble,
+          conversionType: MassaConversionType.kgToMg));
     }
+
 ///////////////////////////////GRAM///////////////////////////////
     if (inputValue == 'gram' && inputResult == 'kg') {
-      context
-          .read<MassaBloc>()
-          .add(GramToKg(gram: double.tryParse(inputController.text) ?? 0));
+      context.read<MassaBloc>().add(MassaConversion(
+          value: inputValueAsDouble,
+          conversionType: MassaConversionType.gramToKg));
       print('gram - kg');
     }
     if (inputValue == 'gram' && inputResult == 'gram') {
-      context
-          .read<MassaBloc>()
-          .add(GramToGram(gram: double.tryParse(inputController.text) ?? 0));
-      print('gram - gram');
+      context.read<MassaBloc>().add(MassaConversion(
+          value: inputValueAsDouble,
+          conversionType: MassaConversionType.gramToGram));
     }
     if (inputValue == 'gram' && inputResult == 'ton') {
-      context
-          .read<MassaBloc>()
-          .add(GramToTon(gram: double.tryParse(inputController.text) ?? 0));
-      print('gram - ton');
+      context.read<MassaBloc>().add(MassaConversion(
+          value: inputValueAsDouble,
+          conversionType: MassaConversionType.gramToTon));
     }
     if (inputValue == 'gram' && inputResult == 'ounce') {
-      context
-          .read<MassaBloc>()
-          .add(GramToOunce(gram: double.tryParse(inputController.text) ?? 0));
-      print('gram - ounce');
+      context.read<MassaBloc>().add(MassaConversion(
+          value: inputValueAsDouble,
+          conversionType: MassaConversionType.gramToOunce));
     }
     if (inputValue == 'gram' && inputResult == 'pound') {
-      context
-          .read<MassaBloc>()
-          .add(GramToPound(gram: double.tryParse(inputController.text) ?? 0));
-      print('gram - pound');
+      context.read<MassaBloc>().add(MassaConversion(
+          value: inputValueAsDouble,
+          conversionType: MassaConversionType.gramToPound));
     }
     if (inputValue == 'gram' && inputResult == 'mg') {
-      context
-          .read<MassaBloc>()
-          .add(GramToMg(gram: double.tryParse(inputController.text) ?? 0));
-      print('gram - mg');
+      context.read<MassaBloc>().add(MassaConversion(
+          value: inputValueAsDouble,
+          conversionType: MassaConversionType.gramToMg));
     }
-///////////////////////////////TON///////////////////////////////
+
     if (inputValue == 'ton' && inputResult == 'kg') {
-      context
-          .read<MassaBloc>()
-          .add(TonToKg(ton: double.tryParse(inputController.text) ?? 0));
-      print('ton - kg');
+      context.read<MassaBloc>().add(MassaConversion(
+          value: inputValueAsDouble,
+          conversionType: MassaConversionType.tonToKg));
+          print('ton - kg');
     }
     if (inputValue == 'ton' && inputResult == 'gram') {
-      context
-          .read<MassaBloc>()
-          .add(TonToGram(ton: double.tryParse(inputController.text) ?? 0));
-      print('ton - gram');
+      context.read<MassaBloc>().add(MassaConversion(
+          value: inputValueAsDouble,
+          conversionType: MassaConversionType.tonToGram));
     }
     if (inputValue == 'ton' && inputResult == 'ton') {
-      context
-          .read<MassaBloc>()
-          .add(TonToTon(ton: double.tryParse(inputController.text) ?? 0));
-      print('ton - ton');
+      context.read<MassaBloc>().add(MassaConversion(
+          value: inputValueAsDouble,
+          conversionType: MassaConversionType.tonToTon));
     }
     if (inputValue == 'ton' && inputResult == 'ounce') {
-      context
-          .read<MassaBloc>()
-          .add(TonToOunce(ton: double.tryParse(inputController.text) ?? 0));
-      print('ton - ounce');
+      context.read<MassaBloc>().add(MassaConversion(
+          value: inputValueAsDouble,
+          conversionType: MassaConversionType.tonToOunce));
     }
     if (inputValue == 'ton' && inputResult == 'pound') {
-      context
-          .read<MassaBloc>()
-          .add(TonToPound(ton: double.tryParse(inputController.text) ?? 0));
-      print('ton - pound');
+      context.read<MassaBloc>().add(MassaConversion(
+          value: inputValueAsDouble,
+          conversionType: MassaConversionType.tonToPound));
     }
     if (inputValue == 'ton' && inputResult == 'mg') {
-      context
-          .read<MassaBloc>()
-          .add(TonToMg(ton: double.tryParse(inputController.text) ?? 0));
-      print('ton - mg');
+      context.read<MassaBloc>().add(MassaConversion(
+          value: inputValueAsDouble,
+          conversionType: MassaConversionType.tonToMg));
     }
-///////////////////////////////OUNCE///////////////////////////////
+
     if (inputValue == 'ounce' && inputResult == 'kg') {
-      context
-          .read<MassaBloc>()
-          .add(OunceToKg(ounce: double.tryParse(inputController.text) ?? 0));
-      print('ounce - kg');
+      context.read<MassaBloc>().add(MassaConversion(
+          value: inputValueAsDouble,
+          conversionType: MassaConversionType.ounceToKg));
     }
     if (inputValue == 'ounce' && inputResult == 'gram') {
-      context
-          .read<MassaBloc>()
-          .add(OunceToGram(ounce: double.tryParse(inputController.text) ?? 0));
-      print('ounce - gram');
+      context.read<MassaBloc>().add(MassaConversion(
+          value: inputValueAsDouble,
+          conversionType: MassaConversionType.ounceToGram));
     }
     if (inputValue == 'ounce' && inputResult == 'ton') {
-      context
-          .read<MassaBloc>()
-          .add(OunceToTon(ounce: double.tryParse(inputController.text) ?? 0));
-      print('ounce - ton');
+      context.read<MassaBloc>().add(MassaConversion(
+          value: inputValueAsDouble,
+          conversionType: MassaConversionType.ounceToTon));
     }
     if (inputValue == 'ounce' && inputResult == 'ounce') {
-      context
-          .read<MassaBloc>()
-          .add(OunceToOunce(ounce: double.tryParse(inputController.text) ?? 0));
-      print('ounce - ounce');
+      context.read<MassaBloc>().add(MassaConversion(
+          value: inputValueAsDouble,
+          conversionType: MassaConversionType.ounceToOunce));
     }
     if (inputValue == 'ounce' && inputResult == 'pound') {
-      context
-          .read<MassaBloc>()
-          .add(OunceToPound(ounce: double.tryParse(inputController.text) ?? 0));
-      print('ounce - pound');
+      context.read<MassaBloc>().add(MassaConversion(
+          value: inputValueAsDouble,
+          conversionType: MassaConversionType.ounceToPound));
     }
     if (inputValue == 'ounce' && inputResult == 'mg') {
-      context
-          .read<MassaBloc>()
-          .add(OunceToMg(ounce: double.tryParse(inputController.text) ?? 0));
-      print('ounce - mg');
+      context.read<MassaBloc>().add(MassaConversion(
+          value: inputValueAsDouble,
+          conversionType: MassaConversionType.ounceToMg));
     }
-///////////////////////////////POUND///////////////////////////////
+
     if (inputValue == 'pound' && inputResult == 'kg') {
-      context
-          .read<MassaBloc>()
-          .add(PoundToKg(pound: double.tryParse(inputController.text) ?? 0));
-      print('pound - kg');
+      context.read<MassaBloc>().add(MassaConversion(
+          value: inputValueAsDouble,
+          conversionType: MassaConversionType.poundToKg));
     }
     if (inputValue == 'pound' && inputResult == 'gram') {
-      context
-          .read<MassaBloc>()
-          .add(PoundToGram(pound: double.tryParse(inputController.text) ?? 0));
-      print('pound - gram');
+      context.read<MassaBloc>().add(MassaConversion(
+          value: inputValueAsDouble,
+          conversionType: MassaConversionType.poundToGram));
     }
     if (inputValue == 'pound' && inputResult == 'ton') {
-      context
-          .read<MassaBloc>()
-          .add(PoundToTon(pound: double.tryParse(inputController.text) ?? 0));
-      print('pound - ton');
+      context.read<MassaBloc>().add(MassaConversion(
+          value: inputValueAsDouble,
+          conversionType: MassaConversionType.poundToTon));
     }
     if (inputValue == 'pound' && inputResult == 'ounce') {
-      context
-          .read<MassaBloc>()
-          .add(PoundToOunce(pound: double.tryParse(inputController.text) ?? 0));
-      print('pound - ounce');
+      context.read<MassaBloc>().add(MassaConversion(
+          value: inputValueAsDouble,
+          conversionType: MassaConversionType.poundToOunce));
     }
     if (inputValue == 'pound' && inputResult == 'pound') {
-      context
-          .read<MassaBloc>()
-          .add(PoundToPound(pound: double.tryParse(inputController.text) ?? 0));
-      print('pound - pound');
+      context.read<MassaBloc>().add(MassaConversion(
+          value: inputValueAsDouble,
+          conversionType: MassaConversionType.poundToPound));
     }
     if (inputValue == 'pound' && inputResult == 'mg') {
-      context
-          .read<MassaBloc>()
-          .add(PoundToMg(pound: double.tryParse(inputController.text) ?? 0));
-      print('pound - mg');
+      context.read<MassaBloc>().add(MassaConversion(
+          value: inputValueAsDouble,
+          conversionType: MassaConversionType.poundToMg));
     }
-///////////////////////////////MG///////////////////////////////
+
     if (inputValue == 'mg' && inputResult == 'kg') {
-      context
-          .read<MassaBloc>()
-          .add(MgToKg(mg: double.tryParse(inputController.text) ?? 0));
-      print('mg - kg');
+      context.read<MassaBloc>().add(MassaConversion(
+          value: inputValueAsDouble,
+          conversionType: MassaConversionType.mgToKg));
     }
     if (inputValue == 'mg' && inputResult == 'gram') {
-      context
-          .read<MassaBloc>()
-          .add(MgToGram(mg: double.tryParse(inputController.text) ?? 0));
-      print('mg - gram');
+      context.read<MassaBloc>().add(MassaConversion(
+          value: inputValueAsDouble,
+          conversionType: MassaConversionType.mgToGram));
     }
     if (inputValue == 'mg' && inputResult == 'ton') {
-      context
-          .read<MassaBloc>()
-          .add(MgToTon(mg: double.tryParse(inputController.text) ?? 0));
-      print('mg - ton');
+      context.read<MassaBloc>().add(MassaConversion(
+          value: inputValueAsDouble,
+          conversionType: MassaConversionType.mgToTon));
     }
     if (inputValue == 'mg' && inputResult == 'ounce') {
-      context
-          .read<MassaBloc>()
-          .add(MgToOunce(mg: double.tryParse(inputController.text) ?? 0));
-      print('mg - ounce');
+      context.read<MassaBloc>().add(MassaConversion(
+          value: inputValueAsDouble,
+          conversionType: MassaConversionType.mgToOunce));
     }
     if (inputValue == 'mg' && inputResult == 'pound') {
-      context
-          .read<MassaBloc>()
-          .add(MgToPound(mg: double.tryParse(inputController.text) ?? 0));
-      print('mg - pound');
+      context.read<MassaBloc>().add(MassaConversion(
+          value: inputValueAsDouble,
+          conversionType: MassaConversionType.mgToPound));
     }
     if (inputValue == 'mg' && inputResult == 'mg') {
-      context
-          .read<MassaBloc>()
-          .add(MgToMg(mg: double.tryParse(inputController.text) ?? 0));
-      print('mg - mg');
+      context.read<MassaBloc>().add(MassaConversion(
+          value: inputValueAsDouble,
+          conversionType: MassaConversionType.mgToMg));
     }
   }
 
@@ -486,19 +454,13 @@ class _MassaViewState extends State<MassaView> {
       context.read<MassaBloc>().add(ShowFormula(formula: ''));
     }
     if (inputValue == 'kg' && inputResult == 'ton') {
-      context
-          .read<MassaBloc>()
-          .add(ShowFormula(formula: 'bagi dengan 1000'));
+      context.read<MassaBloc>().add(ShowFormula(formula: 'bagi dengan 1000'));
     }
     if (inputValue == 'kg' && inputResult == 'gram') {
-      context
-          .read<MassaBloc>()
-          .add(ShowFormula(formula: 'kali dengan 1000'));
+      context.read<MassaBloc>().add(ShowFormula(formula: 'kali dengan 1000'));
     }
     if (inputValue == 'kg' && inputResult == 'ounce') {
-      context
-          .read<MassaBloc>()
-          .add(ShowFormula(formula: 'kali dengan 35.274'));
+      context.read<MassaBloc>().add(ShowFormula(formula: 'kali dengan 35.274'));
     }
     if (inputValue == 'kg' && inputResult == 'pound') {
       context
@@ -512,9 +474,7 @@ class _MassaViewState extends State<MassaView> {
     }
     //
     if (inputValue == 'gram' && inputResult == 'kg') {
-      context
-          .read<MassaBloc>()
-          .add(ShowFormula(formula: 'bagi dengan 1000'));
+      context.read<MassaBloc>().add(ShowFormula(formula: 'bagi dengan 1000'));
     }
     if (inputValue == 'gram' && inputResult == 'ton') {
       context
@@ -525,25 +485,17 @@ class _MassaViewState extends State<MassaView> {
       context.read<MassaBloc>().add(ShowFormula(formula: ''));
     }
     if (inputValue == 'gram' && inputResult == 'ounce') {
-      context
-          .read<MassaBloc>()
-          .add(ShowFormula(formula: 'bagi dengan 28.35'));
+      context.read<MassaBloc>().add(ShowFormula(formula: 'bagi dengan 28.35'));
     }
     if (inputValue == 'gram' && inputResult == 'pound') {
-      context
-          .read<MassaBloc>()
-          .add(ShowFormula(formula: 'bagi dengan 453.6'));
+      context.read<MassaBloc>().add(ShowFormula(formula: 'bagi dengan 453.6'));
     }
     if (inputValue == 'gram' && inputResult == 'mg') {
-      context
-          .read<MassaBloc>()
-          .add(ShowFormula(formula: 'kali dengan 1000'));
+      context.read<MassaBloc>().add(ShowFormula(formula: 'kali dengan 1000'));
     }
     //
     if (inputValue == 'ton' && inputResult == 'kg') {
-      context
-          .read<MassaBloc>()
-          .add(ShowFormula(formula: 'bagi dengan 1000'));
+      context.read<MassaBloc>().add(ShowFormula(formula: 'bagi dengan 1000'));
     }
     if (inputValue == 'ton' && inputResult == 'ton') {
       context.read<MassaBloc>().add(ShowFormula(formula: ''));
@@ -580,19 +532,13 @@ class _MassaViewState extends State<MassaView> {
           .add(ShowFormula(formula: 'kali dengan 1000000'));
     }
     if (inputValue == 'mg' && inputResult == 'gram') {
-      context
-          .read<MassaBloc>()
-          .add(ShowFormula(formula: 'bagi dengan 1000'));
+      context.read<MassaBloc>().add(ShowFormula(formula: 'bagi dengan 1000'));
     }
     if (inputValue == 'mg' && inputResult == 'ounce') {
-      context
-          .read<MassaBloc>()
-          .add(ShowFormula(formula: 'bagi dengan 28350'));
+      context.read<MassaBloc>().add(ShowFormula(formula: 'bagi dengan 28350'));
     }
     if (inputValue == 'mg' && inputResult == 'pound') {
-      context
-          .read<MassaBloc>()
-          .add(ShowFormula(formula: 'bagi dengan 453600'));
+      context.read<MassaBloc>().add(ShowFormula(formula: 'bagi dengan 453600'));
     }
     if (inputValue == 'mg' && inputResult == 'mg') {
       context.read<MassaBloc>().add(ShowFormula(formula: ''));
@@ -617,18 +563,14 @@ class _MassaViewState extends State<MassaView> {
       context.read<MassaBloc>().add(ShowFormula(formula: ''));
     }
     if (inputValue == 'ounce' && inputResult == 'pound') {
-      context
-          .read<MassaBloc>()
-          .add(ShowFormula(formula: 'kali dengan 0.0625'));
+      context.read<MassaBloc>().add(ShowFormula(formula: 'kali dengan 0.0625'));
     }
     if (inputValue == 'ounce' && inputResult == 'mg') {
       context.read<MassaBloc>().add(ShowFormula(formula: '28.3495'));
     }
     //
     if (inputValue == 'pound' && inputResult == 'kg') {
-      context
-          .read<MassaBloc>()
-          .add(ShowFormula(formula: 'bagi dengan 2.205'));
+      context.read<MassaBloc>().add(ShowFormula(formula: 'bagi dengan 2.205'));
     }
     if (inputValue == 'pound' && inputResult == 'ton') {
       context
@@ -639,17 +581,13 @@ class _MassaViewState extends State<MassaView> {
       context.read<MassaBloc>().add(ShowFormula(formula: '453.6'));
     }
     if (inputValue == 'pound' && inputResult == 'ounce') {
-      context
-          .read<MassaBloc>()
-          .add(ShowFormula(formula: 'kali dengan 16'));
+      context.read<MassaBloc>().add(ShowFormula(formula: 'kali dengan 16'));
     }
     if (inputValue == 'pound' && inputResult == 'pound') {
       context.read<MassaBloc>().add(ShowFormula(formula: ''));
     }
     if (inputValue == 'pound' && inputResult == 'mg') {
-      context
-          .read<MassaBloc>()
-          .add(ShowFormula(formula: 'kali dengan 453600'));
+      context.read<MassaBloc>().add(ShowFormula(formula: 'kali dengan 453600'));
     }
   }
 }

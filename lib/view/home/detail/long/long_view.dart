@@ -253,173 +253,148 @@ class _LongViewState extends State<LongView> {
       {required String inputValue,
       required String inputResult,
       required TextEditingController inputController}) {
-    ////////////////////////////Cm/////////////////////
+    double inputValueAsDouble = double.tryParse(inputController.text) ?? 0;
 
     if (inputValue == 'cm' && inputResult == 'm') {
-      context
-          .read<LongBloc>()
-          .add(CmToMeter(cm: double.tryParse(inputController.text) ?? 0));
-      print('cm - m');
+      context.read<LongBloc>().add(LengthConversion(
+          value: inputValueAsDouble,
+          conversionType: LengthConversionType.cmToMeter));
     }
     if (inputValue == 'cm' && inputResult == 'cm') {
-      context
-          .read<LongBloc>()
-          .add(CmToCm(cm: double.tryParse(inputController.text) ?? 0));
-      print('cm - cm');
+      context.read<LongBloc>().add(LengthConversion(
+          value: inputValueAsDouble,
+          conversionType: LengthConversionType.cmToCm));
     }
     if (inputValue == 'cm' && inputResult == 'mm') {
-      context
-          .read<LongBloc>()
-          .add(CmToMm(cm: double.tryParse(inputController.text) ?? 0));
-      print('cm - mm');
+      context.read<LongBloc>().add(LengthConversion(
+          value: inputValueAsDouble,
+          conversionType: LengthConversionType.cmToMm));
     }
     if (inputValue == 'cm' && inputResult == 'km') {
-      context
-          .read<LongBloc>()
-          .add(CmToKm(cm: double.tryParse(inputController.text) ?? 0));
-      print('cm - km');
+      context.read<LongBloc>().add(LengthConversion(
+          value: inputValueAsDouble,
+          conversionType: LengthConversionType.cmToKm));
     }
     if (inputValue == 'cm' && inputResult == 'inch') {
-      context
-          .read<LongBloc>()
-          .add(CmToInch(cm: double.tryParse(inputController.text) ?? 0));
-      print('cm - inch');
+      context.read<LongBloc>().add(LengthConversion(
+          value: inputValueAsDouble,
+          conversionType: LengthConversionType.cmToInch));
     }
 
     ////////////////////////////Meter/////////////////////
 
     if (inputValue == 'm' && inputResult == 'm') {
-      context
-          .read<LongBloc>()
-          .add(MeterToMeter(m: double.tryParse(inputController.text) ?? 0));
-      print('m - m');
+      context.read<LongBloc>().add(LengthConversion(
+          value: inputValueAsDouble,
+          conversionType: LengthConversionType.meterToMeter));
     }
     if (inputValue == 'm' && inputResult == 'cm') {
-      context
-          .read<LongBloc>()
-          .add(MeterToCm(m: double.tryParse(inputController.text) ?? 0));
-      print('m - cm');
+      context.read<LongBloc>().add(LengthConversion(
+          value: inputValueAsDouble,
+          conversionType: LengthConversionType.meterToCm));
     }
     if (inputValue == 'm' && inputResult == 'mm') {
-      context
-          .read<LongBloc>()
-          .add(MeterToMm(m: double.tryParse(inputController.text) ?? 0));
-      print('m - mm');
+      context.read<LongBloc>().add(LengthConversion(
+          value: inputValueAsDouble,
+          conversionType: LengthConversionType.meterToMm));
     }
     if (inputValue == 'm' && inputResult == 'km') {
-      context
-          .read<LongBloc>()
-          .add(MeterToKm(m: double.tryParse(inputController.text) ?? 0));
-      print('m - km');
+      context.read<LongBloc>().add(LengthConversion(
+          value: inputValueAsDouble,
+          conversionType: LengthConversionType.meterToKm));
     }
     if (inputValue == 'm' && inputResult == 'inch') {
-      context
-          .read<LongBloc>()
-          .add(MeterToInch(m: double.tryParse(inputController.text) ?? 0));
-      print('m - inch');
+      context.read<LongBloc>().add(LengthConversion(
+          value: inputValueAsDouble,
+          conversionType: LengthConversionType.meterToInch));
     }
 
     ////////////////////////////Inch/////////////////////
 
-    if (inputValue == 'inch' && inputResult == 'inch') {
-      context
-          .read<LongBloc>()
-          .add(InchToInch(inch: double.tryParse(inputController.text) ?? 0));
-      print('inch - inch');
+    if (inputValue == 'inch' && inputResult == 'm') {
+      context.read<LongBloc>().add(LengthConversion(
+          value: inputValueAsDouble,
+          conversionType: LengthConversionType.inchToMeter));
     }
     if (inputValue == 'inch' && inputResult == 'cm') {
-      context
-          .read<LongBloc>()
-          .add(InchToCm(inch: double.tryParse(inputController.text) ?? 0));
-      print('inch - cm');
-    }
-    if (inputValue == 'inch' && inputResult == 'm') {
-      context
-          .read<LongBloc>()
-          .add(InchToMeter(inch: double.tryParse(inputController.text) ?? 0));
-      print('inch - m');
-    }
-    if (inputValue == 'inch' && inputResult == 'km') {
-      context
-          .read<LongBloc>()
-          .add(InchToKm(inch: double.tryParse(inputController.text) ?? 0));
-      print('inch - km');
+      context.read<LongBloc>().add(LengthConversion(
+          value: inputValueAsDouble,
+          conversionType: LengthConversionType.inchToCm));
     }
     if (inputValue == 'inch' && inputResult == 'mm') {
-      context
-          .read<LongBloc>()
-          .add(InchToMm(inch: double.tryParse(inputController.text) ?? 0));
-      print('inch - mm');
+      context.read<LongBloc>().add(LengthConversion(
+          value: inputValueAsDouble,
+          conversionType: LengthConversionType.inchToMm));
+    }
+    if (inputValue == 'inch' && inputResult == 'km') {
+      context.read<LongBloc>().add(LengthConversion(
+          value: inputValueAsDouble,
+          conversionType: LengthConversionType.inchToKm));
+    }
+    if (inputValue == 'inch' && inputResult == 'inch') {
+      context.read<LongBloc>().add(LengthConversion(
+          value: inputValueAsDouble,
+          conversionType: LengthConversionType.inchToInch));
     }
 
     ////////////////////////////Mm/////////////////////
 
     if (inputValue == 'mm' && inputResult == 'mm') {
-      context
-          .read<LongBloc>()
-          .add(MmToMm(mm: double.tryParse(inputController.text) ?? 0));
-      print('mm - mm');
+      context.read<LongBloc>().add(LengthConversion(
+          value: inputValueAsDouble,
+          conversionType: LengthConversionType.mmToMm));
     }
     if (inputValue == 'mm' && inputResult == 'cm') {
-      context
-          .read<LongBloc>()
-          .add(MmToCm(mm: double.tryParse(inputController.text) ?? 0));
-      print('mm - cm');
+      context.read<LongBloc>().add(LengthConversion(
+          value: inputValueAsDouble,
+          conversionType: LengthConversionType.mmToCm));
     }
     if (inputValue == 'mm' && inputResult == 'km') {
-      context
-          .read<LongBloc>()
-          .add(MmToKm(mm: double.tryParse(inputController.text) ?? 0));
-      print('mm - km');
+      context.read<LongBloc>().add(LengthConversion(
+          value: inputValueAsDouble,
+          conversionType: LengthConversionType.mmToKm));
     }
     if (inputValue == 'mm' && inputResult == 'inch') {
-      context
-          .read<LongBloc>()
-          .add(MmToInch(mm: double.tryParse(inputController.text) ?? 0));
-      print('mm - inch');
+      context.read<LongBloc>().add(LengthConversion(
+          value: inputValueAsDouble,
+          conversionType: LengthConversionType.mmToInch));
     }
     if (inputValue == 'mm' && inputResult == 'm') {
-      context
-          .read<LongBloc>()
-          .add(MmToMeter(mm: double.tryParse(inputController.text) ?? 0));
-      print('mm - m');
+      context.read<LongBloc>().add(LengthConversion(
+          value: inputValueAsDouble,
+          conversionType: LengthConversionType.mmToMeter));
     }
 
     ////////////////////////////Km/////////////////////
 
     if (inputValue == 'km' && inputResult == 'km') {
-      context
-          .read<LongBloc>()
-          .add(KmToKm(km: double.tryParse(inputController.text) ?? 0));
-      print('km - km');
+      context.read<LongBloc>().add(LengthConversion(
+          value: inputValueAsDouble,
+          conversionType: LengthConversionType.kmToKm));
     }
 
     if (inputValue == 'km' && inputResult == 'm') {
-      context
-          .read<LongBloc>()
-          .add(KmToMeter(km: double.tryParse(inputController.text) ?? 0));
-      print('km - m');
+      context.read<LongBloc>().add(LengthConversion(
+          value: inputValueAsDouble,
+          conversionType: LengthConversionType.kmToMeter));
     }
 
     if (inputValue == 'km' && inputResult == 'mm') {
-      context
-          .read<LongBloc>()
-          .add(KmToMm(km: double.tryParse(inputController.text) ?? 0));
-      print('km - mm');
+      context.read<LongBloc>().add(LengthConversion(
+          value: inputValueAsDouble,
+          conversionType: LengthConversionType.kmToMm));
     }
 
     if (inputValue == 'km' && inputResult == 'inch') {
-      context
-          .read<LongBloc>()
-          .add(KmToInch(km: double.tryParse(inputController.text) ?? 0));
-      print('km - inch');
+      context.read<LongBloc>().add(LengthConversion(
+          value: inputValueAsDouble,
+          conversionType: LengthConversionType.kmToInch));
     }
 
     if (inputValue == 'km' && inputResult == 'cm') {
-      context
-          .read<LongBloc>()
-          .add(KmToCm(km: double.tryParse(inputController.text) ?? 0));
-      print('km - cm');
+      context.read<LongBloc>().add(LengthConversion(
+          value: inputValueAsDouble,
+          conversionType: LengthConversionType.kmToCm));
     }
   }
 
