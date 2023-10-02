@@ -43,7 +43,7 @@ class AppPages {
           bloc: BlocProvider(
             create: (_) => LoginBloc(),
           )),
-      PageEntity(routes: AppName.HOME, pages: const HomeView()),
+      PageEntity(routes: AppName.HOME, pages: HomeView()),
       PageEntity(
           routes: AppName.LONG,
           pages: const LongView(),
@@ -88,14 +88,15 @@ class AppPages {
       var resault =
           routes().where((element) => element.routes == settings.name);
       if (resault.isNotEmpty) {
-        bool deviceFristOpen = Global.storageService.autoLogin();
-        if (resault.first.routes == AppName.INITIAL) {
-          if (deviceFristOpen) {
+        bool getBool = Global.storageService.getBool();
+        if (resault.first.routes == AppName.INITIAL && getBool) {
+          bool getString = Global.storageService.getString();
+          if (getString) {
             return MaterialPageRoute(
-                builder: (context) => const HomeView(), settings: settings);
+                builder: (context) => HomeView(), settings: settings);
           }
           return MaterialPageRoute(
-              builder: (context) => SplashScreenView(), settings: settings);
+              builder: (context) => const SelectModeView(), settings: settings);
         }
         return MaterialPageRoute(
             builder: (context) => resault.first.pages, settings: settings);

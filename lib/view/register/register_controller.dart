@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:conversion_app/common/constant/constant.dart';
 import 'package:conversion_app/global.dart';
 import 'package:conversion_app/view/register/bloc/register_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -31,9 +32,9 @@ class RegisterController {
             .createUserWithEmailAndPassword(email: email, password: password);
         await credential.user?.sendEmailVerification();
         await credential.user?.updateDisplayName(email);
-        Global.storageService.setBool('login', true);
+        Global.storageService
+            .setString(AppConstant.STORAGE_USER_TOKEN_KEY, '123');
         Navigator.of(context).pushReplacementNamed('/home');
-        print('account success create');
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
           //handle

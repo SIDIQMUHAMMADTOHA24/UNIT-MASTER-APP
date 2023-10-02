@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:semicircle_indicator/semicircle_indicator.dart';
 
+import '../../common/constant/constant.dart';
+import '../../global.dart';
+
 // ignore: must_be_immutable
 class SplashScreenView extends StatelessWidget {
   SplashScreenView({super.key});
@@ -9,6 +12,8 @@ class SplashScreenView extends StatelessWidget {
 
   void nextPage(BuildContext context) async {
     Future.delayed(const Duration(seconds: 1), () {
+      Global.storageService
+          .setBool(AppConstant.STORAGE_DEVICE_OPEN_FRIST_TIME, true);
       Navigator.of(context).pushNamedAndRemoveUntil('/mode', (route) => false);
     });
   }

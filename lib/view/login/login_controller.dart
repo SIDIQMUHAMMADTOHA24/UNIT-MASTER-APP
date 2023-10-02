@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
+import 'package:conversion_app/common/constant/constant.dart';
 import 'package:conversion_app/global.dart';
 import 'package:conversion_app/view/login/bloc/login_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -28,7 +29,7 @@ class LoginController {
           .signInWithEmailAndPassword(email: email, password: password);
       final user = credential.user;
       if (user == null) {
-        print('pengguna tidak ditemukan');
+        print('user null');
       }
       if (user != null) {
         Global.storageService.setBool('login', true);
@@ -56,7 +57,7 @@ class LoginController {
       final GoogleSignInAccount? googleSignInAccount =
           await googleSignIn.signIn();
       if (googleSignIn == null) {
-        return null;
+        print('gooolgle null');
       }
       final GoogleSignInAuthentication googleSignInAuthentication =
           await googleSignInAccount!.authentication;
@@ -67,7 +68,8 @@ class LoginController {
           await _auth.signInWithCredential(authCredential);
       final User? user = userCredential.user;
       if (user != null) {
-        Global.storageService.setBool('login', true);
+        Global.storageService
+            .setString(AppConstant.STORAGE_USER_TOKEN_KEY, '12345678');
         Navigator.pushReplacementNamed(context, '/home');
       }
       return user;
