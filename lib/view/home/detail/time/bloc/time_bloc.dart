@@ -50,6 +50,9 @@ class TimeBloc extends Bloc<TimeEvent, Map<String, dynamic>> {
         case TimeConversionType.detikToAbad:
           _detikToAbad(event, emit);
           break;
+        case TimeConversionType.menitToDetik:
+          _menitToDetik(event, emit);
+          break;
         case TimeConversionType.menitToMenit:
           _menitToMenit(event, emit);
           break;
@@ -101,6 +104,9 @@ class TimeBloc extends Bloc<TimeEvent, Map<String, dynamic>> {
         case TimeConversionType.jamToAbad:
           _jamToAbad(event, emit);
           break;
+        case TimeConversionType.hariToDetik:
+          _hariToDetik(event, emit);
+          break;
         case TimeConversionType.hariToMenit:
           _hariToMenit(event, emit);
           break;
@@ -124,6 +130,9 @@ class TimeBloc extends Bloc<TimeEvent, Map<String, dynamic>> {
           break;
         case TimeConversionType.hariToAbad:
           _hariToAbad(event, emit);
+          break;
+        case TimeConversionType.mingguToDetik:
+          _mingguToDetik(event, emit);
           break;
         case TimeConversionType.mingguToMenit:
           _mingguToMenit(event, emit);
@@ -176,6 +185,9 @@ class TimeBloc extends Bloc<TimeEvent, Map<String, dynamic>> {
         case TimeConversionType.bulanToAbad:
           _bulanToAbad(event, emit);
           break;
+        case TimeConversionType.tahunToDetik:
+          _tahunToDetik(event, emit);
+          break;
         case TimeConversionType.tahunToMenit:
           _tahunToMenit(event, emit);
           break;
@@ -200,6 +212,9 @@ class TimeBloc extends Bloc<TimeEvent, Map<String, dynamic>> {
         case TimeConversionType.tahunToAbad:
           _tahunToAbad(event, emit);
           break;
+        case TimeConversionType.dekadeToDetik:
+          _dekadeToDetik(event, emit);
+          break;
         case TimeConversionType.dekadeToMenit:
           _dekadeToMenit(event, emit);
           break;
@@ -223,6 +238,9 @@ class TimeBloc extends Bloc<TimeEvent, Map<String, dynamic>> {
           break;
         case TimeConversionType.dekadeToAbad:
           _dekadeToAbad(event, emit);
+          break;
+        case TimeConversionType.abadToDetik:
+          _abadToDetik(event, emit);
           break;
         case TimeConversionType.abadToMenit:
           _abadToMenit(event, emit);
@@ -326,9 +344,9 @@ class TimeBloc extends Bloc<TimeEvent, Map<String, dynamic>> {
     int result = minggu.toInt();
     double remainder = minggu - result.toDouble();
     if (remainder == 0) {
-      emit({...state, 'resultValue': result.toString()});
+      emit({...state, 'resultValue': result.toStringAsExponential(3)});
     } else {
-      emit({...state, 'resultValue': minggu.toString()});
+      emit({...state, 'resultValue': minggu.toStringAsExponential(3)});
     }
   }
 
@@ -337,9 +355,9 @@ class TimeBloc extends Bloc<TimeEvent, Map<String, dynamic>> {
     int result = bulan.toInt();
     double remainder = bulan - result.toDouble();
     if (remainder == 0) {
-      emit({...state, 'resultValue': result.toString()});
+      emit({...state, 'resultValue': result.toStringAsExponential(2)});
     } else {
-      emit({...state, 'resultValue': bulan.toString()});
+      emit({...state, 'resultValue': bulan.toStringAsExponential(2)});
     }
   }
 
@@ -348,9 +366,9 @@ class TimeBloc extends Bloc<TimeEvent, Map<String, dynamic>> {
     int result = tahun.toInt();
     double remainder = tahun - result.toDouble();
     if (remainder == 0) {
-      emit({...state, 'resultValue': result.toString()});
+      emit({...state, 'resultValue': result.toStringAsExponential(2)});
     } else {
-      emit({...state, 'resultValue': tahun.toString()});
+      emit({...state, 'resultValue': tahun.toStringAsExponential(2)});
     }
   }
 
@@ -359,9 +377,9 @@ class TimeBloc extends Bloc<TimeEvent, Map<String, dynamic>> {
     int result = dekade.toInt();
     double remainder = dekade - result.toDouble();
     if (remainder == 0) {
-      emit({...state, 'resultValue': result.toString()});
+      emit({...state, 'resultValue': result.toStringAsExponential(2)});
     } else {
-      emit({...state, 'resultValue': dekade.toString()});
+      emit({...state, 'resultValue': dekade.toStringAsExponential(2)});
     }
   }
 
@@ -370,9 +388,20 @@ class TimeBloc extends Bloc<TimeEvent, Map<String, dynamic>> {
     int result = abad.toInt();
     double remainder = abad - result.toDouble();
     if (remainder == 0) {
+      emit({...state, 'resultValue': result.toStringAsExponential(2)});
+    } else {
+      emit({...state, 'resultValue': abad.toStringAsExponential(2)});
+    }
+  }
+
+  _menitToDetik(TimeConversion event, Emitter<Map<String, dynamic>> emit) {
+    double jam = event.value * 60;
+    int result = jam.toInt();
+    double remainder = jam - result.toDouble();
+    if (remainder == 0) {
       emit({...state, 'resultValue': result.toString()});
     } else {
-      emit({...state, 'resultValue': abad.toString()});
+      emit({...state, 'resultValue': jam.toString()});
     }
   }
 
@@ -429,9 +458,9 @@ class TimeBloc extends Bloc<TimeEvent, Map<String, dynamic>> {
     int result = tahun.toInt();
     double remainder = tahun - result.toDouble();
     if (remainder == 0) {
-      emit({...state, 'resultValue': result.toString()});
+      emit({...state, 'resultValue': result.toStringAsExponential(2)});
     } else {
-      emit({...state, 'resultValue': tahun.toString()});
+      emit({...state, 'resultValue': tahun.toStringAsExponential()});
     }
   }
 
@@ -440,9 +469,9 @@ class TimeBloc extends Bloc<TimeEvent, Map<String, dynamic>> {
     int result = dekade.toInt();
     double remainder = dekade - result.toDouble();
     if (remainder == 0) {
-      emit({...state, 'resultValue': result.toString()});
+      emit({...state, 'resultValue': result.toStringAsExponential(2)});
     } else {
-      emit({...state, 'resultValue': dekade.toString()});
+      emit({...state, 'resultValue': dekade.toStringAsExponential(2)});
     }
   }
 
@@ -451,9 +480,9 @@ class TimeBloc extends Bloc<TimeEvent, Map<String, dynamic>> {
     int result = abad.toInt();
     double remainder = abad - result.toDouble();
     if (remainder == 0) {
-      emit({...state, 'resultValue': result.toString()});
+      emit({...state, 'resultValue': result.toStringAsExponential(2)});
     } else {
-      emit({...state, 'resultValue': abad.toString()});
+      emit({...state, 'resultValue': abad.toStringAsExponential(2)});
     }
   }
 
@@ -545,9 +574,9 @@ class TimeBloc extends Bloc<TimeEvent, Map<String, dynamic>> {
     int result = abad.toInt();
     double remainder = abad - result.toDouble();
     if (remainder == 0) {
-      emit({...state, 'resultValue': result.toString()});
+      emit({...state, 'resultValue': result.toStringAsExponential(2)});
     } else {
-      emit({...state, 'resultValue': abad.toString()});
+      emit({...state, 'resultValue': abad.toStringAsExponential(2)});
     }
   }
 
@@ -600,7 +629,7 @@ class TimeBloc extends Bloc<TimeEvent, Map<String, dynamic>> {
   }
 
   _hariToBulan(TimeConversion event, Emitter<Map<String, dynamic>> emit) {
-    double bulan = event.value / 30.417;
+    double bulan = event.value / 30;
     int result = bulan.toInt();
     double remainder = bulan - result.toDouble();
     if (remainder == 0) {
@@ -611,7 +640,7 @@ class TimeBloc extends Bloc<TimeEvent, Map<String, dynamic>> {
   }
 
   _hariToTahun(TimeConversion event, Emitter<Map<String, dynamic>> emit) {
-    double tahun = event.value / 365.25;
+    double tahun = event.value / 365;
     int result = tahun.toInt();
     double remainder = tahun - result.toDouble();
     if (remainder == 0) {
@@ -622,7 +651,7 @@ class TimeBloc extends Bloc<TimeEvent, Map<String, dynamic>> {
   }
 
   _hariToDekade(TimeConversion event, Emitter<Map<String, dynamic>> emit) {
-    double dekade = event.value / 3652.5;
+    double dekade = event.value / 3652;
     int result = dekade.toInt();
     double remainder = dekade - result.toDouble();
     if (remainder == 0) {
@@ -692,7 +721,7 @@ class TimeBloc extends Bloc<TimeEvent, Map<String, dynamic>> {
   }
 
   _mingguToBulan(TimeConversion event, Emitter<Map<String, dynamic>> emit) {
-    double bulan = event.value / 4.345;
+    double bulan = event.value / 4;
     int result = bulan.toInt();
     double remainder = bulan - result.toDouble();
     if (remainder == 0) {
@@ -740,9 +769,9 @@ class TimeBloc extends Bloc<TimeEvent, Map<String, dynamic>> {
     int result = detik.toInt();
     double remainder = detik - result.toDouble();
     if (remainder == 0) {
-      emit({...state, 'resultValue': result.toString()});
+      emit({...state, 'resultValue': result.toStringAsExponential(2)});
     } else {
-      emit({...state, 'resultValue': detik.toString()});
+      emit({...state, 'resultValue': detik.toStringAsExponential(2)});
     }
   }
 
@@ -751,9 +780,9 @@ class TimeBloc extends Bloc<TimeEvent, Map<String, dynamic>> {
     int result = menit.toInt();
     double remainder = menit - result.toDouble();
     if (remainder == 0) {
-      emit({...state, 'resultValue': result.toString()});
+      emit({...state, 'resultValue': result.toStringAsExponential(2)});
     } else {
-      emit({...state, 'resultValue': menit.toString()});
+      emit({...state, 'resultValue': menit.toStringAsExponential(2)});
     }
   }
 
@@ -832,9 +861,9 @@ class TimeBloc extends Bloc<TimeEvent, Map<String, dynamic>> {
     int result = detik.toInt();
     double remainder = detik - result.toDouble();
     if (remainder == 0) {
-      emit({...state, 'resultValue': result.toString()});
+      emit({...state, 'resultValue': result.toStringAsExponential(2)});
     } else {
-      emit({...state, 'resultValue': detik.toString()});
+      emit({...state, 'resultValue': detik.toStringAsExponential(2)});
     }
   }
 
@@ -843,9 +872,9 @@ class TimeBloc extends Bloc<TimeEvent, Map<String, dynamic>> {
     int result = menit.toInt();
     double remainder = menit - result.toDouble();
     if (remainder == 0) {
-      emit({...state, 'resultValue': result.toString()});
+      emit({...state, 'resultValue': result.toStringAsExponential(2)});
     } else {
-      emit({...state, 'resultValue': menit.toString()});
+      emit({...state, 'resultValue': menit.toStringAsExponential(2)});
     }
   }
 
@@ -924,9 +953,9 @@ class TimeBloc extends Bloc<TimeEvent, Map<String, dynamic>> {
     int result = detik.toInt();
     double remainder = detik - result.toDouble();
     if (remainder == 0) {
-      emit({...state, 'resultValue': result.toString()});
+      emit({...state, 'resultValue': result.toStringAsExponential(2)});
     } else {
-      emit({...state, 'resultValue': detik.toString()});
+      emit({...state, 'resultValue': detik.toStringAsExponential(2)});
     }
   }
 
@@ -935,9 +964,9 @@ class TimeBloc extends Bloc<TimeEvent, Map<String, dynamic>> {
     int result = menit.toInt();
     double remainder = menit - result.toDouble();
     if (remainder == 0) {
-      emit({...state, 'resultValue': result.toString()});
+      emit({...state, 'resultValue': result.toStringAsExponential(2)});
     } else {
-      emit({...state, 'resultValue': menit.toString()});
+      emit({...state, 'resultValue': menit.toStringAsExponential(2)});
     }
   }
 
@@ -946,9 +975,9 @@ class TimeBloc extends Bloc<TimeEvent, Map<String, dynamic>> {
     int result = jam.toInt();
     double remainder = jam - result.toDouble();
     if (remainder == 0) {
-      emit({...state, 'resultValue': result.toString()});
+      emit({...state, 'resultValue': result.toStringAsExponential(2)});
     } else {
-      emit({...state, 'resultValue': jam.toString()});
+      emit({...state, 'resultValue': jam.toStringAsExponential(2)});
     }
   }
 
@@ -1016,9 +1045,9 @@ class TimeBloc extends Bloc<TimeEvent, Map<String, dynamic>> {
     int result = detik.toInt();
     double remainder = detik - result.toDouble();
     if (remainder == 0) {
-      emit({...state, 'resultValue': result.toString()});
+      emit({...state, 'resultValue': result.toStringAsExponential(2)});
     } else {
-      emit({...state, 'resultValue': detik.toString()});
+      emit({...state, 'resultValue': detik.toStringAsExponential(2)});
     }
   }
 
@@ -1027,9 +1056,9 @@ class TimeBloc extends Bloc<TimeEvent, Map<String, dynamic>> {
     int result = menit.toInt();
     double remainder = menit - result.toDouble();
     if (remainder == 0) {
-      emit({...state, 'resultValue': result.toString()});
+      emit({...state, 'resultValue': result.toStringAsExponential(2)});
     } else {
-      emit({...state, 'resultValue': menit.toString()});
+      emit({...state, 'resultValue': menit.toStringAsExponential(2)});
     }
   }
 
@@ -1038,9 +1067,9 @@ class TimeBloc extends Bloc<TimeEvent, Map<String, dynamic>> {
     int result = jam.toInt();
     double remainder = jam - result.toDouble();
     if (remainder == 0) {
-      emit({...state, 'resultValue': result.toString()});
+      emit({...state, 'resultValue': result.toStringAsExponential(2)});
     } else {
-      emit({...state, 'resultValue': jam.toString()});
+      emit({...state, 'resultValue': jam.toStringAsExponential(2)});
     }
   }
 
@@ -1049,9 +1078,9 @@ class TimeBloc extends Bloc<TimeEvent, Map<String, dynamic>> {
     int result = hari.toInt();
     double remainder = hari - result.toDouble();
     if (remainder == 0) {
-      emit({...state, 'resultValue': result.toString()});
+      emit({...state, 'resultValue': result.toStringAsExponential(2)});
     } else {
-      emit({...state, 'resultValue': hari.toString()});
+      emit({...state, 'resultValue': hari.toStringAsExponential(2)});
     }
   }
 
