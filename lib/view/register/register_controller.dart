@@ -32,10 +32,15 @@ class RegisterController {
             .createUserWithEmailAndPassword(email: email, password: password);
         await credential.user?.sendEmailVerification();
         await credential.user?.updateDisplayName(email);
+        Global.storageService.saveUserInfo(
+          userId: credential.user!.uid,
+          email: credential.user!.email!,
+        );
         Global.storageService
-            .setString(AppConstant.STORAGE_USER_TOKEN_KEY, '123');
+            .setString(AppConstant.STORAGE_USER_TOKEN_KEY, '12345678');
         Navigator.of(context).pushReplacementNamed('/home');
       } on FirebaseAuthException catch (e) {
+        print(e.toString());
         if (e.code == 'weak-password') {
           //handle
         } else if (e.code == 'email-already-in-use') {
@@ -43,7 +48,7 @@ class RegisterController {
         }
       }
     } else if (password != confirmPassword) {
-      //handle if betwen
+      print('pasword tidak sama');
     }
   }
 }

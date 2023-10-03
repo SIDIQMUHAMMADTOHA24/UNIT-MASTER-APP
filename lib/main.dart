@@ -1,6 +1,5 @@
 import 'package:conversion_app/common/routes/pages.dart';
 import 'package:conversion_app/global.dart';
-import 'package:conversion_app/view/home/detail/long/long_view.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,6 +21,7 @@ class MyApp extends StatelessWidget {
         providers: [...AppPages.allBlocProvider(context)],
         child: ScreenUtilInit(
           builder: (context, child) => MaterialApp(
+            themeMode: ThemeMode.dark,
             theme: ThemeData(scaffoldBackgroundColor: Colors.white),
             debugShowCheckedModeBanner: false,
             onGenerateRoute: AppPages.GenerateRouteSettings,

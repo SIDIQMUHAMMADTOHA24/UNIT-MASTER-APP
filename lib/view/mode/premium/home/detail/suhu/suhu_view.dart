@@ -1,5 +1,5 @@
-import 'package:conversion_app/view/home/detail/suhu/bloc/suhu_bloc.dart';
-import 'package:conversion_app/view/home/detail/suhu/data/data_suhu.dart';
+import 'package:conversion_app/view/mode/premium/home/detail/suhu/bloc/suhu_bloc.dart';
+import 'package:conversion_app/view/mode/premium/home/detail/suhu/data/data_suhu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

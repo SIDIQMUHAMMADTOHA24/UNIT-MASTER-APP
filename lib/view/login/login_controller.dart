@@ -32,8 +32,12 @@ class LoginController {
         print('user null');
       }
       if (user != null) {
-        Global.storageService.setBool('login', true);
-        //handle when login succesfull
+        Global.storageService.saveUserInfo(
+          userId: user.uid,
+          email: user.email!,
+        );
+        Global.storageService
+            .setString(AppConstant.STORAGE_USER_TOKEN_KEY, '12345678');
         Navigator.of(context)
             .pushNamedAndRemoveUntil('/home', (route) => false);
       }
@@ -56,9 +60,6 @@ class LoginController {
     try {
       final GoogleSignInAccount? googleSignInAccount =
           await googleSignIn.signIn();
-      if (googleSignIn == null) {
-        print('gooolgle null');
-      }
       final GoogleSignInAuthentication googleSignInAuthentication =
           await googleSignInAccount!.authentication;
       final AuthCredential authCredential = GoogleAuthProvider.credential(
@@ -68,6 +69,10 @@ class LoginController {
           await _auth.signInWithCredential(authCredential);
       final User? user = userCredential.user;
       if (user != null) {
+        Global.storageService.saveUserInfo(
+          userId: _auth.currentUser!.uid,
+          email: _auth.currentUser!.email!,
+        );
         Global.storageService
             .setString(AppConstant.STORAGE_USER_TOKEN_KEY, '12345678');
         Navigator.pushReplacementNamed(context, '/home');

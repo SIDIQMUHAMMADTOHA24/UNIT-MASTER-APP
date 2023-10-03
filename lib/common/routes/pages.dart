@@ -1,21 +1,23 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:conversion_app/common/routes/name.dart';
 import 'package:conversion_app/global.dart';
-import 'package:conversion_app/view/home/detail/long/bloc/long_bloc.dart';
-
-import 'package:conversion_app/view/home/detail/long/long_view.dart';
-import 'package:conversion_app/view/home/detail/massa/bloc/massa_bloc.dart';
-import 'package:conversion_app/view/home/detail/massa/massa_view.dart';
-import 'package:conversion_app/view/home/detail/suhu/bloc/suhu_bloc.dart';
-import 'package:conversion_app/view/home/detail/suhu/suhu_view.dart';
-import 'package:conversion_app/view/home/detail/time/bloc/time_bloc.dart';
-import 'package:conversion_app/view/home/detail/time/time_view.dart';
-import 'package:flutter/material.dart';
-import 'package:conversion_app/view/home/home_view.dart';
 import 'package:conversion_app/view/login/login_view.dart';
 import 'package:conversion_app/view/register/register_view.dart';
+
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../view/login/bloc/login_bloc.dart';
+
+import '../../view/mode/premium/home/detail/long/bloc/long_bloc.dart';
+
+import '../../view/mode/premium/home/detail/long/long_view.dart';
+import '../../view/mode/premium/home/detail/massa/bloc/massa_bloc.dart';
+import '../../view/mode/premium/home/detail/massa/massa_view.dart';
+import '../../view/mode/premium/home/detail/suhu/bloc/suhu_bloc.dart';
+import '../../view/mode/premium/home/detail/suhu/suhu_view.dart';
+import '../../view/mode/premium/home/detail/time/bloc/time_bloc.dart';
+import '../../view/mode/premium/home/detail/time/time_view.dart';
+import '../../view/mode/mode_premium/home/home_view.dart';
 import '../../view/register/bloc/register_bloc.dart';
 import '../../view/select_mode/bloc/dot_indicator_bloc.dart';
 import '../../view/select_mode/select_mode_view.dart';
@@ -89,7 +91,10 @@ class AppPages {
           routes().where((element) => element.routes == settings.name);
       if (resault.isNotEmpty) {
         bool getBool = Global.storageService.getBool();
+        //jika pages / view initial dan getBoll == true maka dia akan langsung mengarah ke selctModeview
+        //digunakan ketika sesudah log out
         if (resault.first.routes == AppName.INITIAL && getBool) {
+          //digunakan ketika sudah login
           bool getString = Global.storageService.getString();
           if (getString) {
             return MaterialPageRoute(

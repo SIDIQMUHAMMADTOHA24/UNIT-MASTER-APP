@@ -1,3 +1,4 @@
+import 'package:conversion_app/common/constant/constant.dart';
 import 'package:conversion_app/global.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class HomeView extends StatelessWidget {
   HomeView({super.key});
 
-  final user = FirebaseAuth.instance.currentUser;
+  final user = Global.storageService.getUserInfo();
   final logout = FirebaseAuth.instance.signOut();
 
   @override
@@ -14,27 +15,29 @@ class HomeView extends StatelessWidget {
     return Scaffold(
         drawer: Drawer(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            // ClipRRect(
-            //     borderRadius: BorderRadius.circular(50),
-            //     child: Image.network(
-            //       user!.photoURL ??
-            //           'https://www.google.com/url?sa=i&url=https%3A%2F%2Fstock.adobe.com%2Fsearch%3Fk%3Dperson%2Bicon&psig=AOvVaw3EKbYOnaqxIc-EmtQn-HTX&ust=1696367883437000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNC3xfqk2IEDFQAAAAAdAAAAABAE',
-            //       width: 70,
-            //     )),
+            ClipRRect(
+                borderRadius: BorderRadius.circular(50),
+                child: Image.network(
+                  user['imageUrl'],
+                  width: 70,
+                )),
             const SizedBox(
               height: 7,
             ),
-            // Text(
-            //   'Halo ${user!.email}',
-            //   style: const TextStyle(color: Colors.black, fontSize: 18),
-            // ),
+            Text(
+              'Halo ${user['userEmail']}',
+              style: const TextStyle(color: Colors.black, fontSize: 18),
+            ),
             const SizedBox(
               height: 40,
             ),
             GestureDetector(
               onTap: () async {
                 FirebaseAuth.instance.signOut();
-                Global.storageService.setBool('login', false);
+                Global.storageService.remove(AppConstant.EMAIL);
+                Global.storageService.remove(AppConstant.USER_ID);
+                Global.storageService
+                    .remove(AppConstant.STORAGE_USER_TOKEN_KEY);
                 Navigator.of(context)
                     .pushNamedAndRemoveUntil('/mode', (route) => false);
               },

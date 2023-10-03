@@ -8,7 +8,8 @@ class StorageService {
     _sharedPreferences = await SharedPreferences.getInstance();
     return this;
   }
-//ini  saya buat 2 karena setBool untuk habis logout jadi tidak perlu ke splash screen 
+
+//ini  saya buat 2 karena setBool untuk habis logout jadi tidak perlu ke splash screen
 //untuk yang setString saya buat untuk ketika sudah masuk ke halaman login
 //Digunakan untuk check point
   Future<bool> setBool(String key, bool value) async {
@@ -19,6 +20,17 @@ class StorageService {
     return await _sharedPreferences.setString(key, value);
   }
 
+  Future<bool> remove(String key) async {
+    return await _sharedPreferences.remove(key);
+  }
+
+  Future<void> saveUserInfo({
+    required String userId,
+    required String email,
+  }) async {
+    await _sharedPreferences.setString(AppConstant.EMAIL, email);
+    await _sharedPreferences.setString(AppConstant.USER_ID, userId);
+  }
 
 //Digunakan untuk memanggil terakhir di cek Point
   bool getBool() {
@@ -32,5 +44,15 @@ class StorageService {
             null
         ? false
         : true;
+  }
+
+  Map<String, dynamic> getUserInfo() {
+    final userID =
+        _sharedPreferences.getString(AppConstant.USER_ID) ?? 'kosong';
+    final userEmail =
+        _sharedPreferences.getString(AppConstant.EMAIL) ?? 'kosong';
+    final userImage = _sharedPreferences.getString(AppConstant.IMAGE_URL) ??
+        'https://i.pinimg.com/564x/7c/8d/c5/7c8dc5fa07ecae922195c78a356b845b.jpg';
+    return {'userId': userID, 'userEmail': userEmail, 'imageUrl': userImage};
   }
 }

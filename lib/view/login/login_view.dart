@@ -182,7 +182,6 @@ class _LoginViewState extends State<LoginView> {
         if (images == 'user') {
           Navigator.pushNamed(context, '/register');
         }
-        
 
         if (images == 'google') {
           LoginController(context: context).loginWithGoogle();

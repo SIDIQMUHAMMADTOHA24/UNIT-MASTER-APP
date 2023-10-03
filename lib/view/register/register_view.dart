@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../login/login_controller.dart';
 import 'bloc/register_bloc.dart';
 
 class RegisterView extends StatelessWidget {
@@ -174,6 +175,9 @@ class RegisterView extends StatelessWidget {
       onTap: () {
         if (images == 'user') {
           Navigator.of(context).pushNamed('/login');
+        }
+        if (images == 'google') {
+          LoginController(context: context).loginWithGoogle();
         }
       },
       child: Container(

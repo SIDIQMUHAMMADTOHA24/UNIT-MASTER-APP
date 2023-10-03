@@ -1,5 +1,5 @@
-import 'package:conversion_app/view/home/detail/massa/bloc/massa_bloc.dart';
-import 'package:conversion_app/view/home/detail/massa/data/data_massa.dart';
+import 'package:conversion_app/view/mode/premium/home/detail/massa/bloc/massa_bloc.dart';
+import 'package:conversion_app/view/mode/premium/home/detail/massa/data/data_massa.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -323,7 +323,7 @@ class _MassaViewState extends State<MassaView> {
       context.read<MassaBloc>().add(MassaConversion(
           value: inputValueAsDouble,
           conversionType: MassaConversionType.tonToKg));
-          print('ton - kg');
+      print('ton - kg');
     }
     if (inputValue == 'ton' && inputResult == 'gram') {
       context.read<MassaBloc>().add(MassaConversion(

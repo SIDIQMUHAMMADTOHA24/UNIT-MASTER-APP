@@ -1,5 +1,5 @@
-import 'package:conversion_app/view/home/detail/time/bloc/time_bloc.dart';
-import 'package:conversion_app/view/home/detail/time/data/data_time.dart';
+import 'package:conversion_app/view/mode/premium/home/detail/time/bloc/time_bloc.dart';
+import 'package:conversion_app/view/mode/premium/home/detail/time/data/data_time.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
