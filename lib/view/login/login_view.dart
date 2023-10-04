@@ -250,6 +250,9 @@ class _LoginViewState extends State<LoginView> {
               height: 8.h,
             ),
             TextFormField(
+                onChanged: (value) {
+                  context.read<LoginBloc>().add(EmailEvent(email: value));
+                },
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
                     hintText: 'Masukan email anda',
@@ -268,19 +271,25 @@ class _LoginViewState extends State<LoginView> {
             SizedBox(
               height: 8.h,
             ),
-            Container(
-              height: 35.h,
-              decoration: BoxDecoration(
-                  color: Colors.amberAccent.shade400,
-                  borderRadius: BorderRadius.circular(8)),
-              child: Center(
-                  child: Text(
-                'Kirim',
-                style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    color: Colors.white,
-                    fontSize: 15.sp),
-              )),
+            GestureDetector(
+              onTap: () {
+                LoginController(context: context).doResetPassword();
+                Navigator.pop(context);
+              },
+              child: Container(
+                height: 35.h,
+                decoration: BoxDecoration(
+                    color: Colors.amberAccent.shade400,
+                    borderRadius: BorderRadius.circular(8)),
+                child: Center(
+                    child: Text(
+                  'Kirim',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white,
+                      fontSize: 15.sp),
+                )),
+              ),
             )
           ]),
         ),

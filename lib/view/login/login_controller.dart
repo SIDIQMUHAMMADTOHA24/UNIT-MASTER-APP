@@ -25,8 +25,8 @@ class LoginController {
       print('Password Kosong');
     }
     try {
-      final credential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
+      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: email.trim(), password: password.trim());
       final user = credential.user;
       if (user == null) {
         print('user null');
@@ -80,6 +80,37 @@ class LoginController {
       return user;
     } catch (e) {
       return null;
+    }
+  }
+
+  Future<void> doResetPassword() async {
+    final state = context.read<LoginBloc>().state;
+    print(state.email);
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: state.email.trim());
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'auth/invalid-email') {
+        // Menangani error jika alamat email tidak valid
+        print('Alamat email tidak valid.');
+      } else if (e.code == 'auth/missing-android-pkg-name') {
+        // Menangani error jika nama paket Android tidak diberikan
+        print('Nama paket Android tidak diberikan.');
+      } else if (e.code == 'auth/missing-continue-uri') {
+        // Menangani error jika URL lanjutan tidak diberikan
+        print('URL lanjutan tidak diberikan.');
+      } else if (e.code == 'auth/missing-ios-bundle-id') {
+        // Menangani error jika ID Bundle iOS tidak diberikan
+        print('ID Bundle iOS tidak diberikan.');
+      } else if (e.code == 'auth/invalid-continue-uri') {
+        // Menangani error jika URL lanjutan tidak valid
+        print('URL lanjutan tidak valid.');
+      } else if (e.code == 'auth/unauthorized-continue-uri') {
+        // Menangani error jika domain URL lanjutan tidak diizinkan
+        print('Domain URL lanjutan tidak diizinkan.');
+      } else if (e.code == 'auth/user-not-found') {
+        // Menangani error jika pengguna tidak ditemukan
+        print('Pengguna tidak ditemukan.');
+      }
     }
   }
 }

@@ -175,32 +175,33 @@ class _SelectModeViewState extends State<SelectModeView> {
         ),
         GestureDetector(
           onTap: () {
-            showDialog(
-              context: context,
-              builder: (context) => AlertDialog(
-                buttonPadding: const EdgeInsets.all(10),
-                title: const Text(
-                  'Peringatan',
-                  textAlign: TextAlign.center,
-                ),
-                titleTextStyle: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black.withOpacity(0.8),
-                ),
-                content: SingleChildScrollView(
-                  child: Column(children: [
-                    Text(
-                      'Untuk saat ini mode gratis masih dalam pengembangan, gunakan mode premium untuk masuk ke aplikasi',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.grey.withOpacity(0.9),
-                          fontWeight: FontWeight.w400),
-                    ),
-                  ]),
-                ),
-              ),
-            );
+            Navigator.pushNamed(context, '/gratis');
+            // showDialog(
+            //   context: context,
+            //   builder: (context) => AlertDialog(
+            //     buttonPadding: const EdgeInsets.all(10),
+            //     title: const Text(
+            //       'Peringatan',
+            //       textAlign: TextAlign.center,
+            //     ),
+            //     titleTextStyle: TextStyle(
+            //       fontSize: 25,
+            //       fontWeight: FontWeight.w600,
+            //       color: Colors.black.withOpacity(0.8),
+            //     ),
+            //     content: SingleChildScrollView(
+            //       child: Column(children: [
+            //         Text(
+            //           'Untuk saat ini mode gratis masih dalam pengembangan, gunakan mode premium untuk masuk ke aplikasi',
+            //           textAlign: TextAlign.center,
+            //           style: TextStyle(
+            //               color: Colors.grey.withOpacity(0.9),
+            //               fontWeight: FontWeight.w400),
+            //         ),
+            //       ]),
+            //     ),
+            //   ),
+            // );
           },
           child: SizedBox(
             height: 85.h,
@@ -237,60 +238,19 @@ class _SelectModeViewState extends State<SelectModeView> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              Row(
-                children: [
-                  SizedBox(
-                      height: 20.h, child: Image.asset('assets/crown.png')),
-                  SizedBox(
-                    width: 5.w,
-                  ),
-                  Text(
-                    data.benefit[0],
-                    style: TextStyle(
-                        color: Colors.blue.shade500,
-                        fontSize: 15.sp,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ],
-              ),
+              benefitForPremium(benefit: data.benefit[0]),
               SizedBox(
                 height: 5.h,
               ),
-              Row(
-                children: [
-                  SizedBox(
-                      height: 20.h, child: Image.asset('assets/crown.png')),
-                  SizedBox(
-                    width: 5.w,
-                  ),
-                  Text(
-                    data.benefit[1],
-                    style: TextStyle(
-                        color: Colors.blue.shade500,
-                        fontSize: 15.sp,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ],
-              ),
+              benefitForPremium(benefit: data.benefit[1]),
               SizedBox(
                 height: 5.h,
               ),
-              Row(
-                children: [
-                  SizedBox(
-                      height: 20.h, child: Image.asset('assets/crown.png')),
-                  SizedBox(
-                    width: 5.w,
-                  ),
-                  Text(
-                    data.benefit[2],
-                    style: TextStyle(
-                        color: Colors.blue.shade500,
-                        fontSize: 15.sp,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ],
+              benefitForPremium(benefit: data.benefit[2]),
+              SizedBox(
+                height: 5.h,
               ),
+              benefitForPremium(benefit: data.benefit[3]),
               SizedBox(
                 height: 35.h,
               ),
@@ -310,7 +270,8 @@ class _SelectModeViewState extends State<SelectModeView> {
         ),
         InkWell(
           onTap: () async {
-            Navigator.pushNamed(context, '/login');
+            Navigator.of(context)
+                .pushNamedAndRemoveUntil('/login', (route) => false);
           },
           child: Container(
             height: 85.h,
@@ -326,6 +287,24 @@ class _SelectModeViewState extends State<SelectModeView> {
             ),
           ),
         )
+      ],
+    );
+  }
+
+  Widget benefitForPremium({required String benefit}) {
+    return Row(
+      children: [
+        SizedBox(height: 20.h, child: Image.asset('assets/crown.png')),
+        SizedBox(
+          width: 5.w,
+        ),
+        Text(
+          benefit,
+          style: TextStyle(
+              color: Colors.blue.shade500,
+              fontSize: 15.sp,
+              fontWeight: FontWeight.w500),
+        ),
       ],
     );
   }

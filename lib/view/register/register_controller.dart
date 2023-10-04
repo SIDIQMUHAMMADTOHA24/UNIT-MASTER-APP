@@ -29,7 +29,8 @@ class RegisterController {
     if (password == confirmPassword) {
       try {
         final credential = await FirebaseAuth.instance
-            .createUserWithEmailAndPassword(email: email, password: password);
+            .createUserWithEmailAndPassword(
+                email: email.trim(), password: password.trim());
         await credential.user?.sendEmailVerification();
         await credential.user?.updateDisplayName(email);
         Global.storageService.saveUserInfo(

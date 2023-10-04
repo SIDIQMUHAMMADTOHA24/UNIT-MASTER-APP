@@ -1,4 +1,4 @@
-import 'package:conversion_app/view/login/login_view.dart';
+
 import 'package:conversion_app/view/register/register_controller.dart';
 
 import 'package:flutter/material.dart';

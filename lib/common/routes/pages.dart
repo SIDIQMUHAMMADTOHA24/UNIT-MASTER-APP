@@ -7,7 +7,8 @@ import 'package:conversion_app/view/register/register_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../view/login/bloc/login_bloc.dart';
-
+import '../../view/mode/gratis/bloc/mode_gratis_bloc.dart';
+import '../../view/mode/gratis/mode_gratis_view.dart';
 import '../../view/mode/premium/home/detail/long/bloc/long_bloc.dart';
 
 import '../../view/mode/premium/home/detail/long/long_view.dart';
@@ -17,7 +18,7 @@ import '../../view/mode/premium/home/detail/suhu/bloc/suhu_bloc.dart';
 import '../../view/mode/premium/home/detail/suhu/suhu_view.dart';
 import '../../view/mode/premium/home/detail/time/bloc/time_bloc.dart';
 import '../../view/mode/premium/home/detail/time/time_view.dart';
-import '../../view/mode/mode_premium/home/home_view.dart';
+import '../../view/mode/premium/home/home_view.dart';
 import '../../view/register/bloc/register_bloc.dart';
 import '../../view/select_mode/bloc/dot_indicator_bloc.dart';
 import '../../view/select_mode/select_mode_view.dart';
@@ -69,6 +70,12 @@ class AppPages {
           pages: const TimeView(),
           bloc: BlocProvider(
             create: (_) => TimeBloc(),
+          )),
+      PageEntity(
+          routes: AppName.GRATIS,
+          pages: const ModeGratisView(),
+          bloc: BlocProvider(
+            create: (_) => ModeGratisBloc(),
           ))
     ];
   }

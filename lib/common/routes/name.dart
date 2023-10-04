@@ -9,4 +9,5 @@ class AppName {
   static const MASSA = '/massa';
   static const SUHU = '/suhu';
   static const TIME = '/time';
+  static const GRATIS = '/gratis';
 }

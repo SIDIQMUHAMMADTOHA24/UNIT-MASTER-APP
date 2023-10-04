@@ -15,13 +15,17 @@ class CardMode {
 List<CardMode> listDetailsSelectMode = [
   CardMode(
       topTitle: '',
-      benefit: ['5','x','Uji Coba'],
+      benefit: ['5', 'x', 'Uji Coba'],
       buttonText: 'Gratis',
       requiredPremium: ''),
   CardMode(
       topTitle: 'Akses ke',
-      benefit: ['Lebih dari 5x kesempatan','Dark Mode','Akses ke lebih dari 1 konversi'],
+      benefit: [
+        'Lebih dari 5x kesempatan',
+        'Dark Mode',
+        'Akses ke lebih dari 1 konversi',
+        'Mendapatkan rumus'
+      ],
       buttonText: 'Premium',
-      requiredPremium:
-          'Login untuk menikmati fiktur premium')
+      requiredPremium: 'Login untuk menikmati fiktur premium')
 ];

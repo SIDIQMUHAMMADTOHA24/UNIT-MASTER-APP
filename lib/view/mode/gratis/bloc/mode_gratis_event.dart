@@ -1,11 +1,10 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-part of 'long_bloc.dart';
+part of 'mode_gratis_bloc.dart';
 
 @immutable
-sealed class LongEvent {}
+sealed class ModeGratisEvent {}
 
 //event for fontSize
-class FontSize extends LongEvent {
+class FontSize extends ModeGratisEvent {
   final double size;
   FontSize({
     required this.size,
@@ -13,21 +12,21 @@ class FontSize extends LongEvent {
 }
 
 //Event for DropDownMenu
-class DropDownMenuInput extends LongEvent {
+class DropDownMenuInput extends ModeGratisEvent {
   final String dropDownMenuInput;
   DropDownMenuInput({
     required this.dropDownMenuInput,
   });
 }
 
-class DropDownMenuResult extends LongEvent {
+class DropDownMenuResult extends ModeGratisEvent {
   final String dropDownMenuResult;
   DropDownMenuResult({
     required this.dropDownMenuResult,
   });
 }
 
-class ShowFormula extends LongEvent {
+class ShowFormula extends ModeGratisEvent {
   final String formula;
   ShowFormula({
     required this.formula,
@@ -37,32 +36,11 @@ class ShowFormula extends LongEvent {
 enum LengthConversionType {
   cmToMeter,
   cmToCm,
-  cmToMm,
-  cmToInch,
-  cmToKm,
   meterToMeter,
   meterToCm,
-  meterToMm,
-  meterToInch,
-  meterToKm,
-  inchToInch,
-  inchToMeter,
-  inchToCm,
-  inchToKm,
-  inchToMm,
-  mmToMm,
-  mmToCm,
-  mmToKm,
-  mmToMeter,
-  mmToInch,
-  kmToKm,
-  kmToMm,
-  kmToCm,
-  kmToMeter,
-  kmToInch,
 }
 
-class LengthConversion extends LongEvent {
+class LengthConversion extends ModeGratisEvent {
   final double value;
   final LengthConversionType conversionType;
   LengthConversion({
