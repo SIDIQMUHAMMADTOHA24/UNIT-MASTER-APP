@@ -54,30 +54,56 @@ class LoginController {
     }
   }
 
+  // Future<User?> loginWithGoogle() async {
+  //   final FirebaseAuth _auth = FirebaseAuth.instance;
+  //   final GoogleSignIn googleSignIn = GoogleSignIn();
+  //   try {
+  //     await googleSignIn.signOut();
+  //     final GoogleSignInAccount? googleSignInAccount =
+  //         await googleSignIn.signIn();
+  //     final GoogleSignInAuthentication googleSignInAuthentication =
+  //         await googleSignInAccount!.authentication;
+  //     final AuthCredential authCredential = GoogleAuthProvider.credential(
+  //         accessToken: googleSignInAuthentication.accessToken,
+  //         idToken: googleSignInAuthentication.idToken);
+  //     final UserCredential userCredential =
+  //         await _auth.signInWithCredential(authCredential);
+  //     final User? user = userCredential.user;
+  //     if (user != null) {
+  //       print('Masuk maseh');
+  //       // Global.storageService.saveUserInfo(
+  //       //   userId: _auth.currentUser!.uid,
+  //       //   email: _auth.currentUser!.email!,
+  //       // );
+  //       // Global.storageService
+  //       //     .setString(AppConstant.STORAGE_USER_TOKEN_KEY, '12345678');
+  //       Navigator.pushReplacementNamed(context, '/home');
+  //     }
+  //     return user;
+  //   } catch (e) {
+  //     print(e);
+  //     return null;
+  //   }
+  // }
+
   Future<User?> loginWithGoogle() async {
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    final GoogleSignIn googleSignIn = GoogleSignIn();
+    final auth = await FirebaseAuth.instance;
+    final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
+    final GoogleSignInAuthentication gAuth = await gUser!.authentication;
+    final credential = GoogleAuthProvider.credential(
+        accessToken: gAuth.accessToken, idToken: gAuth.idToken);
+    final UserCredential user = await auth.signInWithCredential(credential);
+
     try {
-      final GoogleSignInAccount? googleSignInAccount =
-          await googleSignIn.signIn();
-      final GoogleSignInAuthentication googleSignInAuthentication =
-          await googleSignInAccount!.authentication;
-      final AuthCredential authCredential = GoogleAuthProvider.credential(
-          accessToken: googleSignInAuthentication.accessToken,
-          idToken: googleSignInAuthentication.idToken);
-      final UserCredential userCredential =
-          await _auth.signInWithCredential(authCredential);
-      final User? user = userCredential.user;
       if (user != null) {
         Global.storageService.saveUserInfo(
-          userId: _auth.currentUser!.uid,
-          email: _auth.currentUser!.email!,
+          userId: auth.currentUser!.uid,
+          email: auth.currentUser!.email!,
         );
         Global.storageService
             .setString(AppConstant.STORAGE_USER_TOKEN_KEY, '12345678');
         Navigator.pushReplacementNamed(context, '/home');
       }
-      return user;
     } catch (e) {
       return null;
     }
@@ -87,7 +113,8 @@ class LoginController {
     final state = context.read<LoginBloc>().state;
     print(state.email);
     try {
-      await FirebaseAuth.instance.sendPasswordResetEmail(email: state.email.trim());
+      await FirebaseAuth.instance
+          .sendPasswordResetEmail(email: state.email.trim());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'auth/invalid-email') {
         // Menangani error jika alamat email tidak valid

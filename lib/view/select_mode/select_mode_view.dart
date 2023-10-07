@@ -29,6 +29,7 @@ class _SelectModeViewState extends State<SelectModeView> {
             SizedBox(
               height: 370.h,
               child: PageView.builder(
+                physics: const ScrollPhysics(parent: BouncingScrollPhysics()),
                 onPageChanged: (value) {
                   state.page = value;
                   context.read<DotIndicatorBloc>().add(DotIndicatorEvent());
@@ -176,32 +177,6 @@ class _SelectModeViewState extends State<SelectModeView> {
         GestureDetector(
           onTap: () {
             Navigator.pushNamed(context, '/gratis');
-            // showDialog(
-            //   context: context,
-            //   builder: (context) => AlertDialog(
-            //     buttonPadding: const EdgeInsets.all(10),
-            //     title: const Text(
-            //       'Peringatan',
-            //       textAlign: TextAlign.center,
-            //     ),
-            //     titleTextStyle: TextStyle(
-            //       fontSize: 25,
-            //       fontWeight: FontWeight.w600,
-            //       color: Colors.black.withOpacity(0.8),
-            //     ),
-            //     content: SingleChildScrollView(
-            //       child: Column(children: [
-            //         Text(
-            //           'Untuk saat ini mode gratis masih dalam pengembangan, gunakan mode premium untuk masuk ke aplikasi',
-            //           textAlign: TextAlign.center,
-            //           style: TextStyle(
-            //               color: Colors.grey.withOpacity(0.9),
-            //               fontWeight: FontWeight.w400),
-            //         ),
-            //       ]),
-            //     ),
-            //   ),
-            // );
           },
           child: SizedBox(
             height: 85.h,
@@ -252,7 +227,7 @@ class _SelectModeViewState extends State<SelectModeView> {
               ),
               benefitForPremium(benefit: data.benefit[3]),
               SizedBox(
-                height: 35.h,
+                height: 25.h,
               ),
               Text(
                 data.requiredPremium,
@@ -268,7 +243,7 @@ class _SelectModeViewState extends State<SelectModeView> {
         SizedBox(
           height: 10.h,
         ),
-        InkWell(
+        GestureDetector(
           onTap: () async {
             Navigator.of(context)
                 .pushNamedAndRemoveUntil('/login', (route) => false);
