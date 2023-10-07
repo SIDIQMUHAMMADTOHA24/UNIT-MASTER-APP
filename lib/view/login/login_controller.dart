@@ -54,37 +54,7 @@ class LoginController {
     }
   }
 
-  // Future<User?> loginWithGoogle() async {
-  //   final FirebaseAuth _auth = FirebaseAuth.instance;
-  //   final GoogleSignIn googleSignIn = GoogleSignIn();
-  //   try {
-  //     await googleSignIn.signOut();
-  //     final GoogleSignInAccount? googleSignInAccount =
-  //         await googleSignIn.signIn();
-  //     final GoogleSignInAuthentication googleSignInAuthentication =
-  //         await googleSignInAccount!.authentication;
-  //     final AuthCredential authCredential = GoogleAuthProvider.credential(
-  //         accessToken: googleSignInAuthentication.accessToken,
-  //         idToken: googleSignInAuthentication.idToken);
-  //     final UserCredential userCredential =
-  //         await _auth.signInWithCredential(authCredential);
-  //     final User? user = userCredential.user;
-  //     if (user != null) {
-  //       print('Masuk maseh');
-  //       // Global.storageService.saveUserInfo(
-  //       //   userId: _auth.currentUser!.uid,
-  //       //   email: _auth.currentUser!.email!,
-  //       // );
-  //       // Global.storageService
-  //       //     .setString(AppConstant.STORAGE_USER_TOKEN_KEY, '12345678');
-  //       Navigator.pushReplacementNamed(context, '/home');
-  //     }
-  //     return user;
-  //   } catch (e) {
-  //     print(e);
-  //     return null;
-  //   }
-  // }
+
 
   Future<User?> loginWithGoogle() async {
     final auth = await FirebaseAuth.instance;

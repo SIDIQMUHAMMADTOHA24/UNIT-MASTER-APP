@@ -4,4 +4,5 @@ class AppConstant {
   static const String USER_ID = 'userId';
   static const String EMAIL = 'email';
   static const String IMAGE_URL = 'image';
+  static const String GRATIS = 'gratis';
 }

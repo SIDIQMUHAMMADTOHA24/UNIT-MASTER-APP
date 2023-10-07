@@ -3,6 +3,8 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../common/constant/constant.dart';
+import '../../global.dart';
 import 'bloc/dot_indicator_bloc.dart';
 import 'details.dart';
 
@@ -18,6 +20,65 @@ class _SelectModeViewState extends State<SelectModeView> {
       PageController(initialPage: 0, viewportFraction: 0.9);
   bool isFirstRun = true;
   int indexDotsIndicator = 0;
+  int userCount = 0;
+  int currentUser = Global.storageService.getInt();
+  //function ini berfungsi untuk mengecek apakah user mencoba
+  //lebih dari 5 kali, jika lebih dia harus login terlebih dahulu
+  Future checkUser() async {
+    if (currentUser <= 5) {
+      userCount = currentUser + 1;
+      Global.storageService.cobaGratis(AppConstant.GRATIS, userCount);
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          buttonPadding: const EdgeInsets.all(10),
+          title: const Text(
+            'Upgrade to Premium',
+            textAlign: TextAlign.center,
+          ),
+          titleTextStyle: TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.w600,
+            color: Colors.black.withOpacity(0.8),
+          ),
+          content: SingleChildScrollView(
+            child: Column(children: [
+              Text(
+                'Anda telah mencapai batas penggunaan gratis. Silakan masuk atau upgrade ke mode premium',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: Colors.grey.withOpacity(0.9),
+                    fontWeight: FontWeight.w400),
+              ),
+              SizedBox(
+                height: 30.h,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, '/login');
+                },
+                child: Container(
+                  height: 35.h,
+                  decoration: BoxDecoration(
+                      color: Colors.amberAccent.shade400,
+                      borderRadius: BorderRadius.circular(8)),
+                  child: Center(
+                      child: Text(
+                    'Login',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                        fontSize: 15.sp),
+                  )),
+                ),
+              )
+            ]),
+          ),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -176,7 +237,10 @@ class _SelectModeViewState extends State<SelectModeView> {
         ),
         GestureDetector(
           onTap: () {
-            Navigator.pushNamed(context, '/gratis');
+            checkUser();
+            if (currentUser <= 5) {
+              Navigator.pushNamed(context, '/long');
+            }
           },
           child: SizedBox(
             height: 85.h,

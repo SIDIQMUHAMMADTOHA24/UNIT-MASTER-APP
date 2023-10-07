@@ -7,8 +7,7 @@ import 'package:conversion_app/view/register/register_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../view/login/bloc/login_bloc.dart';
-import '../../view/mode/gratis/bloc/mode_gratis_bloc.dart';
-import '../../view/mode/gratis/mode_gratis_view.dart';
+
 import '../../view/mode/premium/home/detail/long/bloc/long_bloc.dart';
 
 import '../../view/mode/premium/home/detail/long/long_view.dart';
@@ -71,12 +70,6 @@ class AppPages {
           bloc: BlocProvider(
             create: (_) => TimeBloc(),
           )),
-      PageEntity(
-          routes: AppName.GRATIS,
-          pages: const ModeGratisView(),
-          bloc: BlocProvider(
-            create: (_) => ModeGratisBloc(),
-          ))
     ];
   }
 

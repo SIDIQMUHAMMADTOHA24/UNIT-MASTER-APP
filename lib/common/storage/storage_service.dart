@@ -1,3 +1,4 @@
+import 'package:conversion_app/common/routes/name.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constant/constant.dart';
@@ -32,6 +33,10 @@ class StorageService {
     await _sharedPreferences.setString(AppConstant.USER_ID, userId);
   }
 
+  Future<bool> cobaGratis(String key, int value) async {
+    return await _sharedPreferences.setInt(key, value);
+  }
+
 //Digunakan untuk memanggil terakhir di cek Point
   bool getBool() {
     return _sharedPreferences
@@ -54,5 +59,10 @@ class StorageService {
     final userImage = _sharedPreferences.getString(AppConstant.IMAGE_URL) ??
         'https://i.pinimg.com/564x/7c/8d/c5/7c8dc5fa07ecae922195c78a356b845b.jpg';
     return {'userId': userID, 'userEmail': userEmail, 'imageUrl': userImage};
+  }
+
+  //untuk pengguna fiktur gratis
+  int getInt() {
+    return _sharedPreferences.getInt(AppConstant.GRATIS) ?? 0;
   }
 }
