@@ -7,8 +7,8 @@ class SuhuBloc extends Bloc<SuhuEvent, Map<String, dynamic>> {
   SuhuBloc()
       : super({
           'resultValue': '0',
-          'dropDownMenuInput': '',
-          'dropDownMenuResult': '',
+          'dropDownMenuInput': '°C',
+          'dropDownMenuResult': '°C',
           'fontSize': 0.0,
           'formula': ''
         }) {

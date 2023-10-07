@@ -7,8 +7,8 @@ class TimeBloc extends Bloc<TimeEvent, Map<String, dynamic>> {
   TimeBloc()
       : super({
           'resultValue': '0',
-          'dropDownMenuInput': '',
-          'dropDownMenuResult': '',
+          'dropDownMenuInput': 'Jam',
+          'dropDownMenuResult': 'Jam',
           'fontSize': 0.0,
           'formula': ''
         }) {

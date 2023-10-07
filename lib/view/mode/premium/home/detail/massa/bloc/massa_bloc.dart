@@ -7,8 +7,8 @@ class MassaBloc extends Bloc<MassaEvent, Map<String, dynamic>> {
   MassaBloc()
       : super({
           'resultValue': '0',
-          'dropDownMenuInput': '',
-          'dropDownMenuResult': '',
+          'dropDownMenuInput': 'gram',
+          'dropDownMenuResult': 'gram',
           'fontSize': 0.0,
           'formula': ''
         }) {

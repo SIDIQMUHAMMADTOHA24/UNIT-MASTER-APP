@@ -88,6 +88,7 @@ class LoginController {
 
   Future<User?> loginWithGoogle() async {
     final auth = await FirebaseAuth.instance;
+        await GoogleSignIn().signOut();
     final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
     final GoogleSignInAuthentication gAuth = await gUser!.authentication;
     final credential = GoogleAuthProvider.credential(
