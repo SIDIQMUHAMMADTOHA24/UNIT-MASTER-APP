@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:conversion_app/common/routes/name.dart';
-import 'package:conversion_app/global.dart';
 import 'package:conversion_app/view/login/login_view.dart';
+import 'package:conversion_app/view/mode/premium/home/bloc/dark_mode_bloc.dart';
 import 'package:conversion_app/view/register/register_view.dart';
 
 import 'package:flutter/material.dart';
@@ -70,6 +70,12 @@ class AppPages {
           bloc: BlocProvider(
             create: (_) => TimeBloc(),
           )),
+      PageEntity(
+          routes: AppName.HOME,
+          pages: HomeView(),
+          bloc: BlocProvider(
+            create: (_) => DarkModeBloc(),
+          )),
     ];
   }
 
@@ -90,25 +96,22 @@ class AppPages {
       var resault =
           routes().where((element) => element.routes == settings.name);
       if (resault.isNotEmpty) {
-        bool getBool = Global.storageService.getBool();
-        //jika pages / view initial dan getBoll == true maka dia akan langsung mengarah ke selctModeview
-        //digunakan ketika sesudah log out
-        if (resault.first.routes == AppName.INITIAL && getBool) {
-          //digunakan ketika sudah login
-          bool getString = Global.storageService.getString();
-          if (getString) {
-            return MaterialPageRoute(
-                builder: (context) => HomeView(), settings: settings);
-          }
-          return MaterialPageRoute(
-              builder: (context) => const SelectModeView(), settings: settings);
-        }
+        // bool getBool = Global.storageService.getBool();
+        // if (resault.first.routes == AppName.INITIAL) {
+        //   bool getString = Global.storageService.getString();
+        //   if (getString) {
+        //     return MaterialPageRoute(
+        //         builder: (context) => HomeView(), settings: settings);
+        //   }
+        //   return MaterialPageRoute(
+        //       builder: (context) => const SelectModeView(), settings: settings);
+        // }
         return MaterialPageRoute(
             builder: (context) => resault.first.pages, settings: settings);
       }
     }
     return MaterialPageRoute(
-        builder: (context) => const SelectModeView(), settings: settings);
+        builder: (context) => SplashScreenView(), settings: settings);
   }
 }
 

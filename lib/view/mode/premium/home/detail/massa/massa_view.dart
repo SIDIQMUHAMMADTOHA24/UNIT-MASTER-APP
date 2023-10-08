@@ -1,3 +1,4 @@
+import 'package:conversion_app/view/mode/premium/home/bloc/dark_mode_bloc.dart';
 import 'package:conversion_app/view/mode/premium/home/detail/massa/bloc/massa_bloc.dart';
 import 'package:conversion_app/view/mode/premium/home/detail/massa/data/data_massa.dart';
 import 'package:flutter/material.dart';
@@ -36,93 +37,109 @@ class _MassaViewState extends State<MassaView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          toolbarHeight: 60.h,
-          bottom: const PreferredSize(
-              preferredSize: Size(0, 10),
-              child: Divider(
-                color: Colors.grey,
-              )),
-          leading: IconButton(
-              onPressed: () => Navigator.pop(context),
-              icon: Icon(
-                Icons.keyboard_arrow_left_outlined,
-                size: 30,
-                color: Colors.black.withOpacity(0.7),
-              )),
-          elevation: 0,
-          backgroundColor: Colors.white,
-          title: Text(
-            'Konversi Massa',
-            style: TextStyle(
-                fontSize: 20.sp,
-                fontWeight: FontWeight.w500,
-                color: Colors.black.withOpacity(0.8)),
-          ),
-        ),
-        body: BlocBuilder<MassaBloc, Map<String, dynamic>>(
-          builder: (context, state) {
-            final valueInput = state['dropDownMenuInput'];
-            final valueResult = state['dropDownMenuResult'];
-            resultController.text = state['resultValue'];
-            final fontSize = state['fontSize'];
-            final formula = state['formula'];
-            print(fontSize.toString());
-            return Column(
-              children: [
-                // input
-                inputWidget(
-                    context: context,
-                    valueInput: valueInput,
-                    valueResult: valueResult,
-                    fontSize: fontSize),
-
-                //output
-                resultWidget(
-                    context: context,
-                    valueInput: valueInput,
-                    valueResult: valueResult,
-                    fontSize: fontSize),
-                const SizedBox(
-                  height: 20,
-                ),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+    return BlocBuilder<DarkModeBloc, bool>(
+      builder: (context, state) {
+        final isDarkMode = context.read<DarkModeBloc>().state;
+        return Scaffold(
+            backgroundColor:
+                isDarkMode ? const Color(0xFF121212) : Colors.white,
+            resizeToAvoidBottomInset: false,
+            appBar: AppBar(
+              toolbarHeight: 60.h,
+              bottom: const PreferredSize(
+                  preferredSize: Size(0, 10),
+                  child: Divider(
+                    color: Colors.grey,
+                  )),
+              leading: IconButton(
+                  onPressed: () => Navigator.pop(context),
+                  icon: Icon(
+                    Icons.keyboard_arrow_left_outlined,
+                    size: 30,
+                    color:  isDarkMode
+                        ? Colors.white
+                        : Colors.black.withOpacity(0.7),
+                  )),
+              elevation: 0,
+              backgroundColor:
+                  isDarkMode ? const Color(0xFF121212) : Colors.white,
+              title: Text(
+                'Konversi Massa',
+                style: TextStyle(
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.w500,
+                    color: isDarkMode
+                        ? Colors.white
+                        : Colors.black.withOpacity(0.8)),
+              ),
+            ),
+            body: BlocBuilder<MassaBloc, Map<String, dynamic>>(
+              builder: (context, state) {
+                final valueInput = state['dropDownMenuInput'];
+                final valueResult = state['dropDownMenuResult'];
+                resultController.text = state['resultValue'];
+                final fontSize = state['fontSize'];
+                final formula = state['formula'];
+                return Column(
                   children: [
-                    (formula.isNotEmpty)
-                        ? Container(
-                            padding: const EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: Colors.amber),
-                            child: const Center(
-                                child: Text('Formula :',
-                                    style: TextStyle(fontSize: 18))),
-                          )
-                        : Container(),
+                    // input
+                    inputWidget(
+                        context: context,
+                        valueInput: valueInput,
+                        valueResult: valueResult,
+                        fontSize: fontSize,
+                        isDarkMode: isDarkMode),
+
+                    //output
+                    resultWidget(
+                        context: context,
+                        valueInput: valueInput,
+                        valueResult: valueResult,
+                        fontSize: fontSize,
+                        isDarkMode: isDarkMode),
                     const SizedBox(
-                      width: 10,
+                      height: 20,
                     ),
-                    Text(
-                      formula ?? '',
-                      style: const TextStyle(fontSize: 18),
-                    ),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        (formula.isNotEmpty)
+                            ? Container(
+                                padding: const EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Colors.amber),
+                                child: const Center(
+                                    child: Text('Formula :',
+                                        style: TextStyle(fontSize: 18))),
+                              )
+                            : Container(),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          formula ?? '',
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: isDarkMode ? Colors.white : Colors.black),
+                        ),
+                      ],
+                    )
                   ],
-                )
-              ],
-            );
-          },
-        ));
+                );
+              },
+            ));
+      },
+    );
   }
 
   Widget inputWidget(
       {required BuildContext context,
       required String valueInput,
       required String valueResult,
-      required double fontSize}) {
+      required double fontSize,
+      required bool isDarkMode}) {
     return Container(
         margin: EdgeInsets.only(top: 30.h, right: 15.w, left: 15.w),
         decoration: BoxDecoration(
@@ -136,7 +153,9 @@ class _MassaViewState extends State<MassaView> {
                   controller: inputController,
                   maxLength: 11,
                   autofocus: true,
-                  style: TextStyle(fontSize: fontSize.sp),
+                  style: TextStyle(
+                      fontSize: fontSize.sp,
+                      color: isDarkMode ? Colors.white : Colors.black),
                   textInputAction: TextInputAction.done,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
@@ -153,7 +172,9 @@ class _MassaViewState extends State<MassaView> {
                 controller: TextEditingController(text: valueInput),
                 inputDecorationTheme:
                     const InputDecorationTheme(border: InputBorder.none),
-                textStyle: TextStyle(fontSize: 35.sp, color: Colors.black),
+                textStyle: TextStyle(
+                    fontSize: 35.sp,
+                    color: isDarkMode ? Colors.white : Colors.black),
                 trailingIcon: const Icon(
                   Icons.keyboard_arrow_down_outlined,
                   size: 30,
@@ -190,7 +211,8 @@ class _MassaViewState extends State<MassaView> {
       {required BuildContext context,
       required String valueInput,
       required String valueResult,
-      required double fontSize}) {
+      required double fontSize,
+      required bool isDarkMode}) {
     return Container(
         margin: EdgeInsets.only(top: 30.h, right: 15.w, left: 15.w),
         decoration: BoxDecoration(
@@ -208,7 +230,11 @@ class _MassaViewState extends State<MassaView> {
                 decoration: const InputDecoration(
                     border: InputBorder.none, counterText: ''),
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: fontSize.sp),
+                style: TextStyle(
+                    fontSize: fontSize.sp,
+                    color: isDarkMode
+                        ? Colors.white.withOpacity(0.5)
+                        : Colors.black),
               ),
             ),
             DropdownMenu(
@@ -216,7 +242,8 @@ class _MassaViewState extends State<MassaView> {
                 inputDecorationTheme:
                     const InputDecorationTheme(border: InputBorder.none),
                 textStyle: TextStyle(
-                    fontSize: 35.sp, color: Colors.black.withOpacity(0.5)),
+                    fontSize: 35.sp,
+                    color: isDarkMode ? Colors.white : Colors.black),
                 trailingIcon: const Icon(
                   Icons.keyboard_arrow_down_outlined,
                   size: 30,

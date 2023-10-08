@@ -20,14 +20,13 @@ class _SelectModeViewState extends State<SelectModeView> {
       PageController(initialPage: 0, viewportFraction: 0.9);
   bool isFirstRun = true;
   int indexDotsIndicator = 0;
-  int userCount = 0;
   int currentUser = Global.storageService.getInt();
   //function ini berfungsi untuk mengecek apakah user mencoba
   //lebih dari 5 kali, jika lebih dia harus login terlebih dahulu
-  Future checkUser() async {
+  checkUser() {
     if (currentUser <= 5) {
-      userCount = currentUser + 1;
-      Global.storageService.cobaGratis(AppConstant.GRATIS, userCount);
+      currentUser ++;
+      Global.storageService.cobaGratis(AppConstant.GRATIS, currentUser);
     } else {
       showDialog(
         context: context,

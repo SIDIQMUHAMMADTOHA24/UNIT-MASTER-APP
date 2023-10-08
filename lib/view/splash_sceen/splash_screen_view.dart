@@ -12,9 +12,16 @@ class SplashScreenView extends StatelessWidget {
 
   void nextPage(BuildContext context) async {
     Future.delayed(const Duration(seconds: 1), () {
-      Global.storageService
-          .setBool(AppConstant.STORAGE_DEVICE_OPEN_FRIST_TIME, true);
-      Navigator.of(context).pushNamedAndRemoveUntil('/mode', (route) => false);
+      // Global.storageService
+      //     .setBool(AppConstant.STORAGE_DEVICE_OPEN_FRIST_TIME, true);
+      bool getString = Global.storageService.getString();
+      if (getString) {
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil('/home', (route) => false);
+      } else if (!getString) {
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil('/mode', (route) => false);
+      }
     });
   }
 
