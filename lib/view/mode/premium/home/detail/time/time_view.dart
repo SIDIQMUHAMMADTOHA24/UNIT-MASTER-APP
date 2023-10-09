@@ -88,7 +88,7 @@ class _TimeViewState extends State<TimeView> {
                         context: context,
                         valueInput: valueInput,
                         valueResult: valueResult,
-                        fontSize: 35,
+                        fontSize: fontSize,
                         isDarkMode: isDarkMode),
 
                     //output
@@ -96,7 +96,7 @@ class _TimeViewState extends State<TimeView> {
                         context: context,
                         valueInput: valueInput,
                         valueResult: valueResult,
-                        fontSize: 35,
+                        fontSize: fontSize,
                         isDarkMode: isDarkMode),
                     const SizedBox(
                       height: 20,

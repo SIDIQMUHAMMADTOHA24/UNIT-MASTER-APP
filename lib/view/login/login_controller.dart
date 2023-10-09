@@ -54,28 +54,48 @@ class LoginController {
     }
   }
 
-
-
   Future<User?> loginWithGoogle() async {
-    final auth = await FirebaseAuth.instance;
-        await GoogleSignIn().signOut();
-    final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
-    final GoogleSignInAuthentication gAuth = await gUser!.authentication;
-    final credential = GoogleAuthProvider.credential(
-        accessToken: gAuth.accessToken, idToken: gAuth.idToken);
-    final UserCredential user = await auth.signInWithCredential(credential);
-
     try {
-      if (user != null) {
+      final auth = FirebaseAuth.instance;
+
+      // Logout pengguna sebelum login dengan Google
+      await GoogleSignIn().signOut();
+
+      // Meminta pengguna untuk login dengan akun Google
+      final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
+
+      if (gUser == null) {
+        return null;
+      }
+
+      final GoogleSignInAuthentication gAuth = await gUser.authentication;
+
+      // Membuat credential GoogleAuthProvider
+      final credential = GoogleAuthProvider.credential(
+          accessToken: gAuth.accessToken, idToken: gAuth.idToken);
+
+      // Melakukan login ke Firebase dengan credential
+      final UserCredential user = await auth.signInWithCredential(credential);
+      print(user);
+      if (user.user != null) {
+        // // Menyimpan informasi pengguna ke penyimpanan
         Global.storageService.saveUserInfo(
-          userId: auth.currentUser!.uid,
-          email: auth.currentUser!.email!,
+          userId: user.user!.uid,
+          email: user.user!.email!,
         );
+
+        // // Menyimpan token pengguna (ini mungkin akan diganti dengan token yang unik)
         Global.storageService
             .setString(AppConstant.STORAGE_USER_TOKEN_KEY, '12345678');
+
+        // Mengarahkan pengguna ke layar beranda setelah login
         Navigator.pushReplacementNamed(context, '/home');
+        return user.user!;
+      } else {
+        return null;
       }
-    } catch (e) {
+    } on FirebaseAuthException catch (e) {
+      print('Failed with error code: ${e}');
       return null;
     }
   }
